@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 02-ago-2016 20:53:21 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Pojo.TbProducto" table="tb_producto" catalog="intelcomex" optimistic-lock="version">
+        <id name="id" type="string">
+            <column name="id" length="5" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tbParametrodetalleByTbParametrodetalleAlmacenes" class="Pojo.TbParametrodetalle" fetch="select">
+            <column name="tb_parametrodetalle_almacenes" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbParametrodetalleByTbParametrodetalleClasificacion" class="Pojo.TbParametrodetalle" fetch="select">
+            <column name="tb_parametrodetalle_clasificacion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbParametrodetalleByTbParametrodetalleTasaiva" class="Pojo.TbParametrodetalle" fetch="select">
+            <column name="tb_parametrodetalle_tasaiva" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbParametrodetalleByTbParametrodetalleUnidadmedida" class="Pojo.TbParametrodetalle" fetch="select">
+            <column name="tb_parametrodetalle_unidadmedida" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbPersona" class="Pojo.TbPersona" fetch="select">
+            <column name="tb_proveedor_cedula" length="10" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="60" />
+        </property>
+        <property name="precio1" type="big_decimal">
+            <column name="precio1" precision="5" />
+        </property>
+        <property name="precio2" type="big_decimal">
+            <column name="precio2" precision="5" />
+        </property>
+        <property name="marca" type="string">
+            <column name="marca" length="100" />
+        </property>
+        <property name="fechaIngreso" type="date">
+            <column name="fecha_ingreso" length="10" />
+        </property>
+        <property name="imagendir" type="string">
+            <column name="imagendir" length="100" />
+        </property>
+        <set name="tbDetallepedidoses" table="tb_detallepedidos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tb_producto_id" length="5" not-null="true" />
+            </key>
+            <one-to-many class="Pojo.TbDetallepedidos" />
+        </set>
+        <set name="tbInventarios" table="tb_inventario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tb_producto_id" length="5" not-null="true" />
+            </key>
+            <one-to-many class="Pojo.TbInventario" />
+        </set>
+        <set name="tbDetallefacturas" table="tb_detallefactura" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tb_producto_id" length="5" not-null="true" />
+            </key>
+            <one-to-many class="Pojo.TbDetallefactura" />
+        </set>
+    </class>
+</hibernate-mapping>

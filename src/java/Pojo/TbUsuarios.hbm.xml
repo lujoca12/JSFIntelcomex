@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 02-ago-2016 20:53:21 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Pojo.TbUsuarios" table="tb_usuarios" catalog="intelcomex" optimistic-lock="version">
+        <id name="cedula" type="string">
+            <column name="cedula" length="10" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tbEmpresa" class="Pojo.TbEmpresa" fetch="select">
+            <column name="tb_empresa_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbParametrodetalle" class="Pojo.TbParametrodetalle" fetch="select">
+            <column name="tb_parametrodetalle_tipousuario" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbParroquia" class="Pojo.TbParroquia" fetch="select">
+            <column name="tb_parroquia_id" length="5" not-null="true" />
+            <column name="tb_parroquia_id_canton" length="5" not-null="true" />
+            <column name="tb_parroquia_id_provincia" length="5" not-null="true" />
+        </many-to-one>
+        <property name="nombres" type="string">
+            <column name="nombres" length="60" />
+        </property>
+        <property name="apellidos" type="string">
+            <column name="apellidos" length="60" />
+        </property>
+        <property name="sexo" type="string">
+            <column name="sexo" length="1" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="10" />
+        </property>
+        <property name="estadoCivil" type="string">
+            <column name="estado_civil" length="15" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="100" />
+        </property>
+        <property name="fechanacimiento" type="date">
+            <column name="fechanacimiento" length="10" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="100" />
+        </property>
+        <property name="login" type="string">
+            <column name="login" length="10" />
+        </property>
+        <property name="pass" type="string">
+            <column name="pass" length="20" />
+        </property>
+        <set name="tbTipoUsuarios" table="tb_tipo_usuario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_cedula" length="10" not-null="true" />
+            </key>
+            <one-to-many class="Pojo.TbTipoUsuario" />
+        </set>
+        <set name="tbFacturas" table="tb_factura" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tb_usuarios_cedula" length="10" not-null="true" />
+            </key>
+            <one-to-many class="Pojo.TbFactura" />
+        </set>
+        <set name="tbPedidoses" table="tb_pedidos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tb_usuarios_cedula" length="10" not-null="true" />
+            </key>
+            <one-to-many class="Pojo.TbPedidos" />
+        </set>
+        <set name="tbDetallePermisos" table="tb_detalle_permiso" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_cedula" length="10" not-null="true" />
+            </key>
+            <one-to-many class="Pojo.TbDetallePermiso" />
+        </set>
+    </class>
+</hibernate-mapping>

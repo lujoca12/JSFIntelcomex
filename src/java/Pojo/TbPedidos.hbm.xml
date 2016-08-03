@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 02-ago-2016 20:53:21 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Pojo.TbPedidos" table="tb_pedidos" catalog="intelcomex" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="tbParametrodetalleByTbParametrodetalleTipopedido" class="Pojo.TbParametrodetalle" fetch="select">
+            <column name="tb_parametrodetalle_tipopedido" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbParametrodetalleByTbParametrodetalleTipopago" class="Pojo.TbParametrodetalle" fetch="select">
+            <column name="tb_parametrodetalle_tipopago" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbPersona" class="Pojo.TbPersona" fetch="select">
+            <column name="tb_persona_cedula" length="10" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbUsuarios" class="Pojo.TbUsuarios" fetch="select">
+            <column name="tb_usuarios_cedula" length="10" not-null="true" />
+        </many-to-one>
+        <property name="fechaPedido" type="date">
+            <column name="fecha_pedido" length="10" />
+        </property>
+        <property name="fechaEntrega" type="date">
+            <column name="fecha_entrega" length="10" />
+        </property>
+        <property name="estado" type="java.lang.Integer">
+            <column name="estado" />
+        </property>
+        <set name="tbDetallepedidoses" table="tb_detallepedidos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tb_pedidos_id" not-null="true" />
+            </key>
+            <one-to-many class="Pojo.TbDetallepedidos" />
+        </set>
+    </class>
+</hibernate-mapping>

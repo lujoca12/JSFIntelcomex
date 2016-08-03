@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 02-ago-2016 20:53:21 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Pojo.TbDetallepedidos" table="tb_detallepedidos" catalog="intelcomex" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="tbPedidos" class="Pojo.TbPedidos" fetch="select">
+            <column name="tb_pedidos_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbProducto" class="Pojo.TbProducto" fetch="select">
+            <column name="tb_producto_id" length="5" not-null="true" />
+        </many-to-one>
+        <property name="cantidadProducto" type="java.lang.Integer">
+            <column name="cantidad_producto" />
+        </property>
+        <property name="preciouni" type="big_decimal">
+            <column name="preciouni" precision="6" />
+        </property>
+        <property name="preciodetalle" type="big_decimal">
+            <column name="preciodetalle" precision="6" />
+        </property>
+        <property name="estado" type="java.lang.Boolean">
+            <column name="estado" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -7,5 +7,23 @@
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/intelcomex?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">lujoca12</property>
+    <mapping resource="Pojo/TbDetallefactura.hbm.xml"/>
+    <mapping resource="Pojo/TbPais.hbm.xml"/>
+    <mapping resource="Pojo/TbParametrodetalle.hbm.xml"/>
+    <mapping resource="Pojo/TbFactura.hbm.xml"/>
+    <mapping resource="Pojo/TbPedidos.hbm.xml"/>
+    <mapping resource="Pojo/TbParametro.hbm.xml"/>
+    <mapping resource="Pojo/TbDetallepedidos.hbm.xml"/>
+    <mapping resource="Pojo/TbDetallePermiso.hbm.xml"/>
+    <mapping resource="Pojo/TbProducto.hbm.xml"/>
+    <mapping resource="Pojo/TbCanton.hbm.xml"/>
+    <mapping resource="Pojo/TbPermiso.hbm.xml"/>
+    <mapping resource="Pojo/TbPersona.hbm.xml"/>
+    <mapping resource="Pojo/TbProvincia.hbm.xml"/>
+    <mapping resource="Pojo/TbInventario.hbm.xml"/>
+    <mapping resource="Pojo/TbParroquia.hbm.xml"/>
+    <mapping resource="Pojo/TbUsuarios.hbm.xml"/>
+    <mapping resource="Pojo/TbTipoUsuario.hbm.xml"/>
+    <mapping resource="Pojo/TbEmpresa.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

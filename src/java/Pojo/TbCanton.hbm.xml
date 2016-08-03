@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 02-ago-2016 20:53:21 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Pojo.TbCanton" table="tb_canton" catalog="intelcomex" optimistic-lock="version">
+        <composite-id name="id" class="Pojo.TbCantonId">
+            <key-property name="id" type="string">
+                <column name="id" length="5" />
+            </key-property>
+            <key-property name="tbProvinciaId" type="string">
+                <column name="tb_provincia_id" length="5" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="tbProvincia" class="Pojo.TbProvincia" update="false" insert="false" fetch="select">
+            <column name="tb_provincia_id" length="5" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="40" />
+        </property>
+        <set name="tbParroquias" table="tb_parroquia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tb_canton_id_provincia" length="5" not-null="true" />
+                <column name="tb_canton_id" length="5" not-null="true" />
+            </key>
+            <one-to-many class="Pojo.TbParroquia" />
+        </set>
+    </class>
+</hibernate-mapping>

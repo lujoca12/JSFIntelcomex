@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 02-ago-2016 20:53:21 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Pojo.TbParametro" table="tb_parametro" catalog="intelcomex" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="categoria" type="string">
+            <column name="categoria" length="100" />
+        </property>
+        <property name="detalle" type="string">
+            <column name="detalle" length="100" />
+        </property>
+        <set name="tbParametrodetalles" table="tb_parametrodetalle" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tb_parametro_id" not-null="true" />
+            </key>
+            <one-to-many class="Pojo.TbParametrodetalle" />
+        </set>
+    </class>
+</hibernate-mapping>
