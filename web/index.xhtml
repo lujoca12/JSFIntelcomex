@@ -2,24 +2,246 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>Facelet Title</title>
+        <title>INTELCOMEX | INICIO</title>
         <h:outputScript library="js" name="calendar_es.js" />
+        <h:outputScript library="js" name="visuallightbox.js" />  
+        <h:outputScript library="js" name="vlbdata.js" />
+        <h:outputScript library="js" name="jquery-ui-1.10.3.min.js" />
+        <h:outputScript library="js" name="wowslider.js" />
+        <h:outputScript library="js" name="wowslider-gallery.js" />
+        <h:outputScript library="js" name="script.js" />
+        <h:outputScript library="js" name="script-gallery.js" />
+        <h:outputScript library="js" name="app2.js" />
     </h:head>
     <h:body>
-        <h:form id="form">
-            <p:growl id="msgs" showDetail="true" />
+        
+        <ui:composition template="/templates/masterLayout.xhtml">
+        </ui:composition>   
+        
+        
+        
+        <div class="page-container">
+		<!--BEGIN OF TERMS OF USE. DO NOT EDIT OR DELETE THESE LINES. IF YOU EDIT OR DELETE THESE LINES AN ALERT MESSAGE MAY APPEAR WHEN TEMPLATE WILL BE ONLINE-->
+	<div id="copy" style="height: 75px; position: absolute; bottom: 0px; left:0px; border: none; width: 100%;">
+		<!--<div id="free-flash-header" style="width:820px;margin:0 auto;text-align:right;position:relative;bottom:0px;margin-top:63px;color:#363636;font-size:10px;font-family:Verdana"><strong>plantillas web</strong> en <a href="http://www.freeplantillas.com/"><strong>plantillas web</strong></a></div> -->																			 
+	</div>	
+	<!--debajo va el header-->
+        <header>
+			<div class="container dark-bg no_left no_right">
+				<div class="row">
 
-            <h:panelGrid columns="2" cellpadding="5">
-                <p:outputLabel for="button" value="Button:" />
-                <p:calendar locale="es" class="date_input" id="button" value="#{calendarView.date3}" showOn="button" />
-                <h1>Pilas</h1>
-                
-            </h:panelGrid>
+					<!-- logo -->
+					<div class="col-md-4 col-xs-12 logo no_left">
+                                            <a href="index.jsp">
+                                                <img src="estilos/images/logo.jpg" alt="logo"/>
+						</a>
+					</div>	
+					<!-- logo -->
+				
 
-            
-        </h:form>
+					<div class="col-md-8 col-xs-12 right_header no_right">
+
+						<!-- menu -->	
+						<nav class="menu fr">
+							<ul>
+								<li class="active">
+                                                                    <a href="index.jsp">
+										<span>INICIO</span>
+									</a>
+								</li>
+								<li>
+                                                                    <a href="quienesSomos.jsp">
+                                                                            <span>QUIENES SOMOS</span>
+									</a>
+								</li>
+								<li>
+                                                                    <a href="ofertas.jsp">
+										<span>OFERTAS</span>
+									</a>
+								</li>
+								<li>
+                                                                    <a href="productos.jsp">
+										<span>PRODUCTOS</span>
+									</a>
+								</li>
+								<li>
+                                                                    <a href="contact.htm">
+										<span>CONTACTO</span>
+									</a>
+								</li>
+								<li>
+                                                                    <a href="acceder.jsp">
+										<span>ACCEDER</span>
+									</a>
+								</li>
+							</ul>
+						</nav>
+						<!-- menu -->	
+					</div>
+
+				</div>
+			</div>
+		</header>
+		
+        	<div class="container dark-bg no_left no_right">
+			<div class="slide">
+				<div id="wowslider-container1">
+					<div class="ws_images"><ul>
+                                                
+                                                <li><img src="estilos/images/flashimages/header1.jpg" alt="COMPUTADORA DE ESCRITORIO" title="COMPUTADORA DE ESCRITORIO" id="wows1_0"/></li>
+                                                <li><img src="estilos/images/flashimages/header2.jpg" alt="IMPRESORA" title="IMPRESORA" id="wows1_1"/></li>
+                                                <li><img src="estilos/images/flashimages/header3.jpg" alt="COMPUTADORAS" title="COMPUTADORAS DE ESCRITORIO" id="wows1_2"/></li>
+                                                <li><img src="estilos/images/flashimages/header1.jpg" alt="COMPUTADORA DE ESCRITORIO" title="COMPUTADORA DE ESCRITORIO" id="wows1_0"/></li>
+                                                <li><img src="estilos/images/flashimages/header2.jpg" alt="IMPRESORA" title="IMPRESORA" id="wows1_1"/></li>
+                                                <li><img src="estilos/images/flashimages/header3.jpg" alt="COMPUTADORAS" title="COMPUTADORAS DE ESCRITORIO" id="wows1_2"/></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div class="row with_padding"></div>
+		</div>
+
+
+		<div id="content" class="container">
+
+			<!-- sidebar -->
+			<div class="row">
+				<aside class="col-md-4 col-xs-12 no_left">
+
+					<!-- bloc -->
+					<div>
+						<h3 class="header">Quisque vitae dictum nunc. Donec vitae felis nulla.</h3>
+						<div class="bloc">
+                                                    <p><strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin viverra molestie ornare. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</strong><br>
+                                                        </br>
+                                                        <br>Tam bibendum lorem sed mauris elementum vehicula. Donec odio risus, euismod a congue quis, faucibus in massa. Aliquam erat volutpat. Duis eget sem in enim hendrerit eleifend. Quisque laoreet pulvinar porta. Nunc vel arcu nisi, vitae mattis metus. Nulla aliquet dignissim dolor eget aliquam. Sed eget justo lacus.</br></p>
+						</div>
+					</div>
+					<!-- bloc -->
+
+					<!-- bloc -->
+					<div>
+						<h3 class="header">Quisque vitae dictum nunc. Donec vitae felis nulla.</h3>
+						<ul class="bloc">
+							<li>
+								<p>Sed scelerisque fringilla pharetra. Suspendisse ultricies, dui vel venenatis mollis, tortor nisi ultricies leo, quis sollicitudin leo est et leo.</p>
+								<a class="oranje fr" href="index.htm"> &gt;&gt; Read more</a>
+							</li>
+							<li>
+								<p>Morbi fermentum semper ullamcorper. Donec et laoreet nisl. Donec condimentum interdum leo in porttitor. </p>
+								<a class="oranje fr" href="index.htm"> &gt;&gt; Read more</a>
+							</li>
+						</ul>
+
+					</div>
+					<!-- bloc -->
+ 
+
+				</aside>
+
+
+				<div class="section col-md-8 col-xs-12 no_left no_right">
+					<div class="row">
+						
+						<section class="content">
+							<article class="col-md-6 col-xs-12">
+								<div class="article-content">
+									<div class="bloc-img">
+                                                                            <img src="estilos/images/photo1.jpg" alt="photo"></img>
+										<p class="up-corner">TO RENT</p>
+										<p class="bottom-corner">Ref : XFT.259.KI.1</p>
+									</div>
+									<div class="content-text full-width">
+										<ul>
+											<li>
+												<label>Etiam</label>
+												<p>Ornare, orci eget varius sagittis</p>
+											</li>
+											<li>
+												<label>Suspendi</label>
+												<p>Scelerisque eu turpis. Nam metus est, eleifend sit amet convallis quis, ornare in lorem.</p>
+											</li>
+											<li>
+												<label>Venenatis</label>
+												<p>Duis dolor turpis</p>
+											</li>
+											<li>
+												<label>Maecenas</label>
+												<p>2000 €</p>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</article>
+
+
+							<article class="col-md-6 col-xs-12">
+								<div class="article-content">
+									<div class="bloc-img">
+                                                                            <img src="estilos/images/photo2.jpg" alt="photo"></img>
+										<p class="up-corner">TO BUY</p>
+										<p class="bottom-corner">Ref : XFT.259.KI.1</p>
+									</div>
+									<div class="content-text full-width">
+										<ul>
+											<li>
+												<label>Etiam</label>
+												<p>Ornare, orci eget varius sagittis</p>
+											</li>
+											<li>
+												<label>Suspendi</label>
+												<p>Scelerisque eu turpis. Nam metus est, eleifend sit amet convallis quis, ornare in lorem.</p>
+											</li>
+											<li>
+												<label>Venenatis</label>
+												<p>Duis dolor turpis</p>
+											</li>
+											<li>
+												<label>Maecenas</label>
+												<p>2000 €</p>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</article>
+
+						</section>
+					</div>
+				</div>	
+			</div>
+
+			
+
+			<div class="copy-header">
+				<p class="align_right"></p>				 
+			</div>
+		<div class="clear"></div>
+		</div>
+
+		<!-- footer -->
+		<footer class="footer container">
+			<div class="container copyright">
+                            <p>© Copyright 2016 Company. Ingenieria en Sistemas</p>
+			</div>
+	
+
+		</footer>
+		<!-- end footer -->
+
+		<audio id="audio-bg">
+                    <source src="audio/music.mp3"></source>
+		</audio>
+	
+	</div>
+        
+        
+        
+        
+        
     </h:body>
 </html>
 

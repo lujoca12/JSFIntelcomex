@@ -8,10 +8,10 @@
         <meta charset="UTF-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <meta name="description" content="Postgrado UTEQ"/>
+        <meta name="description" content="INTELCOMEX"/>
         <meta name="author" content="SISFIAC"/>        
-        <link href="#{resource['img/logoPostgrado.ico']}" rel="shortcut icon" type="image/x-icon"/>
-        <title>PostGrado UTEQ</title>
+        <link href="#{resource['images/logo.jpg']}" rel="shortcut icon" type="image/x-icon"/>
+        <title>INTELCOMEX</title>
         <h:outputStylesheet name="normalize.css" library="css"/> 
         <h:outputStylesheet name="layout.css" library="css"/>    
         <h:outputStylesheet name="bootstrap.min.css" library="css"/>    
@@ -39,19 +39,31 @@
                                     <span class="icon-bar"></span>
                                     <span class="icon-bar"></span>
                                 </button>
-                                <p:link class="navbar-brand" outcome="/index" value="Postgrado UTEQ"/>
+                                <p:link class="navbar-brand" outcome="/index" value="INTELCOMEX"  />
                             </div>
                             <!-- Collect the nav links, forms, and other content for toggling -->
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                 <ul class="nav navbar-nav navbar-right">
+                                    
                                     <li>
-                                        <a href="#">Contáctos</a>
+                                        <a href="#">Inicio</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Quienes Somos</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Ofertas</a>
                                     </li>
 
                                     <li>
-                                        <a href="#">Acerca de Nosotros</a>
+                                        <a href="#">Productos</a>
                                     </li>
-                                    <li class="dropdown">
+                                    <li>
+                                        <a href="#">Contacto</a>
+                                    </li>
+                                   <!-- 
+                                    esto es para hacer un submenu....................
+                                   <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Servicios en línea <b class="caret"></b></a>
                                         <ul class="dropdown-menu">
                                             <li>
@@ -68,7 +80,7 @@
                                             </li>
                                             <li><h:link outcome="/Modulos/Biblioteca/principaltesis" value="Biblioteca de Tesis"></h:link></li>                                                
                                         </ul>
-                                    </li>
+                                    </li>-->
                                    
                                     <li class="dropdown">
                                         <!--   falta hacer que cuadno ya se esta logeado
@@ -115,7 +127,7 @@
 
             <div id="footer" class="vertical-centered-text">
                 <ui:insert name="footer" >
-                    <p> Desarrollado por estudiantes de Ingeniería en Sistemas de la UTEQ.</p>
+                    <p> © Copyright 2016 Company. Ingenieria en Sistemas</p>
                 </ui:insert>
             </div>
 
