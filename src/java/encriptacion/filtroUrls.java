@@ -50,7 +50,8 @@ public class filtroUrls implements Filter {
         String[] urlPermitidaSinSesion=new String[]
         {
             //            "faces/Admin/permisosUsuarios.xhtml",
-            "faces/index.xhtml"
+            "faces/index.xhtml",
+            "faces/login.xhtml"
         };
         
         boolean redireccionarPeticion;

@@ -30,6 +30,7 @@ public class TbUsuarios  implements java.io.Serializable {
      private Set tbFacturas = new HashSet(0);
      private Set tbPedidoses = new HashSet(0);
      private Set tbDetallePermisos = new HashSet(0);
+     private Character estado;
 
     public TbUsuarios() {
     }
@@ -41,7 +42,7 @@ public class TbUsuarios  implements java.io.Serializable {
         this.tbParametrodetalle = tbParametrodetalle;
         this.tbParroquia = tbParroquia;
     }
-    public TbUsuarios(String cedula, TbEmpresa tbEmpresa, TbParametrodetalle tbParametrodetalle, TbParroquia tbParroquia, String nombres, String apellidos, String sexo, String telefono, String estadoCivil, String direccion, Date fechanacimiento, String email, String login, String pass, Set tbTipoUsuarios, Set tbFacturas, Set tbPedidoses, Set tbDetallePermisos) {
+    public TbUsuarios(String cedula, TbEmpresa tbEmpresa, TbParametrodetalle tbParametrodetalle, TbParroquia tbParroquia, String nombres, String apellidos, String sexo, String telefono, String estadoCivil, String direccion, Date fechanacimiento, String email, String login, String pass, Set tbTipoUsuarios, Set tbFacturas, Set tbPedidoses, Set tbDetallePermisos, Character estado) {
        this.cedula = cedula;
        this.tbEmpresa = tbEmpresa;
        this.tbParametrodetalle = tbParametrodetalle;
@@ -60,6 +61,7 @@ public class TbUsuarios  implements java.io.Serializable {
        this.tbFacturas = tbFacturas;
        this.tbPedidoses = tbPedidoses;
        this.tbDetallePermisos = tbDetallePermisos;
+       this.estado = estado;
     }
    
     public String getCedula() {
@@ -189,6 +191,14 @@ public class TbUsuarios  implements java.io.Serializable {
         this.tbDetallePermisos = tbDetallePermisos;
     }
 
+    public Character getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Character estado) {
+        this.estado = estado;
+    }
+    
 
 
 

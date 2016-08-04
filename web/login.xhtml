@@ -22,11 +22,11 @@
                     <h2>Inicia Sesión</h2>                    
                     <div class="form-group">
                         <label for="txt_User">Usuario</label>
-                        <h:inputText id="txt_User" value="#{usuarioBean.usuario.nick}" class="form-control login-control" required="true" requiredMessage="Ingrese un usuario."/>                        
+                        <h:inputText id="txt_User" value="#{usuarioBean.usuario.login}" class="form-control login-control" required="true" requiredMessage="Ingrese un usuario."/>                        
                     </div>
                     <div class="form-group">
                         <label for="txt_Password">Password</label>
-                        <h:inputSecret id="txt_Clave"  value="#{usuarioBean.usuario.clave}"  class="form-control login-control" required="true" requiredMessage="Ingrese una clave."/>                                 
+                        <h:inputSecret id="txt_Clave"  value="#{usuarioBean.usuario.pass}"  class="form-control login-control" required="true" requiredMessage="Ingrese una clave."/>                                 
                     </div>                    
 
                     <h:commandLink id="btn-enviar"  class="btn btn-primary btn-lg btn-block "    action="#{usuarioBean.verificarDatos()}"  >

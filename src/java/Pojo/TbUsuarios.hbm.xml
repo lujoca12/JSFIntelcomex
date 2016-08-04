@@ -49,6 +49,9 @@
         <property name="pass" type="string">
             <column name="pass" length="20" />
         </property>
+        <property name="estado" type="character">
+            <column name="estado" length="1" />
+        </property>
         <set name="tbTipoUsuarios" table="tb_tipo_usuario" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="usuario_cedula" length="10" not-null="true" />
