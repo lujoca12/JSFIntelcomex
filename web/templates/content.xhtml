@@ -1,12 +1,166 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+      
     </h:head>
     <h:body>
-        Hello from Facelets content
+        <f:facet name="last">                    
+            <h:outputStylesheet name="modern-business.css" library="css"/>
+            <h:outputStylesheet name="index.css" library="css"/>
+        </f:facet>
+        <div class="col-lg-12">
+            <h1 class="page-header">
+
+            </h1>
+        </div>
+
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                    <div class="fill" style="background-image: url(#{resource['images/flashimages/header1.jpg']});"></div> 
+
+                    <!--Para agregar un texto <div class="carousel-caption">
+                         ...<img src="resources/img/img1.jpg" alt="..."/>
+                     </div> -->
+                </div>
+                <div class="item">
+                    <div class="fill" style="background-image: url(#{resource['images/flashimages/header2.jpg']});"></div> 
+                    <!--Para agregar un texto <div class="carousel-caption">
+                         ...<img src="resources/img/img1.jpg" alt="..."/>
+                     </div> -->
+                </div>
+                <div class="item">
+                    <div class="fill" style="background-image: url(#{resource['images/flashimages/header3.jpg']});"></div> 
+                    <!--Para agregar un texto <div class="carousel-caption">
+                         ...<img src="resources/img/img1.jpg" alt="..."/>
+                     </div> -->
+                </div>
+
+            </div>
+
+            <!-- Controls -->
+            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                <span class="icon-prev" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                <span class="icon-next" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        
+        <div class="col-lg-12">
+                    <h1 class="page-header">
+                      
+                    </h1>
+                </div>
+
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header"></h1>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4><i class="fa fa-fw fa-suitcase"></i> Historia</h4>
+                        </div>
+                        <div class="panel-body">
+                            <p>Somos un grupo de profesionales convencidos que la tecnología es un pilar fundamental para el desarrollo humano y social de todo individuo. Comprendemos la velocidad con que esta se renueva y estamos en la capacidad de asesorar a nuestros clientes en los constantes cambios de este tipo de productos. Nuestros colaboradores están entrenados para brindar la más completa asesoría, en funciones de los intereses de las personas interesadas en adquirir bienes de tecnología, a fin de que nuestros productos se adapten a sus necesidades. Tenemos la mayor variedad de productos en las diferentes líneas de tecnología y servicios, tales como computadoras, anillados, impresoras, suministros de oficina, entre otros, a fin de ser una solución para la mayoría de las personas que requieran nuestros productos. Estamos comprometidos con las tendencias mundiales de crecimiento de la demanda de nuestros productos y queremos ofrecer un valor agregado hacia todos los grupos de interés, basado e nuestros principios y ética profesional.</p>                                                                    
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4><i class="fa fa-fw fa-gear"></i> Misión</h4>
+                        </div>
+                        <div class="panel-body">
+                            <p>La misión de INTELCOMEX S.A, está orientada a proveer el Hardware y Software de vanguardia, necesario para dotar a las empresas y familias, de las herramientas que satisfagan los requerimientos de sus clientes, de tal forma que permita el desarrollo y conectividad a través de la representación local de marcas líderes mundiales en el negocio de la tecnología informática </p>           
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4><i class="fa fa-fw fa-road"></i> Visión</h4>
+                        </div>
+                        <div class="panel-body">
+                            <p>Proveer a nuestros clientes de equipos informáticos y soluciones electrónicas de última tecnología al usuario del mundo actual, cómodamente atendidos, excelencia en servicio, con seguridad, con la gama más amplia de productos, garantías oportunas y a un precio asequible.</p>                                
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <script>
+            $('.carousel').carousel({
+                interval: 3000 //changes the speed
+            });
+        </script>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     </h:body>
 </html>
 

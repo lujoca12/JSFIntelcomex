@@ -22,7 +22,7 @@ img{
 .fill{
     background-position: center;
     background-size: cover;
-    width: 100%;
+    width: 90%;
     transition: all 0.3s ease;
 }
 @media screen and (min-width: 992px){
