@@ -148,10 +148,10 @@ public class DaoTMenu implements InterfaceMenu{
         this.tx = null;
         boolean band = false;
         iniciaOperacion();
-        String hql = "from TbDetallePermiso as dp where dp.usuario.id =:usuario and dp.permiso.id=:permiso";
+        String hql = "from TbDetallePermiso as dp where dp.tbUsuarios.cedula ='"+usuarioId+"' and dp.tbPermiso.id="+permisoId+"";
         Query query = sesion.createQuery(hql);
-        query.setString("usuario", usuarioId);
-        query.setInteger("permiso", permisoId);
+//        query.setString("usuario", usuarioId);
+//        query.setInteger("permiso", permisoId);
         List<TbDetallePermiso> lstDetalleP = (List<TbDetallePermiso>) query.list();
         sesion.close();
         
