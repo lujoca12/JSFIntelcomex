@@ -1,12 +1,30 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<html  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
     <h:head>
-        <title>Facelet Title</title>
+            <title>INTELCOMEX | OFERTAS</title>
+        <h:outputScript library="js" name="calendar_es.js" />
+        <h:outputScript library="js" name="visuallightbox.js" />  
+        <h:outputScript library="js" name="vlbdata.js" />
+        <h:outputScript library="js" name="jquery-ui-1.10.3.min.js" />
+        <h:outputScript library="js" name="wowslider.js" />
+        <h:outputScript library="js" name="wowslider-gallery.js" />
+        <h:outputScript library="js" name="script.js" />
+        <h:outputScript library="js" name="script-gallery.js" />
+        <h:outputScript library="js" name="app2.js" />
     </h:head>
     <h:body>
-        Hello from Facelets
+        <ui:composition template="/templates/masterLayout.xhtml">
+            <ui:define name="leftContent">   
+                <ui:define name="content"> 
+                </ui:define>
+            </ui:define>
+        </ui:composition> 
     </h:body>
 </html>
 
