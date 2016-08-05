@@ -40,19 +40,23 @@ body {
     vertical-align: middle;
 }
 nav a {
-    color:white !important;
+    color: #afd9ee !important;
 }
 nav li, nav li ul{
-   background-color: #1C9626 !important; 
+   background-color: /*#1C9626*/ #2C3F6D !important; 
 }
 
 nav a:hover {
-    color:#F8AA4F !important;
+    color:#F9D403 !important;
 }
 .color-nav{
-    background-color: #1C9626 !important;
-    border-color: #1C9626 !important;
+    background-color:  #2C3F6D  !important;
+    border-color: #26292E !important;
 }
 .navbar-inverse .navbar-nav > .open > a{
-    background-color: #0a7240  !important;
+   /*background-color: #0a7240  !important;*/
+   background-color: #0a7240  !important; 
 }
+
+
+/*9F2739*/
