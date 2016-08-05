@@ -15,7 +15,7 @@ body .profile-info.dropdown .dropdown-menu li a:hover {
   background: #009549;
 }
 body .page-container .sidebar-menu {
-  background: #00a651;
+  background: #39435C;
   color: #009549;
   /*#1C9626*/
 }
@@ -542,15 +542,15 @@ body .horizontal-menu header.navbar > ul > li#search .search-input:-ms-input-pla
 }
 
 .ui-panelmenu-panel h3 a{
-    background-color: #00a651;
+    background-color: #2C3F6D;
     color: white !important;
     text-shadow: 0 1px 0 rgba(11, 10, 10, 0.8) !important;
 }
 .ui-panelmenu-panel h3 a:hover{
-    background-color: #009549;
+    background-color: #AA4144;
 }
 .ui-panelmenu-content ul li{
-    background-color: #00a651;
+    background-color: #2C3F6D;
 }
 
 
@@ -566,7 +566,7 @@ body .horizontal-menu header.navbar > ul > li#search .search-input:-ms-input-pla
     border-radius: 0px;
 }
 .ui-panelmenu .ui-menuitem-link:hover{
-    background-color: #009549;
+    background-color: #AA4144;
 }
 .margenBotton{
  margin-bottom: 20px;   
@@ -619,12 +619,19 @@ form label{
 }
 
 .ui-widget-header{
-    background: #0C0C0C -webkit-gradient(linear, left top, left bottom, from(rgba(8, 8, 8, 0.8)), to(rgba(255,255,255,0))) !important;
-    background: #0C0C0C -moz-linear-gradient(top, #0C0C0C, rgba(255,255,255,0)) !important;
+    background: #2C3F6D -webkit-gradient(linear, left top, left bottom, from(rgba(8, 8, 8, 0.8)), to(rgba(255,255,255,0))) !important;
+    background: #2C3F6D -moz-linear-gradient(top, #2C3F6D, rgba(255,255,255,0)) !important;
     /*background: #00a651 -webkit-gradient(linear, left top, left bottom, from(#00a651), to(rgba(255,255,255,0))) !important;*/
     font-weight: normal !important;
     color: #FBF9F9 !important;
     text-shadow: 0px 1px 0px rgba(249, 246, 246, 0.7) !important;
+    
+    
+    /*aki va el contenido de gadget..................................*/
+    
+    
+    
+    
 }
 
 
@@ -661,8 +668,8 @@ th {
 }
 .tblDatos th{
     color: white !important;
-    background: #0C0C0C -webkit-gradient(linear, left top, left bottom, from(#0C0C0C), to(rgba(255,255,255,0))) !important;
-    background: #0C0C0C -moz-linear-gradient(top, #0C0C0C, rgba(255,255,255,0)) !important;
+    background: #2C3F6D -webkit-gradient(linear, left top, left bottom, from(#2C3F6D), to(rgba(255,255,255,0))) !important;
+    background: #2C3F6D -moz-linear-gradient(top, #2C3F6D, rgba(255,255,255,0)) !important;
     font-weight: normal !important;
 }
 

@@ -836,6 +836,7 @@ content: '';
 */
 .sidebar {
   margin-bottom: 5px;
+  
 }
 .sidebar .sidebar-form input:focus {
   -webkit-box-shadow: none;

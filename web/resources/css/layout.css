@@ -12,10 +12,20 @@ body {
     margin:0;
     padding:0;
     height:100%;
+
+
 }
 #wrapper {
     min-height:100%;
     position:relative;
+    background: rgba(164,179,87,1);
+    background: -moz-linear-gradient(-45deg, rgba(164,179,87,1) 0%, rgba(30,163,204,0.81) 100%);
+    background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(164,179,87,1)), color-stop(100%, rgba(30,163,204,0.81)));
+    background: -webkit-linear-gradient(-45deg, rgba(164,179,87,1) 0%, rgba(30,163,204,0.81) 100%);
+    background: -o-linear-gradient(-45deg, rgba(164,179,87,1) 0%, rgba(30,163,204,0.81) 100%);
+    background: -ms-linear-gradient(-45deg, rgba(164,179,87,1) 0%, rgba(30,163,204,0.81) 100%);
+    background: linear-gradient(135deg, rgba(164,179,87,1) 0%, rgba(30,163,204,0.81) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a4b357', endColorstr='#1ea3cc', GradientType=1 );
 }
 
 #content {
@@ -30,6 +40,14 @@ body {
     left:0;
     text-align: center;
     margin: auto;
+    background: rgba(164,179,87,1);
+    background: -moz-linear-gradient(-45deg, rgba(164,179,87,1) 0%, rgba(30,163,204,0.81) 100%);
+    background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(164,179,87,1)), color-stop(100%, rgba(30,163,204,0.81)));
+    background: -webkit-linear-gradient(-45deg, rgba(164,179,87,1) 0%, rgba(30,163,204,0.81) 100%);
+    background: -o-linear-gradient(-45deg, rgba(164,179,87,1) 0%, rgba(30,163,204,0.81) 100%);
+    background: -ms-linear-gradient(-45deg, rgba(164,179,87,1) 0%, rgba(30,163,204,0.81) 100%);
+    background: linear-gradient(135deg, rgba(164,179,87,1) 0%, rgba(30,163,204,0.81) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a4b357', endColorstr='#1ea3cc', GradientType=1 );
 }
 .vertical-centered-text {
     height: 200px;
@@ -40,22 +58,23 @@ body {
     vertical-align: middle;
 }
 nav a {
-    color: #afd9ee !important;
+    color: /*#afd9ee*/#F9D403 !important;
 }
 nav li, nav li ul{
-   background-color: /*#1C9626*/ #2C3F6D !important; 
+    background-color: /*#1C9626*/ #2C3F6D !important; 
 }
 
 nav a:hover {
-    color:#F9D403 !important;
+    color:#afd9ee !important;
 }
 .color-nav{
     background-color:  #2C3F6D  !important;
     border-color: #26292E !important;
+    
 }
 .navbar-inverse .navbar-nav > .open > a{
-   /*background-color: #0a7240  !important;*/
-   background-color: #0a7240  !important; 
+    /*background-color: #0a7240  !important;*/
+    background-color: #0a7240  !important; 
 }
 
 
