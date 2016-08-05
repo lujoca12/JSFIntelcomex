@@ -1,70 +1,119 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 05/08/2016, 0:52:57
-    Author     : Anonimous
-*/
+body,html{
+    height: 100%;
+  }
 
+  nav11.sidebar11, .main11{
+    -webkit-transition: margin 200ms ease-out;
+      -moz-transition: margin 200ms ease-out;
+      -o-transition: margin 200ms ease-out;
+      transition: margin 200ms ease-out;
+  }
 
+  .main11{
+    padding: 10px 10px 0 10px;
+  }
 
-* {
-    margin:0px;
-    padding:0px;
-}
+ @media (min-width: 765px) {
 
-#header1 {
-    margin:auto;
-    width:500px;
-    font-family:Arial, Helvetica, sans-serif;
-}
+    .main11{
+      position: absolute;
+      width: calc(100% - 40px); 
+      margin-left: 40px;
+      float: right;
+    }
 
-ul, ol {
-    list-style:none;
-    display:block;
-}
+    nav11.sidebar11:hover + .main11{
+      margin-left: 200px;
+    }
 
-.nav1 {
-    width:500px; /*Le establecemos un ancho*/
-    margin:0 auto; /*Centramos automaticamente*/
-}
+    nav11.sidebar11.navbar11.sidebar11>.container11 .navbar-brand11, .navbar11>.container-fluid11 .navbar-brand11 {
+      margin-left: 0px;
+    }
 
-.nav1 > li {
-    float:left;
-    display:block;
-}
+    nav11.sidebar11 .navbar-brand11, nav11.sidebar11 .navbar-header11{
+      text-align: center;
+      width: 100%;
+      margin-left: 0px;
+    }
+    
+    nav11.sidebar11 a{
+      padding-right: 13px;
+    }
 
-.nav1 li a {
-    background-color:#000;
-    color:#fff;
-    text-decoration:none;
-    padding:10px 12px;
-    display:block;
-}
+    nav11.sidebar11 .navbar-nav11 > li:first-child{
+      border-top: 1px #e5e5e5 solid;
+    }
 
-.nav1 li a:hover {
-    background-color:#434343;
-}
+    nav11.sidebar11 .navbar-nav11 > li{
+      border-bottom: 1px #e5e5e5 solid;
+    }
 
-.nav1 li ul {
-    display:none;
-    position:absolute;
-    min-width:140px;
-}
+    nav11.sidebar11 .navbar-nav11 .open11 .dropdown-menu11 {
+      position: static;
+      float: none;
+      width: auto;
+      margin-top: 0;
+      background-color: transparent;
+      border: 0;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+    }
 
-.nav1 li:hover > ul {
-    display:block;
-}
+    nav11.sidebar11 .navbar-collapse11, nav11.sidebar11 .container-fluid11{
+      padding: 0 0px 0 0px;
+    }
 
-.nav1 li ul li {
-    position:relative;
-}
+    .navbar-inverse11 .navbar-nav11 .open11 .dropdown-menu11>li>a {
+      color: #777;
+    }
 
-.nav1 li ul li ul {
-    right:-140px;
-    top:0px;
-}
+    nav11.sidebar11{
+      width: 200px;
+      height: 100%;
+      margin-left: -160px;
+      float: left;
+      margin-bottom: 0px;
+    }
 
-	
+    nav11.sidebar11 li {
+      width: 100%;
+    }
+
+    nav11.sidebar11:hover{
+      margin-left: 0px;
+    }
+
+    .forAnimate11{
+      opacity: 0;
+    }
+  }
+   
+  @media (min-width: 1330px) {
+
+    .main11{
+      width: calc(100% - 200px);
+      margin-left: 200px;
+    }
+
+    nav11.sidebar11{
+      margin-left: 0px;
+      float: left;
+    }
+
+    nav11.sidebar11 .forAnimate11{
+      opacity: 1;
+    }
+  }
+
+  nav11.sidebar11 .navbar-nav11 .open11 .dropdown-menu11>li>a:hover, nav11.sidebar11 .navbar-nav11 .open11 .dropdown-menu11>li>a:focus {
+    color: #CCC;
+    background-color: transparent;
+  }
+
+  nav11:hover .forAnimate11{
+    opacity: 1;
+  }
+  section11{
+    padding-left: 15px;
+  }
+  
