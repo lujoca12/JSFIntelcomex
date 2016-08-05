@@ -143,7 +143,7 @@ public class MbVTablaPermisos implements Serializable{
                             if (p.getId() == p1.getPadre() && p1.getEstado().equals('0')) {
                                 bandera = false;
                                 contenedor = p1.getForm().substring(17, 33);
-                                ruta = p1.getForm().substring(54, p1.getForm().length() - 2);
+                                ruta = p1.getForm().substring(57, p1.getForm().length() - 2);
                                 lstTablaPermisos.add(new ClsTablaPermisos(p1.getId(), p1.getDescripcion(), contenedor, ruta, p1.getOrden(), "Folder", p1.getPadre()));
                                 //node00 = new DefaultTreeNode(new ClsTablaPermisos(p1.getId(),p1.getDescripcion(),contenedor,ruta,p1.getOrden(), "Folder",1), node0);
                             }
@@ -161,7 +161,7 @@ public class MbVTablaPermisos implements Serializable{
                         for (TbPermiso p1 : lstMenus) {
                             if (p.getId() == p1.getPadre()) {
                                 contenedor = p1.getForm().substring(17, 33);
-                                ruta = p1.getForm().substring(54, p1.getForm().length() - 2);
+                                ruta = p1.getForm().substring(57, p1.getForm().length() - 2);
                                 lstTablaPermisos.add(new ClsTablaPermisos(p1.getId(), p1.getDescripcion(), contenedor, ruta, p1.getOrden(), "Folder", p1.getPadre()));
                                 //node00 = new DefaultTreeNode(new ClsTablaPermisos(p1.getId(),p1.getDescripcion(),contenedor,ruta,p1.getOrden(), "Folder",1), node0);
                             }
