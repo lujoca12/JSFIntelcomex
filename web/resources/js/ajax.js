@@ -33,6 +33,7 @@ function CargarPaginaExterna(NombreContenedor,nombreCarpeta,nombrePagina)
 }
 function CargarPaginaURL(NombreContenedor,ruta)
 {
+    
     $("#"+NombreContenedor).html('<div><center><img class=\"imgAjax\" src="../resources/img/ajax-loader.gif"/></center></div>');
     $("#"+NombreContenedor).load(ruta+'.xhtml');
 }
