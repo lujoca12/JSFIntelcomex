@@ -1,5 +1,5 @@
 package Pojo;
-// Generated 02-ago-2016 20:53:09 by Hibernate Tools 4.3.1
+// Generated 04-ago-2016 23:19:04 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -18,14 +18,12 @@ public class TbParametrodetalle  implements java.io.Serializable {
      private Set tbPedidosesForTbParametrodetalleTipopedido = new HashSet(0);
      private Set tbPedidosesForTbParametrodetalleTipopago = new HashSet(0);
      private Set tbPersonasForTbParametrodetalleTipoempresa = new HashSet(0);
-     private Set tbEmpresas = new HashSet(0);
      private Set tbPersonasForTbParametrodetalleTipopersona = new HashSet(0);
      private Set tbProductosForTbParametrodetalleAlmacenes = new HashSet(0);
      private Set tbProductosForTbParametrodetalleClasificacion = new HashSet(0);
      private Set tbProductosForTbParametrodetalleTasaiva = new HashSet(0);
      private Set tbFacturas = new HashSet(0);
      private Set tbProductosForTbParametrodetalleUnidadmedida = new HashSet(0);
-     private Set tbUsuarioses = new HashSet(0);
 
     public TbParametrodetalle() {
     }
@@ -35,21 +33,19 @@ public class TbParametrodetalle  implements java.io.Serializable {
         this.tbParametro = tbParametro;
         this.parametro = parametro;
     }
-    public TbParametrodetalle(TbParametro tbParametro, String parametro, String detalle, Set tbPedidosesForTbParametrodetalleTipopedido, Set tbPedidosesForTbParametrodetalleTipopago, Set tbPersonasForTbParametrodetalleTipoempresa, Set tbEmpresas, Set tbPersonasForTbParametrodetalleTipopersona, Set tbProductosForTbParametrodetalleAlmacenes, Set tbProductosForTbParametrodetalleClasificacion, Set tbProductosForTbParametrodetalleTasaiva, Set tbFacturas, Set tbProductosForTbParametrodetalleUnidadmedida, Set tbUsuarioses) {
+    public TbParametrodetalle(TbParametro tbParametro, String parametro, String detalle, Set tbPedidosesForTbParametrodetalleTipopedido, Set tbPedidosesForTbParametrodetalleTipopago, Set tbPersonasForTbParametrodetalleTipoempresa, Set tbPersonasForTbParametrodetalleTipopersona, Set tbProductosForTbParametrodetalleAlmacenes, Set tbProductosForTbParametrodetalleClasificacion, Set tbProductosForTbParametrodetalleTasaiva, Set tbFacturas, Set tbProductosForTbParametrodetalleUnidadmedida) {
        this.tbParametro = tbParametro;
        this.parametro = parametro;
        this.detalle = detalle;
        this.tbPedidosesForTbParametrodetalleTipopedido = tbPedidosesForTbParametrodetalleTipopedido;
        this.tbPedidosesForTbParametrodetalleTipopago = tbPedidosesForTbParametrodetalleTipopago;
        this.tbPersonasForTbParametrodetalleTipoempresa = tbPersonasForTbParametrodetalleTipoempresa;
-       this.tbEmpresas = tbEmpresas;
        this.tbPersonasForTbParametrodetalleTipopersona = tbPersonasForTbParametrodetalleTipopersona;
        this.tbProductosForTbParametrodetalleAlmacenes = tbProductosForTbParametrodetalleAlmacenes;
        this.tbProductosForTbParametrodetalleClasificacion = tbProductosForTbParametrodetalleClasificacion;
        this.tbProductosForTbParametrodetalleTasaiva = tbProductosForTbParametrodetalleTasaiva;
        this.tbFacturas = tbFacturas;
        this.tbProductosForTbParametrodetalleUnidadmedida = tbProductosForTbParametrodetalleUnidadmedida;
-       this.tbUsuarioses = tbUsuarioses;
     }
    
     public Integer getId() {
@@ -101,13 +97,6 @@ public class TbParametrodetalle  implements java.io.Serializable {
     public void setTbPersonasForTbParametrodetalleTipoempresa(Set tbPersonasForTbParametrodetalleTipoempresa) {
         this.tbPersonasForTbParametrodetalleTipoempresa = tbPersonasForTbParametrodetalleTipoempresa;
     }
-    public Set getTbEmpresas() {
-        return this.tbEmpresas;
-    }
-    
-    public void setTbEmpresas(Set tbEmpresas) {
-        this.tbEmpresas = tbEmpresas;
-    }
     public Set getTbPersonasForTbParametrodetalleTipopersona() {
         return this.tbPersonasForTbParametrodetalleTipopersona;
     }
@@ -149,13 +138,6 @@ public class TbParametrodetalle  implements java.io.Serializable {
     
     public void setTbProductosForTbParametrodetalleUnidadmedida(Set tbProductosForTbParametrodetalleUnidadmedida) {
         this.tbProductosForTbParametrodetalleUnidadmedida = tbProductosForTbParametrodetalleUnidadmedida;
-    }
-    public Set getTbUsuarioses() {
-        return this.tbUsuarioses;
-    }
-    
-    public void setTbUsuarioses(Set tbUsuarioses) {
-        this.tbUsuarioses = tbUsuarioses;
     }
 
 

@@ -1,5 +1,5 @@
 package Pojo;
-// Generated 02-ago-2016 20:53:09 by Hibernate Tools 4.3.1
+// Generated 04-ago-2016 23:19:04 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -12,8 +12,8 @@ public class TbEmpresa  implements java.io.Serializable {
 
 
      private Integer id;
-     private TbParametrodetalle tbParametrodetalle;
      private TbParroquia tbParroquia;
+     private TbTipoempresa tbTipoempresa;
      private String razonSocial;
      private String ruc;
      private String direccion;
@@ -23,13 +23,13 @@ public class TbEmpresa  implements java.io.Serializable {
     }
 
 	
-    public TbEmpresa(TbParametrodetalle tbParametrodetalle, TbParroquia tbParroquia) {
-        this.tbParametrodetalle = tbParametrodetalle;
+    public TbEmpresa(TbParroquia tbParroquia, TbTipoempresa tbTipoempresa) {
         this.tbParroquia = tbParroquia;
+        this.tbTipoempresa = tbTipoempresa;
     }
-    public TbEmpresa(TbParametrodetalle tbParametrodetalle, TbParroquia tbParroquia, String razonSocial, String ruc, String direccion, Set tbUsuarioses) {
-       this.tbParametrodetalle = tbParametrodetalle;
+    public TbEmpresa(TbParroquia tbParroquia, TbTipoempresa tbTipoempresa, String razonSocial, String ruc, String direccion, Set tbUsuarioses) {
        this.tbParroquia = tbParroquia;
+       this.tbTipoempresa = tbTipoempresa;
        this.razonSocial = razonSocial;
        this.ruc = ruc;
        this.direccion = direccion;
@@ -43,19 +43,19 @@ public class TbEmpresa  implements java.io.Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-    public TbParametrodetalle getTbParametrodetalle() {
-        return this.tbParametrodetalle;
-    }
-    
-    public void setTbParametrodetalle(TbParametrodetalle tbParametrodetalle) {
-        this.tbParametrodetalle = tbParametrodetalle;
-    }
     public TbParroquia getTbParroquia() {
         return this.tbParroquia;
     }
     
     public void setTbParroquia(TbParroquia tbParroquia) {
         this.tbParroquia = tbParroquia;
+    }
+    public TbTipoempresa getTbTipoempresa() {
+        return this.tbTipoempresa;
+    }
+    
+    public void setTbTipoempresa(TbTipoempresa tbTipoempresa) {
+        this.tbTipoempresa = tbTipoempresa;
     }
     public String getRazonSocial() {
         return this.razonSocial;

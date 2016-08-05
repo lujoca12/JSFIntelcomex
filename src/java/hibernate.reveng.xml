@@ -2,22 +2,23 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="intelcomex"/>
-  <table-filter match-name="tb_detallepedidos"/>
-  <table-filter match-name="tb_inventario"/>
-  <table-filter match-name="tb_canton"/>
-  <table-filter match-name="tb_usuarios"/>
-  <table-filter match-name="tb_pais"/>
-  <table-filter match-name="tb_permiso"/>
   <table-filter match-name="tb_factura"/>
+  <table-filter match-name="tb_inventario"/>
   <table-filter match-name="tb_tipo_usuario"/>
   <table-filter match-name="tb_empresa"/>
-  <table-filter match-name="tb_pedidos"/>
+  <table-filter match-name="tb_parroquia"/>
+  <table-filter match-name="tb_canton"/>
+  <table-filter match-name="tb_detalle_permiso"/>
+  <table-filter match-name="tb_parametrodetalle"/>
   <table-filter match-name="tb_detallefactura"/>
-  <table-filter match-name="tb_parametro"/>
-  <table-filter match-name="tb_provincia"/>
+  <table-filter match-name="tb_detallepedidos"/>
   <table-filter match-name="tb_producto"/>
   <table-filter match-name="tb_persona"/>
-  <table-filter match-name="tb_parroquia"/>
-  <table-filter match-name="tb_parametrodetalle"/>
-  <table-filter match-name="tb_detalle_permiso"/>
+  <table-filter match-name="tb_provincia"/>
+  <table-filter match-name="tb_pedidos"/>
+  <table-filter match-name="tb_permiso"/>
+  <table-filter match-name="tb_usuarios"/>
+  <table-filter match-name="tb_parametro"/>
+  <table-filter match-name="tb_tipoempresa"/>
+  <table-filter match-name="tb_pais"/>
 </hibernate-reverse-engineering>

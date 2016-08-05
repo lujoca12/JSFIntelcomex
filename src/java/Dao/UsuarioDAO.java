@@ -41,7 +41,7 @@ public class UsuarioDAO {
         TbUsuarios us = null;
         try {
             sesion = HibernateUtil.getSessionFactory().openSession();
-            String hql = "FROM TbUsuarios user inner join fetch user.tbTipoUsuarios tuser WHERE login='" + usuario.getLogin()+ "' and "
+            String hql = "FROM TbUsuarios user inner join fetch user.tbTipoUsuario tuser WHERE login='" + usuario.getLogin()+ "' and "
                     + "pass='" + usuario.getPass()+ "' and user.estado = '1'";
             Query query = sesion.createQuery(hql);
             if (!query.list().isEmpty()) {
@@ -59,7 +59,7 @@ public class UsuarioDAO {
         boolean existe = false;
         try {
             sesion = HibernateUtil.getSessionFactory().openSession();
-            String hql = "FROM Usuario u where u.nick='" + Nick + "' ";
+            String hql = "FROM TbUsuarios u where u.login='" + Nick + "' ";
             Query query = sesion.createQuery(hql);
             us = (TbUsuarios) query.uniqueResult();
             existe = us != null;

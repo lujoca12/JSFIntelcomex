@@ -18,6 +18,7 @@
     <mapping resource="Pojo/TbParametro.hbm.xml"/>
     <mapping resource="Pojo/TbDetallepedidos.hbm.xml"/>
     <mapping resource="Pojo/TbDetallePermiso.hbm.xml"/>
+    <mapping resource="Pojo/TbTipoempresa.hbm.xml"/>
     <mapping resource="Pojo/TbProducto.hbm.xml"/>
     <mapping resource="Pojo/TbCanton.hbm.xml"/>
     <mapping resource="Pojo/TbPermiso.hbm.xml"/>

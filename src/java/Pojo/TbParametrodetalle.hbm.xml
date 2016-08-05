@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 02-ago-2016 20:53:21 by Hibernate Tools 4.3.1 -->
+<!-- Generated 04-ago-2016 23:19:11 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="Pojo.TbParametrodetalle" table="tb_parametrodetalle" catalog="intelcomex" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
@@ -34,12 +34,6 @@
                 <column name="tb_parametrodetalle_tipoempresa" not-null="true" />
             </key>
             <one-to-many class="Pojo.TbPersona" />
-        </set>
-        <set name="tbEmpresas" table="tb_empresa" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="tb_parametrodetalle_tipoempresa" not-null="true" />
-            </key>
-            <one-to-many class="Pojo.TbEmpresa" />
         </set>
         <set name="tbPersonasForTbParametrodetalleTipopersona" table="tb_persona" inverse="true" lazy="true" fetch="select">
             <key>
@@ -76,12 +70,6 @@
                 <column name="tb_parametrodetalle_unidadmedida" not-null="true" />
             </key>
             <one-to-many class="Pojo.TbProducto" />
-        </set>
-        <set name="tbUsuarioses" table="tb_usuarios" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="tb_parametrodetalle_tipousuario" not-null="true" />
-            </key>
-            <one-to-many class="Pojo.TbUsuarios" />
         </set>
     </class>
 </hibernate-mapping>

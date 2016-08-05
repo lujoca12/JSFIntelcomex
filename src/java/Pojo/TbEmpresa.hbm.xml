@@ -1,20 +1,18 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 02-ago-2016 20:53:21 by Hibernate Tools 4.3.1 -->
+<!-- Generated 04-ago-2016 23:19:11 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="Pojo.TbEmpresa" table="tb_empresa" catalog="intelcomex" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
         </id>
-        <many-to-one name="tbParametrodetalle" class="Pojo.TbParametrodetalle" fetch="select">
-            <column name="tb_parametrodetalle_tipoempresa" not-null="true" />
-        </many-to-one>
         <many-to-one name="tbParroquia" class="Pojo.TbParroquia" fetch="select">
             <column name="tb_parroquia_id" length="5" not-null="true" />
-            <column name="tb_parroquia_id_canton" length="5" not-null="true" />
-            <column name="tb_parroquia_id_provincia" length="5" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbTipoempresa" class="Pojo.TbTipoempresa" fetch="select">
+            <column name="tb_tipoEmpresa_id_tipoEmpresa" not-null="true" />
         </many-to-one>
         <property name="razonSocial" type="string">
             <column name="`razon social`" length="60" />

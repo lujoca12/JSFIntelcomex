@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 02-ago-2016 20:53:21 by Hibernate Tools 4.3.1 -->
+<!-- Generated 04-ago-2016 23:19:11 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="Pojo.TbUsuarios" table="tb_usuarios" catalog="intelcomex" optimistic-lock="version">
         <id name="cedula" type="string">
@@ -11,13 +11,11 @@
         <many-to-one name="tbEmpresa" class="Pojo.TbEmpresa" fetch="select">
             <column name="tb_empresa_id" not-null="true" />
         </many-to-one>
-        <many-to-one name="tbParametrodetalle" class="Pojo.TbParametrodetalle" fetch="select">
-            <column name="tb_parametrodetalle_tipousuario" not-null="true" />
-        </many-to-one>
         <many-to-one name="tbParroquia" class="Pojo.TbParroquia" fetch="select">
             <column name="tb_parroquia_id" length="5" not-null="true" />
-            <column name="tb_parroquia_id_canton" length="5" not-null="true" />
-            <column name="tb_parroquia_id_provincia" length="5" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbTipoUsuario" class="Pojo.TbTipoUsuario" fetch="select">
+            <column name="tb_tipo_usuario_id" not-null="true" />
         </many-to-one>
         <property name="nombres" type="string">
             <column name="nombres" length="60" />
@@ -47,17 +45,11 @@
             <column name="login" length="10" />
         </property>
         <property name="pass" type="string">
-            <column name="pass" length="20" />
+            <column name="pass" length="255" />
         </property>
-        <property name="estado" type="character">
+        <property name="estado" type="java.lang.Character">
             <column name="estado" length="1" />
         </property>
-        <set name="tbTipoUsuarios" table="tb_tipo_usuario" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="usuario_cedula" length="10" not-null="true" />
-            </key>
-            <one-to-many class="Pojo.TbTipoUsuario" />
-        </set>
         <set name="tbFacturas" table="tb_factura" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="tb_usuarios_cedula" length="10" not-null="true" />

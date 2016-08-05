@@ -1,5 +1,5 @@
 package Pojo;
-// Generated 02-ago-2016 20:53:09 by Hibernate Tools 4.3.1
+// Generated 04-ago-2016 23:19:04 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -11,7 +11,7 @@ import java.util.Set;
 public class TbParroquia  implements java.io.Serializable {
 
 
-     private TbParroquiaId id;
+     private String id;
      private TbCanton tbCanton;
      private String nombre;
      private Set tbUsuarioses = new HashSet(0);
@@ -22,11 +22,11 @@ public class TbParroquia  implements java.io.Serializable {
     }
 
 	
-    public TbParroquia(TbParroquiaId id, TbCanton tbCanton) {
+    public TbParroquia(String id, TbCanton tbCanton) {
         this.id = id;
         this.tbCanton = tbCanton;
     }
-    public TbParroquia(TbParroquiaId id, TbCanton tbCanton, String nombre, Set tbUsuarioses, Set tbEmpresas, Set tbPersonas) {
+    public TbParroquia(String id, TbCanton tbCanton, String nombre, Set tbUsuarioses, Set tbEmpresas, Set tbPersonas) {
        this.id = id;
        this.tbCanton = tbCanton;
        this.nombre = nombre;
@@ -35,11 +35,11 @@ public class TbParroquia  implements java.io.Serializable {
        this.tbPersonas = tbPersonas;
     }
    
-    public TbParroquiaId getId() {
+    public String getId() {
         return this.id;
     }
     
-    public void setId(TbParroquiaId id) {
+    public void setId(String id) {
         this.id = id;
     }
     public TbCanton getTbCanton() {

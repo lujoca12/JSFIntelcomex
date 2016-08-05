@@ -1,5 +1,5 @@
 package Pojo;
-// Generated 02-ago-2016 20:53:09 by Hibernate Tools 4.3.1
+// Generated 04-ago-2016 23:19:04 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -14,8 +14,8 @@ public class TbUsuarios  implements java.io.Serializable {
 
      private String cedula;
      private TbEmpresa tbEmpresa;
-     private TbParametrodetalle tbParametrodetalle;
      private TbParroquia tbParroquia;
+     private TbTipoUsuario tbTipoUsuario;
      private String nombres;
      private String apellidos;
      private String sexo;
@@ -26,27 +26,26 @@ public class TbUsuarios  implements java.io.Serializable {
      private String email;
      private String login;
      private String pass;
-     private Set tbTipoUsuarios = new HashSet(0);
+     private Character estado;
      private Set tbFacturas = new HashSet(0);
      private Set tbPedidoses = new HashSet(0);
      private Set tbDetallePermisos = new HashSet(0);
-     private Character estado;
 
     public TbUsuarios() {
     }
 
 	
-    public TbUsuarios(String cedula, TbEmpresa tbEmpresa, TbParametrodetalle tbParametrodetalle, TbParroquia tbParroquia) {
+    public TbUsuarios(String cedula, TbEmpresa tbEmpresa, TbParroquia tbParroquia, TbTipoUsuario tbTipoUsuario) {
         this.cedula = cedula;
         this.tbEmpresa = tbEmpresa;
-        this.tbParametrodetalle = tbParametrodetalle;
         this.tbParroquia = tbParroquia;
+        this.tbTipoUsuario = tbTipoUsuario;
     }
-    public TbUsuarios(String cedula, TbEmpresa tbEmpresa, TbParametrodetalle tbParametrodetalle, TbParroquia tbParroquia, String nombres, String apellidos, String sexo, String telefono, String estadoCivil, String direccion, Date fechanacimiento, String email, String login, String pass, Set tbTipoUsuarios, Set tbFacturas, Set tbPedidoses, Set tbDetallePermisos, Character estado) {
+    public TbUsuarios(String cedula, TbEmpresa tbEmpresa, TbParroquia tbParroquia, TbTipoUsuario tbTipoUsuario, String nombres, String apellidos, String sexo, String telefono, String estadoCivil, String direccion, Date fechanacimiento, String email, String login, String pass, Character estado, Set tbFacturas, Set tbPedidoses, Set tbDetallePermisos) {
        this.cedula = cedula;
        this.tbEmpresa = tbEmpresa;
-       this.tbParametrodetalle = tbParametrodetalle;
        this.tbParroquia = tbParroquia;
+       this.tbTipoUsuario = tbTipoUsuario;
        this.nombres = nombres;
        this.apellidos = apellidos;
        this.sexo = sexo;
@@ -57,11 +56,10 @@ public class TbUsuarios  implements java.io.Serializable {
        this.email = email;
        this.login = login;
        this.pass = pass;
-       this.tbTipoUsuarios = tbTipoUsuarios;
+       this.estado = estado;
        this.tbFacturas = tbFacturas;
        this.tbPedidoses = tbPedidoses;
        this.tbDetallePermisos = tbDetallePermisos;
-       this.estado = estado;
     }
    
     public String getCedula() {
@@ -78,19 +76,19 @@ public class TbUsuarios  implements java.io.Serializable {
     public void setTbEmpresa(TbEmpresa tbEmpresa) {
         this.tbEmpresa = tbEmpresa;
     }
-    public TbParametrodetalle getTbParametrodetalle() {
-        return this.tbParametrodetalle;
-    }
-    
-    public void setTbParametrodetalle(TbParametrodetalle tbParametrodetalle) {
-        this.tbParametrodetalle = tbParametrodetalle;
-    }
     public TbParroquia getTbParroquia() {
         return this.tbParroquia;
     }
     
     public void setTbParroquia(TbParroquia tbParroquia) {
         this.tbParroquia = tbParroquia;
+    }
+    public TbTipoUsuario getTbTipoUsuario() {
+        return this.tbTipoUsuario;
+    }
+    
+    public void setTbTipoUsuario(TbTipoUsuario tbTipoUsuario) {
+        this.tbTipoUsuario = tbTipoUsuario;
     }
     public String getNombres() {
         return this.nombres;
@@ -162,12 +160,12 @@ public class TbUsuarios  implements java.io.Serializable {
     public void setPass(String pass) {
         this.pass = pass;
     }
-    public Set getTbTipoUsuarios() {
-        return this.tbTipoUsuarios;
+    public Character getEstado() {
+        return this.estado;
     }
     
-    public void setTbTipoUsuarios(Set tbTipoUsuarios) {
-        this.tbTipoUsuarios = tbTipoUsuarios;
+    public void setEstado(Character estado) {
+        this.estado = estado;
     }
     public Set getTbFacturas() {
         return this.tbFacturas;
@@ -191,14 +189,6 @@ public class TbUsuarios  implements java.io.Serializable {
         this.tbDetallePermisos = tbDetallePermisos;
     }
 
-    public Character getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Character estado) {
-        this.estado = estado;
-    }
-    
 
 
 
