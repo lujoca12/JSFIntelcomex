@@ -20,8 +20,106 @@
     <h:body>
         <ui:composition template="/templates/masterLayout.xhtml">
             <ui:define name="leftContent">   
-                <ui:define name="content"> 
-                </ui:define>
+            </ui:define>
+            <ui:define name="content">
+                <f:facet name="last">                    
+                    <h:outputStylesheet name="modern-business.css" library="css"/>
+                    <h:outputStylesheet name="index.css" library="css"/>
+                </f:facet>
+                <div class="col-lg-12">
+                    <h1 class="page-header"></h1>
+                </div>
+
+
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                    </ol>
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                            <div class="fill" style="background-image: url(#{resource['images/flashimages/header1.jpg']});"></div> 
+
+                            <!--Para agregar un texto <div class="carousel-caption">
+                                 ...<img src="resources/img/img1.jpg" alt="..."/>
+                             </div> -->
+                        </div>
+                        <div class="item">
+                            <div class="fill" style="background-image: url(#{resource['images/flashimages/header2.jpg']});"></div> 
+                            <!--Para agregar un texto <div class="carousel-caption">
+                                 ...<img src="resources/img/img1.jpg" alt="..."/>
+                             </div> -->
+                        </div>
+                        <div class="item">
+                            <div class="fill" style="background-image: url(#{resource['images/flashimages/header3.jpg']});"></div> 
+                            <!--Para agregar un texto <div class="carousel-caption">
+                                 ...<img src="resources/img/img1.jpg" alt="..."/>
+                             </div> -->
+                        </div>
+                        <div class="item">
+                            <div class="fill" style="background-image: url(#{resource['images/flashimages/header4.jpg']});"></div> 
+                            <!--Para agregar un texto <div class="carousel-caption">
+                                 ...<img src="resources/img/img1.jpg" alt="..."/>
+                             </div> -->
+                        </div>
+
+                    </div>
+
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                        <span class="icon-prev" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                        <span class="icon-next" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+
+                <div class="col-lg-12">
+                    <h1 class="page-header"></h1>
+                </div>
+
+
+                <div class="container">
+                    <div style="width: 850px; margin: 25px auto">
+                        <h2><strong>Productos</strong></h2>
+                        <p:accordionPanel multiple="true">
+                            <p:tab title="DISCO DURO 500 GB">
+                                <h:panelGrid columns="2" cellpadding="10">
+                                    <p:graphicImage style="width:3cm; height: 4cm;" url="resources/ImagesProductos/DISCO-DURO-500-GB-VARIAS-MARCAS.jpg" />
+                                    <h:outputText
+                                        value="Disco Duros de muy buena tecnología varias marcas, totalmente garantizados, " />
+                                </h:panelGrid>
+                            </p:tab>
+                            <p:tab title="CABLE VGA PARA MONITOR">
+                                <h:panelGrid columns="2" cellpadding="10">
+                                    <p:graphicImage style="width:3cm; height: 4cm;" url="resources/ImagesProductos/CABLE-VGA-PARA-MONITOR.jpg" />
+                                    <h:outputText value="Francis Ford Coppola's legendary..." />
+                                </h:panelGrid>
+                            </p:tab>
+                            <p:tab title="Godfather Part III">
+                                <h:panelGrid columns="2" cellpadding="10">
+                                    <p:graphicImage name="demo/images/godfather/godfather3.jpg" />
+                                    <h:outputText value="After a break of more than 15 years...." />
+                                </h:panelGrid>
+                            </p:tab>
+                        </p:accordionPanel>
+
+
+
+
+
+
+                    </div>
+                </div>
+
+
+
             </ui:define>
         </ui:composition> 
     </h:body>

@@ -1,13 +1,13 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html  xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-    
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:p="http://primefaces.org/ui"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:f="http://xmlns.jcp.org/jsf/core">
+
     <h:head>
-            <title>INTELCOMEX | CONTACTO</title>
+        <title>INTELCOMEX | CONTACTO</title>
         <h:outputScript library="js" name="calendar_es.js" />
         <h:outputScript library="js" name="visuallightbox.js" />  
         <h:outputScript library="js" name="vlbdata.js" />
@@ -21,8 +21,78 @@
     <h:body>
         <ui:composition template="/templates/masterLayout.xhtml">
             <ui:define name="leftContent">   
-                <ui:define name="content"> 
-                </ui:define>
+            </ui:define>
+            <ui:define name="content"> 
+                <f:facet name="last">                    
+                    <h:outputStylesheet name="modern-business.css" library="css"/>
+                    <h:outputStylesheet name="index.css" library="css"/>
+                </f:facet>
+                <div class="col-lg-12">
+                    <h1 class="page-header">
+
+                    </h1>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <h2>Informacion de Contacto</h2>
+                        <div class="row" style="margin:1em 0;">
+                            <div class="col-md-3 col-xs-12 no_left">
+                                <img style="width: 8cm; height: 4cm; padding: 50px auto; margin: 30px auto;" src="resources/images/logo.jpg" alt="about-me"/>
+                            </div>
+                            <div class="col-md-9 col-xs-12 no_right">
+                                <p><span> <strong>Intelcomex</strong></span></p>
+                                <p>Valencia, Av. 13 de diciembre y 2 de Agosto</p>
+
+                                <p><span> <strong>Office:</strong></span> 052948438</p>
+                                <p><span> <strong> Mail:</strong></span><a class="oranje" href="intelcomex@hotmail.com">intelcomex@hotmail.com</a></p>
+
+
+                                <h:form>
+                                    <p><strong>Contacto</strong> </p>
+                                    <h:outputStylesheet name="style.css" library="css"/>
+                                    <div>
+                                       <p><strong>Su Información</strong></p>
+                                       <ul>
+                                            <li>
+                                                <label>Nombres Completos :</label>
+                                                <input type="text"/>
+                                            </li>
+                                            <li>
+                                                <label>E-Mail :</label>
+                                                <input type="text"/>
+                                            </li>
+                                            <li>
+                                                <label>Telefono :</label>
+                                                <input type="text"/>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div>
+                                        <p><strong>Su Mensaje</strong></p>
+                                        <ul>
+                                            <li>
+                                                <label>Asunto :</label>
+                                                <input type="text"/>
+                                            </li>
+                                            <li>
+                                                <label>Mensaje :</label>
+                                                <textarea></textarea>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <p:commandButton value="Guardar" ></p:commandButton>
+
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+
+
+
             </ui:define>
         </ui:composition> 
     </h:body>

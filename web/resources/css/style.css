@@ -100,3 +100,105 @@ img{
     clear: left;
 }
 
+
+
+/*------- contact ------*/
+.contact-content form {
+  margin-top: 2em;
+  width: 100%;
+}
+.contact-content li {list-style: none; }
+.contact-content form label {
+  color: #333;
+  font-size: 0.95em;
+  text-align: right;
+  width: 25%;
+}
+
+.contact-content input,.contact-content textarea {width: 50%; }
+.contact-content .bloc-img.bordered {
+  margin-bottom: 1.5em;
+  width: 199px;
+}
+
+.contact-content p {margin: 0 0 2px; }
+
+.contact-content a {
+  color: #fff;
+  display: inline-block;
+  padding: 0;
+}
+.contact-content .information, .contact-content .message {
+  border: 1px solid #d2d2d2;
+  margin-bottom: 2em;
+  padding: 0.5em;
+  position: relative;
+  text-align: center;
+}
+.contact-content .message {margin-bottom: 0.5em; } 
+.no_margin p {margin: 4px 0; }
+label {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 0 1em;
+  text-align: right;
+  vertical-align: middle;
+  width: 30%;
+}
+input, textarea {
+  border: 1px solid #eae9e9;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1) inset;
+  color: #000;
+  margin: 1px 0;
+  padding: 5px 10px;
+  vertical-align: middle;
+  width: 65%;
+}
+.contact-content ul {
+  margin: 0;
+}
+textarea {
+  min-height: 110px;
+  vertical-align: top;
+}
+.message li:last-child label {margin-top: 0.5em; }
+form p {
+  background: none repeat scroll 0 0 #fff;
+  color: #ea4800;
+  font-weight: 600;
+  left: 10px;
+  padding: 0 9px;
+  position: absolute;
+  top: -9px;
+}
+.contact-content input[type="submit"], .contact-content input[type="submit"], input[type="submit"], input[type="submit"]:hover, input[type="submit"]:active {
+  box-shadow: 0 0 0;
+  height: inherit;
+  margin-bottom: 0.5em;
+  padding: 6px;
+  position: relative;
+  text-align: center;
+}
+.contact-content input[type="submit"], .contact-content input[type="submit"] {
+  background: none repeat scroll 0 0 #f38f00;
+  box-shadow: 0 0 0;
+  display: block;
+  float: none;
+  height: inherit;
+  margin: 1em auto 2em;
+  padding: 6px;
+  position: relative;
+  text-align: center;
+}
+form .title {
+  color: #333;
+  left: 0;
+  padding: 0;
+  position: relative;
+}
+.strong {font-weight: 600; }
+.contact-content h2 {
+  margin: 0;
+}
+/*------- end contact ------*/
+
