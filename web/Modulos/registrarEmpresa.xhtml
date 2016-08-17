@@ -30,7 +30,7 @@
                     <p:ajax event="change" update="group group2 group3 group4 group5 group6" />
                 </h:selectOneMenu>
                 <h:panelGroup id="group">
-                    <h:outputLabel for="provinciaNac" styleClass="labelDerecha"  rendered="#{mbVEmpresa.idEcuador==mbVEmpresa.idPaisOrigen}" value="Provincia de Nacimiento: "/>
+                    <h:outputLabel for="provinciaNac" styleClass="labelDerecha"  rendered="#{mbVEmpresa.idEcuador==mbVEmpresa.idPaisOrigen}" value="Provincia: "/>
                 </h:panelGroup>
                 <h:panelGroup id="group2">
                     <h:selectOneMenu id="provinciaNac" rendered="#{mbVEmpresa.idEcuador==mbVEmpresa.idPaisOrigen}" class="form-control" value="#{mbVEmpresa.idProvinciaNac}">
@@ -40,7 +40,7 @@
                     </h:selectOneMenu>
                 </h:panelGroup>
                 <h:panelGroup id="group3">
-                    <h:outputLabel for="cantonNac" styleClass="labelDerecha" rendered="#{mbVEmpresa.idEcuador==mbVEmpresa.idPaisOrigen}" value="Cantón de Nacimiento: " />
+                    <h:outputLabel for="cantonNac" styleClass="labelDerecha" rendered="#{mbVEmpresa.idEcuador==mbVEmpresa.idPaisOrigen}" value="Cantón: " />
                 </h:panelGroup>
                 <h:panelGroup id="group4">
                     <h:selectOneMenu id="cantonNac" rendered="#{mbVEmpresa.idEcuador==mbVEmpresa.idPaisOrigen}" class="form-control" value="#{mbVEmpresa.idCantonNac}">
@@ -50,7 +50,7 @@
                     </h:selectOneMenu>
                 </h:panelGroup>
                 <h:panelGroup id="group5">
-                    <h:outputLabel styleClass="labelDerecha" for="parroquiaNac" rendered="#{mbVEmpresa.idEcuador==mbVEmpresa.idPaisOrigen}" value="Parroquia de Nacimiento: "/>
+                    <h:outputLabel styleClass="labelDerecha" for="parroquiaNac" rendered="#{mbVEmpresa.idEcuador==mbVEmpresa.idPaisOrigen}" value="Parroquia: "/>
                 </h:panelGroup>
                 <h:panelGroup id="group6">
                     <h:selectOneMenu id="parroquiaNac" rendered="#{mbVEmpresa.idEcuador==mbVEmpresa.idPaisOrigen}" class="form-control" required="true" value="#{mbVEmpresa.idParroquiaNac}">
