@@ -42,6 +42,74 @@ public class LocalizacionDao {
         throw new HibernateException("Ocurrió un error en la capa de acceso a datos", he);
     }
     
+    public boolean registrarPaises(TbPais tPais){
+        boolean band = false;
+        try {
+            iniciaOperacion();
+            sesion.save(tPais);
+
+            tx.commit();
+            sesion.close();
+            band = true;
+        } catch (Exception e) {
+            tx.rollback();
+            band = false;
+        }
+        
+        return band;
+    }
+    
+    public boolean registrarProvincia(TbProvincia tProvincia){
+        boolean band = false;
+        try {
+            iniciaOperacion();
+            sesion.save(tProvincia);
+
+            tx.commit();
+            sesion.close();
+            band = true;
+        } catch (Exception e) {
+            tx.rollback();
+            band = false;
+        }
+        
+        return band;
+    }
+    
+    public boolean registrarCanton(TbCanton tCanton){
+        boolean band = false;
+        try {
+            iniciaOperacion();
+            sesion.save(tCanton);
+
+            tx.commit();
+            sesion.close();
+            band = true;
+        } catch (Exception e) {
+            tx.rollback();
+            band = false;
+        }
+        
+        return band;
+    }
+    
+    public boolean registrarParroquia(TbParroquia tParroquia){
+        boolean band = false;
+        try {
+            iniciaOperacion();
+            sesion.save(tParroquia);
+
+            tx.commit();
+            sesion.close();
+            band = true;
+        } catch (Exception e) {
+            tx.rollback();
+            band = false;
+        }
+        
+        return band;
+    }
+    
     public List<TbPais> getPaises(){
         this.sesion = null;
         this.tx = null;

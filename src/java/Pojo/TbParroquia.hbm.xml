@@ -5,7 +5,7 @@
 <hibernate-mapping>
     <class name="Pojo.TbParroquia" table="tb_parroquia" catalog="intelcomex" optimistic-lock="version">
         <id name="id" type="string">
-            <column name="id" length="5" />
+            <column name="id" length="6" />
             <generator class="assigned" />
         </id>
         <many-to-one name="tbCanton" class="Pojo.TbCanton" fetch="select">

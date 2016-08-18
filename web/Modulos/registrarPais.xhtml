@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <div class="ui-fluid">
+        <h:form id="frmRegistrarPais">
+            <p:growl id="msgs" showDetail="true" />
+            <p:tab id="personal" title="RegistrarPais">
+                <p:panel header="Registrar Pais" >
+                    <p:focus context="txtCodPais"/>
+            <p:panelGrid columns="2" columnClasses="ui-grid-col-3,ui-grid-col-6" layout="grid" styleClass="ui-panelgrid-blank">
+                
+                <p:outputLabel for="txtCodPais" styleClass="labelDerecha" value="Código:" />
+                <p:inputText id="txtCodPais" value="#{mbVLocalizacion.tPais.id}" required="true" maxlength="5"/>
+                
+                <p:outputLabel for="txtNombrePais" styleClass="labelDerecha" value="Nombre:" />
+                <p:inputText id="txtNombrePais" value="#{mbVLocalizacion.tPais.nombre}" required="true" maxlength="30"/>
+                
+                <p:outputLabel for="txtNacionalidad" styleClass="labelDerecha" value="Nacionalidad:" />
+                <p:inputText id="txtNacionalidad" value="#{mbVLocalizacion.tPais.nacionalidad}" required="true" maxlength="50"/>
+                
+                <h:outputText id="display" value="" />
+                <p:commandButton value="Guardar" update="frmRegistrarPais,msgs" styleClass="anchoBotones" icon="ui-icon-disk"
+                                 actionListener="#{mbVLocalizacion.registrarPais()}" />
+                
+            </p:panelGrid>
+            
+            <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+            <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                <p:graphicImage class="imgAjax" value="#{resource['img/ajax-loader.gif']}"  />
+            </p:dialog>
+                </p:panel>
+            </p:tab>
+ </h:form>
+            
+    
+    
+</div>
+    </h:body>
+</html>
+

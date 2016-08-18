@@ -12,7 +12,7 @@
             <column name="tb_empresa_id" not-null="true" />
         </many-to-one>
         <many-to-one name="tbParroquia" class="Pojo.TbParroquia" fetch="select">
-            <column name="tb_parroquia_id" length="5" not-null="true" />
+            <column name="tb_parroquia_id" length="6" not-null="true" />
         </many-to-one>
         <many-to-one name="tbTipoUsuario" class="Pojo.TbTipoUsuario" fetch="select">
             <column name="tb_tipo_usuario_id" not-null="true" />

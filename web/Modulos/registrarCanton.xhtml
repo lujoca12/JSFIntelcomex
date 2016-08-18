@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <div class="ui-fluid">
+        <h:form id="frmRegistrarCanton">
+            <p:growl id="msgs" showDetail="true" />
+            <p:tab id="personal" title="RegistrarCanton">
+                <p:panel header="Registrar Cantón" >
+                    <p:focus context="pais"/>
+            <p:panelGrid columns="2" columnClasses="ui-grid-col-3,ui-grid-col-6" layout="grid" styleClass="ui-panelgrid-blank">
+                
+                <h:outputLabel for="pais" styleClass="labelDerecha" value="País: "/>
+                <h:selectOneMenu id="pais" class="form-control" value="#{mbVLocalizacion.idPaisOrigen}">
+                    <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
+                    <f:selectItems value="#{mbVLocalizacion.lstPais}"  /> 
+                    <p:ajax event="change" update="group group2" />
+                </h:selectOneMenu>
+                <h:panelGroup id="group">
+                    <h:outputLabel for="provinciaNac" styleClass="labelDerecha"  rendered="#{mbVLocalizacion.idEcuador==mbVLocalizacion.idPaisOrigen}" value="Provincia: "/>
+                </h:panelGroup>
+                <h:panelGroup id="group2">
+                    <h:selectOneMenu id="provinciaNac" rendered="#{mbVLocalizacion.idEcuador==mbVLocalizacion.idPaisOrigen}" class="form-control" value="#{mbVLocalizacion.idProvinciaNac}">
+                        <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{mbVLocalizacion.provincias}"  />  
+                    </h:selectOneMenu>
+                </h:panelGroup>
+                
+                <p:outputLabel for="txtCodProvincia" styleClass="labelDerecha" value="Código Cantón" />
+                <p:inputText id="txtCodProvincia" value="#{mbVLocalizacion.tProvincia.id}" required="true" maxlength="5"/>
+                
+                <p:outputLabel for="txtNombreProv" styleClass="labelDerecha" value="Nombre:" />
+                <p:inputText id="txtNombreProv" value="#{mbVLocalizacion.tProvincia.nombre}" required="true" maxlength="40"/>
+                
+                <h:outputText id="display" value="" />
+                <p:commandButton value="Guardar" update="frmRegistrarCanton,msgs" styleClass="anchoBotones" icon="ui-icon-disk"
+                                 actionListener="#{mbVLocalizacion.registrarProvincia()}" />
+                
+            </p:panelGrid>
+            
+            <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+            <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                <p:graphicImage class="imgAjax" value="#{resource['img/ajax-loader.gif']}"  />
+            </p:dialog>
+                </p:panel>
+            </p:tab>
+ </h:form>
+            
+    
+    
+</div>
+    </h:body>
+</html>
+

@@ -5,13 +5,16 @@
  */
 package managedBean;
 
+import Dao.DaoTEmpresa;
 import Dao.LocalizacionDao;
 import Pojo.TbCanton;
 import Pojo.TbEmpresa;
 import Pojo.TbPais;
 import Pojo.TbParroquia;
 import Pojo.TbProvincia;
+import Pojo.TbTipoempresa;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -19,6 +22,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -41,6 +46,7 @@ public class MbVEmpresa implements Serializable{
     private String idCantonNac = "";
     private String idParroquiaNac = "";
     private String idEcuador;
+    private String tipoEmpresa = "";
     
     private Map<String, String> provincias;
     private Map<String, String> cantones;
@@ -51,6 +57,7 @@ public class MbVEmpresa implements Serializable{
     
     private List<SelectItem> lstPais;
     private List<SelectItem> lstProvincia;
+    private List<SelectItem> lstTipoEmpresa;
     
     boolean msg = false;
     
@@ -60,6 +67,22 @@ public class MbVEmpresa implements Serializable{
         cargarProvCantParroq();
     }
 
+    public List<SelectItem> getLstTipoEmpresa() {
+        return lstTipoEmpresa;
+    }
+
+    public void setLstTipoEmpresa(List<SelectItem> lstTipoEmpresa) {
+        this.lstTipoEmpresa = lstTipoEmpresa;
+    }
+    
+    public String getTipoEmpresa() {
+        return tipoEmpresa;
+    }
+
+    public void setTipoEmpresa(String tipoEmpresa) {
+        this.tipoEmpresa = tipoEmpresa;
+    }
+    
     public List<SelectItem> getLstProvincia() {
         return lstProvincia;
     }
@@ -180,8 +203,16 @@ public class MbVEmpresa implements Serializable{
     private void cargarProvCantParroq() {
         //prov canton parroq
         try {
+            
+//            lstTipoEmpresa = new ArrayList<>();
             provincias = new LinkedHashMap<>();
             lstProvincia = new ArrayList<>();
+//            String arreglo[] = {"Privada","Pública"};
+//            for (int i = 0; i < arreglo.length; i++) {
+//                SelectItem item = new SelectItem((i+1), arreglo[i]);
+//                lstProvincia.add(item);
+//            }
+            
             LocalizacionDao locDao = new LocalizacionDao();
             List<SelectItem> itemsProv = new ArrayList<>();
             List<TbProvincia> prov = locDao.getProvincias();
@@ -236,5 +267,50 @@ public class MbVEmpresa implements Serializable{
         } catch (Exception ex) {
             Logger.getLogger(MbVEmpresa.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    private void mensajesOk(String msg) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Mensaje de la Aplicacion", msg);
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+
+    private void mensajesError(String msg) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Mensaje de la Aplicacion", msg);
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+    
+    public void registrar() {
+        
+        try {
+
+            DaoTEmpresa daoEmpresa = new DaoTEmpresa();
+            TbTipoempresa tbTipoEmpresa = new TbTipoempresa();
+            tbTipoEmpresa.setIdTipoEmpresa(Integer.valueOf(tipoEmpresa));
+            tbEmpresa.setTbTipoempresa(tbTipoEmpresa);
+            TbParroquia tParroquia = new TbParroquia();
+            tParroquia.setId(idParroquiaNac);
+            tbEmpresa.setTbParroquia(tParroquia);
+            msg = daoEmpresa.registrar(tbEmpresa);
+            
+            if(msg){
+                mensajesOk("Datos procesados correctamente");
+                vaciarCajas();
+            }else{
+                mensajesError("Error al procesar los Datos");
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(MbVEmpresa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+
+    }
+    private void vaciarCajas(){
+        tbEmpresa = new TbEmpresa();
+        idParroquiaNac = "";
+        tipoEmpresa = "";
+        idPaisOrigen = "";
+        idProvinciaNac = "";
+        idCantonNac = "";
     }
 }

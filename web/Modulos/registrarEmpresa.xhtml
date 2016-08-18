@@ -9,9 +9,11 @@
     </h:head>
     <h:body>
         <div class="ui-fluid">
-        <h:form id="frmRegistrarUsuarios">
+        <h:form id="frmRegistrarEmpresa">
+            <p:growl id="msgs" showDetail="true" />
             <p:tab id="personal" title="RegistrarEmpresa">
                 <p:panel header="Registrar Empresa" >
+                    <p:focus context="txtRuc"/>
             <p:panelGrid columns="2" columnClasses="ui-grid-col-3,ui-grid-col-6" layout="grid" styleClass="ui-panelgrid-blank">
                 
                 <p:outputLabel for="txtRuc" styleClass="labelDerecha" value="RUC:" />
@@ -20,8 +22,12 @@
                 <p:outputLabel for="txtRazonSocial" styleClass="labelDerecha" value="Razòn Social:" />
                 <p:inputText id="txtRazonSocial" value="#{mbVEmpresa.tbEmpresa.razonSocial}" required="true" maxlength="60"/>
                 
-                <p:outputLabel for="txtDireccion" styleClass="labelDerecha" value="Razòn Social:" />
-                <p:inputText id="txtDireccion" value="#{mbVEmpresa.tbEmpresa.direccion}" required="true" maxlength="100"/>
+                <h:outputLabel for="cboTipoEmpresa" styleClass="labelDerecha" value="Tipo Empresa: "/>
+                <h:selectOneMenu id="cboTipoEmpresa" required="true" class="form-control" value="#{mbVEmpresa.tipoEmpresa}">
+                    <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
+                    <f:selectItem itemLabel="Privada" itemValue="1" />
+                    <f:selectItem itemLabel="Pública" itemValue="2" />
+                </h:selectOneMenu>
                 
                 <h:outputLabel for="pais" styleClass="labelDerecha" value="País: "/>
                 <h:selectOneMenu id="pais" class="form-control" value="#{mbVEmpresa.idPaisOrigen}">
@@ -58,6 +64,13 @@
                         <f:selectItems value="#{mbVEmpresa.parroquias}"  /> 
                     </h:selectOneMenu>
                 </h:panelGroup>
+                
+                <p:outputLabel for="txtDireccion" styleClass="labelDerecha" value="Dirección:" />
+                <p:inputText id="txtDireccion" value="#{mbVEmpresa.tbEmpresa.direccion}" required="true" maxlength="100"/>
+                
+                <h:outputText id="display" value="" />
+                <p:commandButton value="Guardar" update="frmRegistrarEmpresa,msgs" styleClass="anchoBotones" icon="ui-icon-disk"
+                                 actionListener="#{mbVEmpresa.registrar()}" />
                 
             </p:panelGrid>
             
