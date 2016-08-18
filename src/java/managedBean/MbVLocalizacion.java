@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
@@ -60,11 +61,36 @@ public class MbVLocalizacion implements Serializable{
     boolean msg = false;
     
     public MbVLocalizacion() {
+        cargarPaises();
+        cargarProvCantParroq();
+    }
+    
+    @PostConstruct
+    public void load() {
         tPais = new TbPais();
         tProvincia = new TbProvincia();
         tCanton = new TbCanton();
         tParroquia = new TbParroquia();
         cargarPaises();
+        cargarProvCantParroq();
+    }
+    
+    public void onProvinciaNacChange() {
+        try {
+            cantones = new HashMap<>();
+            parroquias = new HashMap<>();
+            if (idProvinciaNac != null && !idProvinciaNac.equals("")) {
+                cantones = dataProCan.get(idProvinciaNac);
+            } else {
+                cantones = new HashMap<>();
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(MbVEmpresa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
+    public void onPaisChange() {
         cargarProvCantParroq();
     }
     
@@ -111,7 +137,8 @@ public class MbVLocalizacion implements Serializable{
                 }
                 dataProCan.put(i.getValue().toString(), map3);
             }
-        } catch (Exception e) {
+        } catch (Exception ex) {
+            Logger.getLogger(MbVLocalizacion.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -302,11 +329,56 @@ public class MbVLocalizacion implements Serializable{
         }
     }
     
+    public void registrarCanton() {
+        
+        try {
+
+            LocalizacionDao localizacion = new LocalizacionDao();  
+            TbProvincia tbProvincia = new TbProvincia();
+            tbProvincia.setId(idProvinciaNac);
+            tCanton.setTbProvincia(tbProvincia);
+            msg = localizacion.registrarCanton(tCanton);
+            
+            if(msg){
+                mensajesOk("Datos procesados correctamente");
+                vaciarCajas();
+            }else{
+                mensajesError("Error al procesar los Datos");
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(MbVEmpresa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void registrarParroquia() {
+        
+        try {
+
+            LocalizacionDao localizacion = new LocalizacionDao();  
+            TbCanton tbCanton = new TbCanton();
+            tbCanton.setId(idCantonNac);
+            tParroquia.setTbCanton(tbCanton);
+            msg = localizacion.registrarParroquia(tParroquia);
+            
+            if(msg){
+                mensajesOk("Datos procesados correctamente");
+                vaciarCajas();
+            }else{
+                mensajesError("Error al procesar los Datos");
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(MbVEmpresa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     private void vaciarCajas(){
         tPais = new TbPais();
         tProvincia = new TbProvincia();
         tCanton = new TbCanton();
         tParroquia = new TbParroquia();
         idPaisOrigen = "";
+        idProvinciaNac = "";
     }
 }

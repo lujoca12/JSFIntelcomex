@@ -10,6 +10,7 @@
     <h:body>
         <div class="ui-fluid">
         <h:form id="frmRegistrarCanton">
+            <p:remoteCommand name="frmRegistrarCanton" autoRun="true" action="#{mbVLocalizacion.load()}" />
             <p:growl id="msgs" showDetail="true" />
             <p:tab id="personal" title="RegistrarCanton">
                 <p:panel header="Registrar Cantón" >
@@ -20,7 +21,7 @@
                 <h:selectOneMenu id="pais" class="form-control" value="#{mbVLocalizacion.idPaisOrigen}">
                     <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
                     <f:selectItems value="#{mbVLocalizacion.lstPais}"  /> 
-                    <p:ajax event="change" update="group group2" />
+                    <p:ajax listener="#{mbVLocalizacion.onProvinciaNacChange()}" update="group group2" />
                 </h:selectOneMenu>
                 <h:panelGroup id="group">
                     <h:outputLabel for="provinciaNac" styleClass="labelDerecha"  rendered="#{mbVLocalizacion.idEcuador==mbVLocalizacion.idPaisOrigen}" value="Provincia: "/>
@@ -33,14 +34,14 @@
                 </h:panelGroup>
                 
                 <p:outputLabel for="txtCodProvincia" styleClass="labelDerecha" value="Código Cantón" />
-                <p:inputText id="txtCodProvincia" value="#{mbVLocalizacion.tProvincia.id}" required="true" maxlength="5"/>
+                <p:inputText id="txtCodProvincia" value="#{mbVLocalizacion.tCanton.id}" required="true" maxlength="5"/>
                 
                 <p:outputLabel for="txtNombreProv" styleClass="labelDerecha" value="Nombre:" />
-                <p:inputText id="txtNombreProv" value="#{mbVLocalizacion.tProvincia.nombre}" required="true" maxlength="40"/>
+                <p:inputText id="txtNombreProv" value="#{mbVLocalizacion.tCanton.nombre}" required="true" maxlength="40"/>
                 
                 <h:outputText id="display" value="" />
                 <p:commandButton value="Guardar" update="frmRegistrarCanton,msgs" styleClass="anchoBotones" icon="ui-icon-disk"
-                                 actionListener="#{mbVLocalizacion.registrarProvincia()}" />
+                                 actionListener="#{mbVLocalizacion.registrarCanton()}" />
                 
             </p:panelGrid>
             

@@ -1,12 +1,71 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        Hello from Facelets
+        <div class="ui-fluid">
+        <h:form id="frmRegistrarParroquia">
+            <p:remoteCommand name="frmRegistrarParroquia" autoRun="true" action="#{mbVLocalizacion.load()}" />
+            <p:growl id="msgs" showDetail="true" />
+            <p:tab id="personal" title="RegistrarParroquia">
+                <p:panel header="Registrar Parroquia" >
+                    <p:focus context="pais"/>
+            <p:panelGrid columns="2" columnClasses="ui-grid-col-3,ui-grid-col-6" layout="grid" styleClass="ui-panelgrid-blank">
+                
+                <h:outputLabel for="pais" styleClass="labelDerecha" value="País: "/>
+                <h:selectOneMenu id="pais" class="form-control" value="#{mbVLocalizacion.idPaisOrigen}">
+                    <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
+                    <f:selectItems value="#{mbVLocalizacion.lstPais}"  /> 
+                    <p:ajax listener="#{mbVLocalizacion.onProvinciaNacChange()}" update="group group2 group3 group4" />
+                </h:selectOneMenu>
+                <h:panelGroup id="group">
+                    <h:outputLabel for="provinciaNac" styleClass="labelDerecha"  rendered="#{mbVLocalizacion.idEcuador==mbVLocalizacion.idPaisOrigen}" value="Provincia: "/>
+                </h:panelGroup>
+                <h:panelGroup id="group2">
+                    <h:selectOneMenu id="provinciaNac" rendered="#{mbVLocalizacion.idEcuador==mbVLocalizacion.idPaisOrigen}" class="form-control" value="#{mbVLocalizacion.idProvinciaNac}">
+                        <p:ajax listener="#{mbVLocalizacion.onProvinciaNacChange()}" update="cantonNac" />                                        
+                        <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{mbVLocalizacion.provincias}"  />  
+                    </h:selectOneMenu>
+                </h:panelGroup>
+                <h:panelGroup id="group3">
+                    <h:outputLabel for="cantonNac" styleClass="labelDerecha" rendered="#{mbVLocalizacion.idEcuador==mbVLocalizacion.idPaisOrigen}" value="Cantón: " />
+                </h:panelGroup>
+                <h:panelGroup id="group4">
+                    <h:selectOneMenu id="cantonNac" rendered="#{mbVLocalizacion.idEcuador==mbVLocalizacion.idPaisOrigen}" class="form-control" value="#{mbVLocalizacion.idCantonNac}">
+                        <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{mbVLocalizacion.cantones}"  />  
+                    </h:selectOneMenu>
+                </h:panelGroup>
+                
+                <p:outputLabel for="txtCodParroquia" styleClass="labelDerecha" value="Código Parroquia" />
+                <p:inputText id="txtCodParroquia" value="#{mbVLocalizacion.tParroquia.id}" required="true" maxlength="6"/>
+                
+                <p:outputLabel for="txtNombreParroquia" styleClass="labelDerecha" value="Nombre:" />
+                <p:inputText id="txtNombreParroquia" value="#{mbVLocalizacion.tParroquia.nombre}" required="true" maxlength="300"/>
+                
+                <h:outputText id="display" value="" />
+                <p:commandButton value="Guardar" update="frmRegistrarParroquia,msgs" styleClass="anchoBotones" icon="ui-icon-disk"
+                                 actionListener="#{mbVLocalizacion.registrarParroquia()}" />
+                
+            </p:panelGrid>
+            
+            <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+            <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                <p:graphicImage class="imgAjax" value="#{resource['img/ajax-loader.gif']}"  />
+            </p:dialog>
+                </p:panel>
+            </p:tab>
+ </h:form>
+            
+    
+    
+</div>
     </h:body>
 </html>
 
