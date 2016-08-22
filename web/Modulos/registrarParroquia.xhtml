@@ -19,27 +19,28 @@
                 
                 <h:outputLabel for="pais" styleClass="labelDerecha" value="País: "/>
                 <h:selectOneMenu id="pais" class="form-control" value="#{mbVLocalizacion.idPaisOrigen}">
+                    <p:ajax listener="#{mbVLocalizacion.onPaisChange()}" update="group group2 group3 group4" />
                     <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
                     <f:selectItems value="#{mbVLocalizacion.lstPais}"  /> 
-                    <p:ajax listener="#{mbVLocalizacion.onProvinciaNacChange()}" update="group group2 group3 group4" />
+                    
                 </h:selectOneMenu>
                 <h:panelGroup id="group">
-                    <h:outputLabel for="provinciaNac" styleClass="labelDerecha"  rendered="#{mbVLocalizacion.idEcuador==mbVLocalizacion.idPaisOrigen}" value="Provincia: "/>
+                    <h:outputLabel for="provinciaNac" styleClass="labelDerecha"  value="Provincia: "/>
                 </h:panelGroup>
                 <h:panelGroup id="group2">
-                    <h:selectOneMenu id="provinciaNac" rendered="#{mbVLocalizacion.idEcuador==mbVLocalizacion.idPaisOrigen}" class="form-control" value="#{mbVLocalizacion.idProvinciaNac}">
-                        <p:ajax listener="#{mbVLocalizacion.onProvinciaNacChange()}" update="cantonNac" />                                        
+                    <h:selectOneMenu id="provinciaNac" class="form-control" value="#{mbVLocalizacion.idProvinciaNac}">
+                        <p:ajax listener="#{mbVLocalizacion.onProvinciaChange()}" update="group3 group4" />                                        
                         <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
-                        <f:selectItems value="#{mbVLocalizacion.provincias}"  />  
+                        <f:selectItems value="#{mbVLocalizacion.lstProvincia}"  />  
                     </h:selectOneMenu>
                 </h:panelGroup>
                 <h:panelGroup id="group3">
-                    <h:outputLabel for="cantonNac" styleClass="labelDerecha" rendered="#{mbVLocalizacion.idEcuador==mbVLocalizacion.idPaisOrigen}" value="Cantón: " />
+                    <h:outputLabel for="cantonNac" styleClass="labelDerecha" value="Cantón: " />
                 </h:panelGroup>
                 <h:panelGroup id="group4">
-                    <h:selectOneMenu id="cantonNac" rendered="#{mbVLocalizacion.idEcuador==mbVLocalizacion.idPaisOrigen}" class="form-control" value="#{mbVLocalizacion.idCantonNac}">
+                    <h:selectOneMenu id="cantonNac" class="form-control" value="#{mbVLocalizacion.idCantonNac}">
                         <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
-                        <f:selectItems value="#{mbVLocalizacion.cantones}"  />  
+                        <f:selectItems value="#{mbVLocalizacion.lstCanton}"  />  
                     </h:selectOneMenu>
                 </h:panelGroup>
                 

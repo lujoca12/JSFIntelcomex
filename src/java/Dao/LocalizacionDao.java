@@ -171,12 +171,12 @@ public class LocalizacionDao {
         sesion.close();
         return pais; 
     }
-    public List<TbProvincia> getProvincias(){
+    public List<TbProvincia> getProvincias(String idPais){
         this.sesion = null;
         this.tx = null;
         iniciaOperacion();
        
-        String hql="from TbProvincia p inner join fetch p.tbCantons c order by p.nombre asc";
+        String hql="from TbProvincia p inner join fetch p.tbPais pais where pais.id='"+idPais+"' order by p.nombre asc";
        
         Query query = sesion.createQuery(hql);
         //query.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
@@ -184,7 +184,7 @@ public class LocalizacionDao {
         sesion.close();
         return lst; 
     }
-    public List<TbCanton> getCantonProvicia(int IdProvincia) throws Exception {
+    public List<TbCanton> getCantonProvicia(String IdProvincia) throws Exception {
         List<TbCanton> lst = null;
         try {
             this.sesion = null;
@@ -198,7 +198,7 @@ public class LocalizacionDao {
         }
         return lst;
     }
-     public List<TbParroquia> getParroquiaCanton(int IdCanton) throws Exception {
+     public List<TbParroquia> getParroquiaCanton(String IdCanton) throws Exception {
         List<TbParroquia> lst = null;
         try {
             this.sesion = null;
