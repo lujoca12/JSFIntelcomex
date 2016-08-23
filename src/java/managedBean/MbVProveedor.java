@@ -243,6 +243,7 @@ public class MbVProveedor implements Serializable{
             TbParroquia tParroquia = new TbParroquia();
             tParroquia.setId(idParroquiaNac);
             tbPersona.setTbParroquia(tParroquia);
+            tbPersona.setTelefono(tbPersona.getTelefono().replaceAll("[()-]", ""));
             msg = daoProveedor.registrarProveedor(tbPersona);
             
             if(msg){

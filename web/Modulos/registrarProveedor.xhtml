@@ -54,7 +54,7 @@
                 </h:panelGroup>
                 
                 <p:outputLabel for="txtCedula" styleClass="labelDerecha" value="Cédula:" />
-                <p:inputText id="txtCedula" value="#{mbVProveedor.tbPersona.cedula}" required="true" maxlength="10"/>
+                <p:inputMask id="txtCedula" class="validarCedula" onblur="validarCedulaUsuarios();" value="#{mbVProveedor.tbPersona.cedula}" required="true" mask="9999999999"/>
                 
                 <p:outputLabel for="txtNombres" styleClass="labelDerecha" value="Nombres:" />
                 <p:inputText id="txtNombres" value="#{mbVProveedor.tbPersona.nombres}" required="true" maxlength="150"/>
@@ -65,11 +65,17 @@
                 <p:outputLabel for="txtDireccion" styleClass="labelDerecha" value="Dirección:" />
                 <p:inputText id="txtDireccion" value="#{mbVProveedor.tbPersona.direccion}" required="true" maxlength="30"/>
                 
-                <p:outputLabel for="txtEmail" styleClass="labelDerecha" value="email:" />
-                <p:inputText id="txtEmail" value="#{mbVProveedor.tbPersona.email}" required="true" maxlength="20"/>
+                <p:outputLabel for="email" styleClass="labelDerecha" value="Correo:" />
+                <p:inputText id="email" required="true" label="email" size="20"
+                             requiredMessage="Por favor ingrese email."
+                             validatorMessage="Invalid email format"
+                             value="#{mbVProveedor.tbPersona.email}">
+                    <f:validateRegex
+                        pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                </p:inputText>
                 
-                <p:outputLabel for="txtTelefono" styleClass="labelDerecha" value="Telefono:" />
-                <p:inputText id="txtTelefono" value="#{mbVProveedor.tbPersona.telefono}" required="true" maxlength="10"/>
+                <p:outputLabel for="txtTelefono" styleClass="labelDerecha" value="Teléfono:" />
+                <p:inputMask id="txtTelefono" value="#{mbVProveedor.tbPersona.telefono}" mask="(999)-999-999"/>
                 
                 <h:outputLabel for="cboTipoPersona" styleClass="labelDerecha" value="Tipo Persona: "/>
                 <h:selectOneMenu id="cboTipoPersona" required="true" class="form-control" value="#{mbVProveedor.tipoPersona.id}">
@@ -85,7 +91,7 @@
                 
                 <h:outputText id="display" value="" />
                 <p:commandButton value="Guardar" update="frmRegistrarProveedor,msgs" styleClass="anchoBotones" icon="ui-icon-disk"
-                                 actionListener="#{mbVProveedor.registrarProducto()}" />
+                                 actionListener="#{mbVProveedor.registrar()}" />
                 
             </p:panelGrid>
             

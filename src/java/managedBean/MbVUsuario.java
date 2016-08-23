@@ -10,12 +10,19 @@ import Clases.ClsGenerarUserClaves;
 
 import Clases.Document;
 import Dao.DaoTDetallePermiso;
+import Dao.DaoTEmpresa;
 import Dao.DaoTMenu;
 import Dao.DaoTTipoUsuario;
 import Dao.DaoTUsuario;
+import Dao.LocalizacionDao;
+import Pojo.TbCanton;
 
 import Pojo.TbDetallePermiso;
+import Pojo.TbEmpresa;
+import Pojo.TbPais;
+import Pojo.TbParroquia;
 import Pojo.TbPermiso;
+import Pojo.TbProvincia;
 
 import Pojo.TbTipoUsuario;
 import Pojo.TbUsuarios;
@@ -56,6 +63,7 @@ public class MbVUsuario implements Serializable {
      * Creates a new instance of MbVUsuario
      */
     private TbUsuarios tUsuario;
+    private TbEmpresa tEmpresa;
     private List<SelectItem> lstUsuario;
     private List<SelectItem> lstTodosUsuarios;
     private String usuario;
@@ -84,13 +92,188 @@ public class MbVUsuario implements Serializable {
     private boolean estadoCorreo;
     private boolean cedOpasap;
     private boolean mostrarEliminados;
+    
+    
+    private List<SelectItem> lstPais;
+    private List<SelectItem> lstCanton;
+    private List<SelectItem> lstProvincia;
+    private List<SelectItem> lstParroquia;
+    private List<SelectItem> lstEmpresa;
+    
+    private String idPaisOrigen;
+    private String idProvinciaNac = "";
+    private String idCantonNac = "";
+    private String idParroquiaNac = "";
+    private String idEcuador;
+    
+    
 
     public MbVUsuario() {
         tUsuario = new TbUsuarios();
+        tEmpresa = new TbEmpresa();
         llenarCboDocentes();
         llenarCboUsuarios();
+        cargarPaises();
+        cargarEmpresas();
+    }
+    private void cargarPaises(){
+        lstPais = new ArrayList<>();
+        LocalizacionDao locDao = new LocalizacionDao();
+        List<TbPais> paises = locDao.getPaises();
+        for (TbPais p : paises) {
+            SelectItem item = new SelectItem(p.getId(), p.getNombre());
+            lstPais.add(item);
+            if (p.getNombre().equalsIgnoreCase("ecuador")) {
+                idEcuador = String.valueOf(p.getId());
+            }
+        }
+    }
+    
+    private void cargarEmpresas(){
+        try {
+            lstEmpresa = new ArrayList<>();
+            DaoTEmpresa daoEmpresa = new DaoTEmpresa();
+            List<TbEmpresa> empresa = daoEmpresa.getEmpresa();
+            for (TbEmpresa e : empresa) {
+                SelectItem item = new SelectItem(e.getId(), e.getRazonSocial());
+                lstEmpresa.add(item);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(MbVUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+   
+   public void onPaisChange() {
+        lstProvincia = new ArrayList<>();
+        lstCanton = new ArrayList<>();
+        lstParroquia = new ArrayList<>();
+        LocalizacionDao locDao = new LocalizacionDao();
+        List<TbProvincia> provincia = locDao.getProvincias(idPaisOrigen);
+        for (TbProvincia p : provincia) {
+            SelectItem item = new SelectItem(p.getId(), p.getNombre());
+            lstProvincia.add(item);
+        }
+    }
+    
+    public void onProvinciaChange() {
+        try {
+            lstCanton = new ArrayList<>();
+            lstParroquia = new ArrayList<>();
+            LocalizacionDao locDao = new LocalizacionDao();
+            List<TbCanton> canton = locDao.getCantonProvicia(idProvinciaNac);
+            for (TbCanton c : canton) {
+                SelectItem item = new SelectItem(c.getId(), c.getNombre());
+                lstCanton.add(item);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(MbVEmpresa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
+    public void onCantonChange(){
+        try {
+            lstParroquia = new ArrayList<>();
+            LocalizacionDao locDao = new LocalizacionDao();
+            List<TbParroquia> parroquia = locDao.getParroquiaCanton(idCantonNac);
+            for (TbParroquia p : parroquia) {
+                SelectItem item = new SelectItem(p.getId(), p.getNombre());
+                lstParroquia.add(item);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(MbVEmpresa.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
+    public List<SelectItem> getLstEmpresa() {
+        return lstEmpresa;
+    }
+
+    public void setLstEmpresa(List<SelectItem> lstEmpresa) {
+        this.lstEmpresa = lstEmpresa;
+    }
+    
+    public List<SelectItem> getLstPais() {
+        return lstPais;
+    }
+
+    public void setLstPais(List<SelectItem> lstPais) {
+        this.lstPais = lstPais;
+    }
+
+    public List<SelectItem> getLstCanton() {
+        return lstCanton;
+    }
+
+    public void setLstCanton(List<SelectItem> lstCanton) {
+        this.lstCanton = lstCanton;
+    }
+
+    public List<SelectItem> getLstProvincia() {
+        return lstProvincia;
+    }
+
+    public void setLstProvincia(List<SelectItem> lstProvincia) {
+        this.lstProvincia = lstProvincia;
+    }
+
+    public List<SelectItem> getLstParroquia() {
+        return lstParroquia;
+    }
+
+    public void setLstParroquia(List<SelectItem> lstParroquia) {
+        this.lstParroquia = lstParroquia;
+    }
+
+    public String getIdPaisOrigen() {
+        return idPaisOrigen;
+    }
+
+    public void setIdPaisOrigen(String idPaisOrigen) {
+        this.idPaisOrigen = idPaisOrigen;
+    }
+
+    public String getIdProvinciaNac() {
+        return idProvinciaNac;
+    }
+
+    public void setIdProvinciaNac(String idProvinciaNac) {
+        this.idProvinciaNac = idProvinciaNac;
+    }
+
+    public String getIdCantonNac() {
+        return idCantonNac;
+    }
+
+    public void setIdCantonNac(String idCantonNac) {
+        this.idCantonNac = idCantonNac;
+    }
+
+    public String getIdParroquiaNac() {
+        return idParroquiaNac;
+    }
+
+    public void setIdParroquiaNac(String idParroquiaNac) {
+        this.idParroquiaNac = idParroquiaNac;
+    }
+
+    public String getIdEcuador() {
+        return idEcuador;
+    }
+
+    public void setIdEcuador(String idEcuador) {
+        this.idEcuador = idEcuador;
+    }
+    
+    public TbEmpresa gettEmpresa() {
+        return tEmpresa;
+    }
+
+    public void settEmpresa(TbEmpresa tEmpresa) {
+        this.tEmpresa = tEmpresa;
+    }
+    
     public String getUsuario() {
         return usuario;
     }
@@ -378,54 +561,64 @@ public class MbVUsuario implements Serializable {
 
     private void vaciarCajas() {
         tUsuario = new TbUsuarios();
+        tEmpresa = new TbEmpresa();
         clave = "";
         telefono = "";
         celular = "";
         cedOpasap = false;
+        idParroquiaNac = "";
+        idPaisOrigen = "";
+        idProvinciaNac = "";
+        idCantonNac = "";
     }
 
-//    public void registrarDocente() {
-//        DaoTUsuario daoTusuario = new DaoTUsuario();
-//
-//        try {
-//            DaoTTipoUsuario daoTipoUsuario = new DaoTTipoUsuario();
-//            TbTipoUsuario tipoUsuario = new TbTipoUsuario();
-//            tipoUsuario = (TbTipoUsuario) daoTipoUsuario.getTipoUsuarios("Prof");
-//
-//            //tUsuario.setClave(Class_Encript.getStringMessageDigest(this.clave, Class_Encript.SHA256));
-//            tUsuario.setTelefono(telefono.replaceAll("[()-]", ""));
-//            tUsuario.setCelular(celular.replaceAll("[()-]", ""));
-//            tUsuario.setEstado('1');
-//            
-//            String usuarioGenerado = ClsGenerarUserClaves.getUsuarioAleatorio(10);
-//            String claveGenerada = ClsGenerarUserClaves.getPassword(ClsGenerarUserClaves.MINUSCULAS.concat(ClsGenerarUserClaves.MAYUSCULAS).concat(ClsGenerarUserClaves.ESPECIALES),10);
-//            tUsuario.setClave(Class_Encript.getStringMessageDigest(claveGenerada, Class_Encript.SHA256));
-//            tUsuario.setNick(usuarioGenerado);
-//            
-//            band = daoTusuario.verificarUsuarioNick(tUsuario.getNick());
-//            if (band) {
-//                if (tipoUsuario != null) {
-//                    tUsuario.setTipoUsuario(tipoUsuario);
-//                    enviarEmail(claveGenerada);
+    public void registrarCliente() {
+        DaoTUsuario daoTusuario = new DaoTUsuario();
+
+        try {
+            DaoTTipoUsuario daoTipoUsuario = new DaoTTipoUsuario();
+            TbTipoUsuario tipoUsuario = new TbTipoUsuario();
+            tipoUsuario = (TbTipoUsuario) daoTipoUsuario.getTipoUsuarios("cliente");
+
+            //tUsuario.setClave(Class_Encript.getStringMessageDigest(this.clave, Class_Encript.SHA256));
+            tUsuario.setTelefono(tUsuario.getTelefono().replaceAll("[()-]", ""));
+            tUsuario.setEstado('1');
+            
+            String usuarioGenerado = ClsGenerarUserClaves.getUsuarioAleatorio(10);
+            String claveGenerada = ClsGenerarUserClaves.getPassword(ClsGenerarUserClaves.MINUSCULAS.concat(ClsGenerarUserClaves.MAYUSCULAS).concat(ClsGenerarUserClaves.ESPECIALES),10);
+            tUsuario.setPass(Class_Encript.getStringMessageDigest(claveGenerada, Class_Encript.SHA256));
+            tUsuario.setLogin(usuarioGenerado);
+            
+            band = daoTusuario.verificarUsuarioNick(tUsuario.getLogin());
+            if (band) {
+                if (tipoUsuario != null) {
+                    tUsuario.setTbTipoUsuario(tipoUsuario);
+                    //enviarEmail(claveGenerada);
 //                    if(estadoCorreo){
-//                        band = daoTusuario.registrar(tUsuario);
-//                        vaciarCajas();
+                        tUsuario.setTbEmpresa(tEmpresa);
+                        TbParroquia tParroquia = new TbParroquia();
+                        tParroquia.setId(idParroquiaNac);
+                        tUsuario.setTbParroquia(tParroquia);
+                        band = daoTusuario.registrar(tUsuario);
+                        if(band)
+                            vaciarCajas();
 //                    }
-//                    
-//                }
-//            } else {
-//                mensajesError("Usuario ya existe");
-//            }
-//
-//        } catch (Exception e) {
-//            vaciarCajas();
-//        }
-//        if (band) {
-//            mensajesOk("Datos procesados correctamente");
-//        } else {
-//            mensajesError("Error al procesar datos");
-//        }
-//    }
+                }
+                 else
+                           mensajesError("No existe Tipo Usuario"); 
+            } else {
+                mensajesError("Usuario ya existe");
+            }
+
+        } catch (Exception e) {
+            vaciarCajas();
+        }
+        if (band) {
+            mensajesOk("Datos procesados correctamente");
+        } else {
+            mensajesError("Error al procesar datos");
+        }
+    }
     
     public void actualizarDatos(){
         DaoTUsuario daoTusuario = new DaoTUsuario();

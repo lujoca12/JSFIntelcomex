@@ -9,6 +9,7 @@ import Interface.InterfaceEmpresa;
 import Pojo.TbEmpresa;
 import java.util.List;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
@@ -59,7 +60,14 @@ public class DaoTEmpresa implements InterfaceEmpresa{
 
     @Override
     public List<TbEmpresa> getEmpresa() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.sesion = null;
+        this.tx = null;
+        iniciaOperacion();
+        String hql="from TbEmpresa as e order by e.razonSocial asc";
+        Query query = sesion.createQuery(hql);
+        List<TbEmpresa> empresa= (List<TbEmpresa>) query.list();
+        sesion.close();
+        return empresa;
     }
 
     @Override

@@ -41,8 +41,9 @@ public class DaoTUsuario implements InterfaceUsuario {
         try {
             iniciaOperacion();
             sesion.save(tUsuario);
-            String sql = String.format("create user " + tUsuario.getLogin()+ " superuser password '" + tUsuario.getPass()+ "' ;");
-            sesion.createSQLQuery(sql).executeUpdate();
+            //Para crear usuarios de bd
+//            String sql = String.format("create user " + tUsuario.getLogin()+ " superuser password '" + tUsuario.getPass()+ "' ;");
+//            sesion.createSQLQuery(sql).executeUpdate();
 
             tx.commit();
             sesion.close();
