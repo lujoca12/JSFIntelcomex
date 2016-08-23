@@ -5,8 +5,9 @@
  */
 package Dao;
 
-import Interface.InterfaceTipoUsuario;
-import Pojo.TbTipoUsuario;
+import Interface.InterfaceParametro;
+import Pojo.TbParametro;
+import Pojo.TbParametrodetalle;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -18,7 +19,7 @@ import util.HibernateUtil;
  *
  * @author server
  */
-public class DaoTTipoUsuario implements InterfaceTipoUsuario{
+public class DaoTParametro implements InterfaceParametro {
     
     private Session sesion;
     private Transaction tx;
@@ -33,7 +34,7 @@ public class DaoTTipoUsuario implements InterfaceTipoUsuario{
         }
         
     }
-     
+    
     private void manejaExcepcion(HibernateException he) throws HibernateException
     {
         tx.rollback();
@@ -41,11 +42,11 @@ public class DaoTTipoUsuario implements InterfaceTipoUsuario{
     }
 
     @Override
-    public boolean registrar(TbTipoUsuario tTipoUsuario) throws Exception {
+    public boolean registrarParametro(TbParametro tParametro) throws Exception {
         boolean band = false;
         try {
             iniciaOperacion();
-            //sesion.save(tPromocion);
+            sesion.save(tParametro);
 
             tx.commit();
             sesion.close();
@@ -59,32 +60,48 @@ public class DaoTTipoUsuario implements InterfaceTipoUsuario{
     }
 
     @Override
-    public List<TbTipoUsuario> getTodosTipoUsuarios() throws Exception {
+    public List<TbParametro> getParametro() throws Exception {
         this.sesion = null;
         this.tx = null;
         iniciaOperacion();
-        String hql="from TbTipoUsuario as t order by t.descripcion asc";
+        String hql="from TbParametro as p order by p.categoria asc";
         Query query = sesion.createQuery(hql);
-        List<TbTipoUsuario> tipoUsuario= (List<TbTipoUsuario>) query.list();
+        List<TbParametro> parametro= (List<TbParametro>) query.list();
         sesion.close();
-        return tipoUsuario;
+        return parametro;
     }
 
     @Override
-    public boolean update(TbTipoUsuario tTipoUsuario) throws Exception {
+    public boolean registrarParametroDetalle(TbParametrodetalle tParametroDetalle) throws Exception {
+        boolean band = false;
+        try {
+            iniciaOperacion();
+            sesion.save(tParametroDetalle);
+
+            tx.commit();
+            sesion.close();
+            band = true;
+        } catch (Exception e) {
+            tx.rollback();
+            band = false;
+        }
+        
+        return band;
+    }
+
+    @Override
+    public List<TbParametrodetalle> getParametroDetalle(String descripcionParametro) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public TbTipoUsuario getTipoUsuarios(String rol) throws Exception {
-        this.sesion = null;
-        this.tx = null;
-        iniciaOperacion();
-        String hql="from TbTipoUsuario as t where t.descripcion like '%"+rol+"%' order by t.descripcion asc";
-        Query query = sesion.createQuery(hql);
-        TbTipoUsuario tipoUsuario= (TbTipoUsuario) query.uniqueResult();
-        sesion.close();
-        return tipoUsuario;
+    public boolean updateParametro(TbParametro tParametro) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean updateParametrodetalle(TbParametrodetalle tParametroDetalle) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
