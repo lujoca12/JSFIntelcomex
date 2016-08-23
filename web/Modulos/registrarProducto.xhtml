@@ -9,69 +9,59 @@
     </h:head>
     <h:body>
         <div class="ui-fluid">
-        <h:form id="frmRegistrarEmpresa">
+        <h:form id="frmRegistrarProducto">
             <p:growl id="msgs" showDetail="true" />
-            <p:tab id="personal" title="RegistrarEmpresa">
-                <p:panel header="Registrar Empresa" >
-                    <p:focus context="txtRuc"/>
+            <p:tab id="personal" title="RegistrarProducto">
+                <p:panel header="Registrar Producto" >
+                    <p:focus context="txtCodigo"/>
             <p:panelGrid columns="2" columnClasses="ui-grid-col-3,ui-grid-col-6" layout="grid" styleClass="ui-panelgrid-blank">
                 
-                <p:outputLabel for="txtRuc" styleClass="labelDerecha" value="RUC:" />
-                <p:inputText id="txtRuc" value="#{mbVEmpresa.tbEmpresa.ruc}" required="true" maxlength="13"/>
+                <p:outputLabel for="txtCodigo" styleClass="labelDerecha" value="Código:" />
+                <p:inputText id="txtCodigo" value="#{mbVProducto.tbProducto.id}" required="true" maxlength="5"/>
                 
-                <p:outputLabel for="txtRazonSocial" styleClass="labelDerecha" value="Razòn Social:" />
-                <p:inputText id="txtRazonSocial" value="#{mbVEmpresa.tbEmpresa.razonSocial}" required="true" maxlength="60"/>
-                
-                <h:outputLabel for="cboTipoEmpresa" styleClass="labelDerecha" value="Tipo Empresa: "/>
-                <h:selectOneMenu id="cboTipoEmpresa" required="true" class="form-control" value="#{mbVEmpresa.tipoEmpresa}">
+                <h:outputLabel for="cboProveedor" styleClass="labelDerecha" value="Proveedor: "/>
+                <h:selectOneMenu id="cboProveedor" required="true" class="form-control" value="#{mbVProducto.tbPersona.cedula}">
                     <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
-                    <f:selectItem itemLabel="Privada" itemValue="1" />
-                    <f:selectItem itemLabel="Pública" itemValue="2" />
                 </h:selectOneMenu>
                 
-                <h:outputLabel for="pais" styleClass="labelDerecha" value="País: "/>
-                <h:selectOneMenu id="pais" class="form-control" value="#{mbVEmpresa.idPaisOrigen}">
-                    <p:ajax listener="#{mbVEmpresa.onPaisChange()}" update="group group2 group3 group4 group5 group6" />
+                <h:outputLabel for="cboUndMedida" styleClass="labelDerecha" value="Und. Medida: "/>
+                <h:selectOneMenu id="cboUndMedida" required="true" class="form-control" value="#{mbVProducto.undMedida.id}">
                     <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
-                    <f:selectItems value="#{mbVEmpresa.lstPais}"  /> 
-                    
                 </h:selectOneMenu>
-                <h:panelGroup id="group">
-                    <h:outputLabel for="provinciaNac" styleClass="labelDerecha"  value="Provincia: "/>
-                </h:panelGroup>
-                <h:panelGroup id="group2">
-                    <h:selectOneMenu id="provinciaNac" class="form-control" value="#{mbVEmpresa.idProvinciaNac}">
-                        <p:ajax listener="#{mbVEmpresa.onProvinciaChange()}" update="group3 group4 group5 group6" />                                        
-                        <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
-                        <f:selectItems value="#{mbVEmpresa.lstProvincia}"  />  
-                    </h:selectOneMenu>
-                </h:panelGroup>
-                <h:panelGroup id="group3">
-                    <h:outputLabel for="cantonNac" styleClass="labelDerecha" value="Cantón: " />
-                </h:panelGroup>
-                <h:panelGroup id="group4">
-                    <h:selectOneMenu id="cantonNac" class="form-control" value="#{mbVEmpresa.idCantonNac}">
-                        <p:ajax listener="#{mbVEmpresa.onCantonChange()}" update="group5 group6" />
-                        <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
-                        <f:selectItems value="#{mbVEmpresa.lstCanton}"  />  
-                    </h:selectOneMenu>
-                </h:panelGroup>
-                <h:panelGroup id="group5">
-                    <h:outputLabel styleClass="labelDerecha" for="parroquiaNac" value="Parroquia: "/>
-                </h:panelGroup>
-                <h:panelGroup id="group6">
-                    <h:selectOneMenu id="parroquiaNac" class="form-control" required="true" value="#{mbVEmpresa.idParroquiaNac}">
-                        <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
-                        <f:selectItems value="#{mbVEmpresa.lstParroquia}"  /> 
-                    </h:selectOneMenu>
-                </h:panelGroup>
                 
-                <p:outputLabel for="txtDireccion" styleClass="labelDerecha" value="Dirección:" />
-                <p:inputText id="txtDireccion" value="#{mbVEmpresa.tbEmpresa.direccion}" required="true" maxlength="100"/>
+                <h:outputLabel for="cboAlmacen" styleClass="labelDerecha" value="Almacen: "/>
+                <h:selectOneMenu id="cboAlmacen" required="true" class="form-control" value="#{mbVProducto.almacen.id}">
+                    <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
+                </h:selectOneMenu>
+                
+                <h:outputLabel for="cboClasificacion" styleClass="labelDerecha" value="Clasificación: "/>
+                <h:selectOneMenu id="cboClasificacion" required="true" class="form-control" value="#{mbVProducto.clasificacion.id}">
+                    <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
+                </h:selectOneMenu>
+                
+                <h:outputLabel for="cboIva" styleClass="labelDerecha" value="IVA: "/>
+                <h:selectOneMenu id="cboIva" required="true" class="form-control" value="#{mbVProducto.iva.id}">
+                    <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
+                </h:selectOneMenu>
+                
+                <p:outputLabel for="txtDescripcion" styleClass="labelDerecha" value="Descripción:" />
+                <p:inputText id="txtDescripcion" value="#{mbVProducto.tbProducto.nombre}" required="true" maxlength="60"/>
+                
+                <p:outputLabel for="txtPrecio1" styleClass="labelDerecha" value="Precio 1:" />
+                <p:inputText id="txtPrecio1" value="#{mbVProducto.tbProducto.precio1}" required="true" maxlength="100"/>
+                
+                <p:outputLabel for="txtPrecio2" styleClass="labelDerecha" value="Precio 2:" />
+                <p:inputText id="txtPrecio2" value="#{mbVProducto.tbProducto.precio2}" required="true" maxlength="100"/>
+                
+                <p:outputLabel for="txtMarca" styleClass="labelDerecha" value="Marca:" />
+                <p:inputText id="txtMarca" value="#{mbVProducto.tbProducto.marca}" required="true" maxlength="100"/>
+                
+                <p:outputLabel for="foto" styleClass="labelDerecha" value="Foto:" />
+                <p:fileUpload id="foto" required="true" value="#{mbVProducto.file}" mode="simple" skinSimple="true"/>
                 
                 <h:outputText id="display" value="" />
-                <p:commandButton value="Guardar" update="frmRegistrarEmpresa,msgs" styleClass="anchoBotones" icon="ui-icon-disk"
-                                 actionListener="#{mbVEmpresa.registrar()}" />
+                <p:commandButton value="Guardar" update="frmRegistrarProducto,msgs" styleClass="anchoBotones" icon="ui-icon-disk"
+                                 actionListener="#{mbVProducto.registrarProducto()}" />
                 
             </p:panelGrid>
             
