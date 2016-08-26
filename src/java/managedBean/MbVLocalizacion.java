@@ -27,6 +27,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import org.primefaces.event.RowEditEvent;
 
 /**
  *
@@ -53,6 +54,18 @@ public class MbVLocalizacion implements Serializable{
     private List<SelectItem> lstParroquia;
     private List<SelectItem> lstTipoEmpresa;
     
+    private List<TbPais> lstPaisTbl;
+    private TbPais tblPais;
+    
+    private List<TbProvincia> lstProvinciaTbl;
+    private TbProvincia tblProvincia;
+    
+    private List<TbCanton> lstCantonTbl;
+    private TbCanton tblCanton;
+    
+    private List<TbParroquia> lstParroquiaTbl;
+    private TbParroquia tblParroquia;
+    
     private Map<String, String> provincias;
     private Map<String, String> cantones;
     private Map<String, String> parroquias;
@@ -74,6 +87,9 @@ public class MbVLocalizacion implements Serializable{
         tCanton = new TbCanton();
         tParroquia = new TbParroquia();
         cargarPaises();
+        cargarTablaProvincias();
+        cargarTablaCanton();
+        cargarTablaParroquia();
         //cargarProvCantParroq();
     }
     
@@ -123,8 +139,10 @@ public class MbVLocalizacion implements Serializable{
     
     private void cargarPaises(){
         lstPais = new ArrayList<>();
+        lstPaisTbl = new ArrayList<>();
         LocalizacionDao locDao = new LocalizacionDao();
         List<TbPais> paises = locDao.getPaises();
+        lstPaisTbl = paises;
         for (TbPais p : paises) {
             SelectItem item = new SelectItem(p.getId(), p.getNombre());
             lstPais.add(item);
@@ -134,41 +152,67 @@ public class MbVLocalizacion implements Serializable{
         }
     }
     
-//    private void cargarProvCantParroq() {
-//        //prov canton parroq
-//        try {
-//            
-//            provincias = new LinkedHashMap<>();
-//            lstProvincia = new ArrayList<>();
-//            
-//            LocalizacionDao locDao = new LocalizacionDao();
-//            List<SelectItem> itemsProv = new ArrayList<>();
-//            List<TbProvincia> prov = locDao.getProvincias();
-//            for (TbProvincia p : prov) {
-//                SelectItem item = new SelectItem(p.getId(), p.getNombre());
-//                itemsProv.add(item);
-//            }
-//            for (SelectItem i : itemsProv) {
-//                provincias.put(i.getLabel(), i.getValue().toString());
-//                List<TbCanton> lstC = locDao.getCantonProvicia(Integer.valueOf(i.getValue().toString()));
-//
-//                Map<String, String> map3 = new LinkedHashMap<>();
-//                for (TbCanton c : lstC) {
-//                    map3.put(c.getNombre(), String.valueOf(c.getId()));
-//                    List<TbParroquia> lstPa = locDao.getParroquiaCanton(Integer.valueOf(c.getId()));
-//                    Map<String, String> map4 = new LinkedHashMap<>();
-//                    for (TbParroquia pa : lstPa) {
-//                        map4.put(pa.getNombre(), String.valueOf(pa.getId()));
-//                    }
-//                    dataCanPar.put(String.valueOf(c.getId()), map4);
-//                }
-//                dataProCan.put(i.getValue().toString(), map3);
-//            }
-//        } catch (Exception ex) {
-//            Logger.getLogger(MbVLocalizacion.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//    }
+    private void cargarTablaProvincias(){
+        lstProvinciaTbl = new ArrayList<>();
+        LocalizacionDao locDao = new LocalizacionDao();
+        try {
+                lstProvinciaTbl = locDao.getProvincias(0);
+            } catch (Exception ex) {
+                Logger.getLogger(MbVLocalizacion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void cargarTablaCanton(){
+        lstCantonTbl = new ArrayList<>();
+        LocalizacionDao locDao = new LocalizacionDao();
+        try {
+            lstCantonTbl = locDao.getCanton(0);
+        } catch (Exception ex) {
+            Logger.getLogger(MbVLocalizacion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void cargarTablaParroquia(){
+        lstParroquiaTbl = new ArrayList<>();
+        LocalizacionDao locDao = new LocalizacionDao();
+        try {
+            lstParroquiaTbl = locDao.getParroquia(0);
+        } catch (Exception ex) {
+            Logger.getLogger(MbVLocalizacion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public List<TbProvincia> getLstProvinciaTbl() {
+        return lstProvinciaTbl;
+    }
+
+    public void setLstProvinciaTbl(List<TbProvincia> lstProvinciaTbl) {
+        this.lstProvinciaTbl = lstProvinciaTbl;
+    }
+
+    public TbProvincia getTblProvincia() {
+        return tblProvincia;
+    }
+
+    public void setTblProvincia(TbProvincia tblProvincia) {
+        this.tblProvincia = tblProvincia;
+    }
+    
+    public List<TbPais> getLstPaisTbl() {
+        return lstPaisTbl;
+    }
+
+    public void setLstPaisTbl(List<TbPais> lstPaisTbl) {
+        this.lstPaisTbl = lstPaisTbl;
+    }
+
+    public TbPais getTblPais() {
+        return tblPais;
+    }
+
+    public void setTblPais(TbPais tblPais) {    
+        this.tblPais = tblPais;
+    }
 
     public List<SelectItem> getLstCanton() {
         return lstCanton;
@@ -321,6 +365,39 @@ public class MbVLocalizacion implements Serializable{
     public void settParroquia(TbParroquia tParroquia) {
         this.tParroquia = tParroquia;
     }
+
+    public List<TbCanton> getLstCantonTbl() {
+        return lstCantonTbl;
+    }
+
+    public void setLstCantonTbl(List<TbCanton> lstCantonTbl) {
+        this.lstCantonTbl = lstCantonTbl;
+    }
+
+    public TbCanton getTblCanton() {
+        return tblCanton;
+    }
+
+    public void setTblCanton(TbCanton tblCanton) {
+        this.tblCanton = tblCanton;
+    }
+
+    public List<TbParroquia> getLstParroquiaTbl() {
+        return lstParroquiaTbl;
+    }
+
+    public void setLstParroquiaTbl(List<TbParroquia> lstParroquiaTbl) {
+        this.lstParroquiaTbl = lstParroquiaTbl;
+    }
+
+    public TbParroquia getTblParroquia() {
+        return tblParroquia;
+    }
+
+    public void setTblParroquia(TbParroquia tblParroquia) {
+        this.tblParroquia = tblParroquia;
+    }
+    
     private void mensajesOk(String msg) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Mensaje de la Aplicacion", msg);
         FacesContext.getCurrentInstance().addMessage(null, message);
@@ -423,5 +500,51 @@ public class MbVLocalizacion implements Serializable{
         tParroquia = new TbParroquia();
         idPaisOrigen = "";
         idProvinciaNac = "";
+    }
+    
+    public void onRowEditPais(RowEditEvent event) {
+
+        
+    }
+    
+    public void onRowCancelPais(RowEditEvent event) {
+
+    }
+
+    public void onDeletePais(TbPais tblPais) {
+
+        
+    }
+    
+    public void onRecuperarPais(TbPais tblPais) {
+
+        
+    }
+    
+    public void onRowEditProvincia(RowEditEvent event) {
+
+        
+    }
+    
+    public void onRowCancelProvincia(RowEditEvent event) {
+
+    }
+    
+    public void onRowEditCanton(RowEditEvent event) {
+
+        
+    }
+    
+    public void onRowCancelCanton(RowEditEvent event) {
+
+    }
+    
+    public void onRowEditParroquia(RowEditEvent event) {
+
+        
+    }
+    
+    public void onRowCancelParroquia(RowEditEvent event) {
+
     }
 }

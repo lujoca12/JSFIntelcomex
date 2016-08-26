@@ -37,6 +37,49 @@
             </p:dialog>
                 </p:panel>
             </p:tab>
+            
+            <br></br>
+
+                <p:panel id="panelTabla" style="height: 30%; width: 100%;">
+                    <p:dataTable class="tblDatos fuenteTamanio" id="tblPais" var="lstTbl" value="#{mbVLocalizacion.lstPaisTbl}"
+                                 editable="true" scrollable="true" scrollHeight="150" sortMode="multiple">
+                        <p:ajax event="rowEdit" listener="#{mbVLocalizacion.onRowEditPais}" update=":frmRegistrarPais:msgs" />
+                        <p:ajax event="rowEditCancel" listener="#{mbVLocalizacion.onRowCancelPais}" update=":frmRegistrarPais:msgs" />
+
+                        <p:column headerText="Código" sortBy="#{lstTbl.id}">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.id}" /></f:facet>
+                                <f:facet name="input">
+                                    <p:inputText readonly="true" style="width:100%" required="true" value="#{lstTbl.id}"  />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        
+
+                        <p:column headerText="Pais" sortBy="#{lstTbl.nombre}">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.nombre}" /></f:facet>
+                                <f:facet name="input">
+                                    <p:inputText readonly="true" style="width:100%" required="true" value="#{lstTbl.nombre}"  />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        
+                        <p:column headerText="Nacionalidad" sortBy="#{lstTbl.nacionalidad}">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.nacionalidad}" /></f:facet>
+                                <f:facet name="input"><p:inputText required="true" value="#{lstTbl.nacionalidad}" style="width:100%"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        
+                        <p:column>
+                            <p:rowEditor />   
+                        </p:column>
+
+                    </p:dataTable>
+
+                </p:panel>
+            
  </h:form>
             
     

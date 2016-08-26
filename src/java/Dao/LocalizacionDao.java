@@ -184,6 +184,26 @@ public class LocalizacionDao {
         sesion.close();
         return lst; 
     }
+    public List<TbProvincia> getProvincias(int orden){
+        this.sesion = null;
+        this.tx = null;
+        iniciaOperacion();
+        String condicion = "";
+        //desordenada
+        if(orden == 0)
+            condicion = "";
+        //ordenada
+        else
+            condicion = "order by p.nombre asc";
+        
+        String hql="from TbProvincia p inner join fetch p.tbPais pais "+condicion+" ";
+       
+        Query query = sesion.createQuery(hql);
+        //query.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        List<TbProvincia> lst=(List<TbProvincia>) query.list();
+        sesion.close();
+        return lst; 
+    }
     public List<TbCanton> getCantonProvicia(String IdProvincia) throws Exception {
         List<TbCanton> lst = null;
         try {
@@ -198,6 +218,29 @@ public class LocalizacionDao {
         }
         return lst;
     }
+    
+    public List<TbCanton> getCanton(int orden) throws Exception {
+        List<TbCanton> lst = null;
+        try {
+            this.sesion = null;
+            this.tx = null;
+            iniciaOperacion();
+            String condicion = "";
+            
+            if(orden == 0)
+                condicion = "";
+            else
+                condicion = "order by c.nombre asc";
+            
+            String hql = "from TbCanton c inner join fetch c.tbProvincia p "+condicion+"";
+            Query query = sesion.createQuery(hql);
+            lst = (List<TbCanton>) query.list();
+            sesion.close();
+        } catch (Exception ex) {
+        }
+        return lst;
+    }
+    
      public List<TbParroquia> getParroquiaCanton(String IdCanton) throws Exception {
         List<TbParroquia> lst = null;
         try {
@@ -212,5 +255,26 @@ public class LocalizacionDao {
         }
         return lst;
     }
+     
+    public List<TbParroquia> getParroquia(int orden) throws Exception {
+        List<TbParroquia> lst = null;
+        try {
+            this.sesion = null;
+            this.tx = null;
+            iniciaOperacion();
+            String condicion = "";
+            if(orden == 0)
+                condicion = "";
+            else
+                condicion = "order by p.nombre asc";
+            
+            String hql = "from TbParroquia p inner join fetch p.tbCanton c "+condicion+"";
+            Query query = sesion.createQuery(hql);
+            lst = (List<TbParroquia>) query.list();
+            sesion.close();
+        } catch (Exception ex) {
+        }
+        return lst;
+    } 
     
 }

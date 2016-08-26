@@ -62,6 +62,48 @@
             </p:dialog>
                 </p:panel>
             </p:tab>
+            
+            <br></br>
+
+                <p:panel id="panelTabla" style="height: 30%; width: 100%;">
+                    <p:dataTable class="tblDatos fuenteTamanio" id="tblProvincia" var="lstTbl" value="#{mbVLocalizacion.lstParroquiaTbl}"
+                                 editable="true" scrollable="true" scrollHeight="150"  sortMode="multiple">
+                        <p:ajax event="rowEdit" listener="#{mbVLocalizacion.onRowEditParroquia}" update=":frmRegistrarParroquia:msgs" />
+                        <p:ajax event="rowEditCancel" listener="#{mbVLocalizacion.onRowCancelParroquia}" update=":frmRegistrarParroquia:msgs" />
+
+                        <p:column headerText="Código" sortBy="#{lstTbl.id}">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.id}" /></f:facet>
+                                <f:facet name="input">
+                                    <p:inputText readonly="true" style="width:100%" required="true" value="#{lstTbl.id}"  />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+
+                        <p:column headerText="Parroquia" sortBy="#{lstTbl.nombre}">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.nombre}" /></f:facet>
+                                <f:facet name="input">
+                                    <p:inputText readonly="true" style="width:100%" required="true" value="#{lstTbl.nombre}"  />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Cantón" sortBy="#{lstTbl.tbCanton.nombre}">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.tbCanton.nombre}" /></f:facet>
+                                <f:facet name="input"><p:inputText required="true" value="#{lstTbl.tbCanton.nombre}" style="width:100%"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column>
+                            <p:rowEditor />   
+                        </p:column>
+
+                    </p:dataTable>
+
+                </p:panel>
  </h:form>
             
     

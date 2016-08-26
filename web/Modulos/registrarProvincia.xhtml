@@ -33,6 +33,8 @@
                                  actionListener="#{mbVLocalizacion.registrarProvincia()}" />
                 
             </p:panelGrid>
+                    
+                     
             
             <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
             <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
@@ -40,6 +42,48 @@
             </p:dialog>
                 </p:panel>
             </p:tab>
+            
+            <br></br>
+
+                <p:panel id="panelTabla" style="height: 30%; width: 100%;">
+                    <p:dataTable class="tblDatos fuenteTamanio" id="tblProvincia" var="lstTbl" value="#{mbVLocalizacion.lstProvinciaTbl}"
+                                 editable="true" scrollable="true" scrollHeight="150" sortMode="multiple">
+                        <p:ajax event="rowEdit" listener="#{mbVLocalizacion.onRowEditProvincia}" update=":frmRegistrarProvincia:msgs" />
+                        <p:ajax event="rowEditCancel" listener="#{mbVLocalizacion.onRowCancelProvincia}" update=":frmRegistrarProvincia:msgs" />
+
+                        <p:column headerText="Código" sortBy="#{lstTbl.id}">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.id}" /></f:facet>
+                                <f:facet name="input">
+                                    <p:inputText readonly="true" style="width:100%" required="true" value="#{lstTbl.id}"  />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        
+
+                        <p:column headerText="Provincia" sortBy="#{lstTbl.nombre}">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.nombre}" /></f:facet>
+                                <f:facet name="input">
+                                    <p:inputText readonly="true" style="width:100%" required="true" value="#{lstTbl.nombre}"  />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        
+                        <p:column headerText="Pais" sortBy="#{lstTbl.tbPais.nombre}">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.tbPais.nombre}" /></f:facet>
+                                <f:facet name="input"><p:inputText required="true" value="#{lstTbl.tbPais.nombre}" style="width:100%"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        
+                        <p:column>
+                            <p:rowEditor />   
+                        </p:column>
+
+                    </p:dataTable>
+
+                </p:panel>
  </h:form>
             
     

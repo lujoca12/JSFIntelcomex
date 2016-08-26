@@ -9,54 +9,96 @@
     </h:head>
     <h:body>
         <div class="ui-fluid">
-        <h:form id="frmRegistrarCanton">
-            <p:remoteCommand name="frmRegistrarCanton" autoRun="true" action="#{mbVLocalizacion.load()}" />
-            <p:growl id="msgs" showDetail="true" />
-            <p:tab id="personal" title="RegistrarCanton">
-                <p:panel header="Registrar Cantón" >
-                    <p:focus context="pais"/>
-            <p:panelGrid columns="2" columnClasses="ui-grid-col-3,ui-grid-col-6" layout="grid" styleClass="ui-panelgrid-blank">
-                
-                <h:outputLabel for="pais" styleClass="labelDerecha" value="País: "/>
-                <h:selectOneMenu id="pais" class="form-control" value="#{mbVLocalizacion.idPaisOrigen}">
-                    <p:ajax listener="#{mbVLocalizacion.onPaisChange()}" update="group group2" />
-                    <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
-                    <f:selectItems value="#{mbVLocalizacion.lstPais}"  /> 
-                    
-                </h:selectOneMenu>
-                <h:panelGroup id="group">
-                    <h:outputLabel for="provinciaNac" styleClass="labelDerecha"  value="Provincia: "/>
-                </h:panelGroup>
-                <h:panelGroup id="group2">
-                    <h:selectOneMenu id="provinciaNac" class="form-control" value="#{mbVLocalizacion.idProvinciaNac}">
-                        <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
-                        <f:selectItems value="#{mbVLocalizacion.lstProvincia}"  />  
-                    </h:selectOneMenu>
-                </h:panelGroup>
-                
-                <p:outputLabel for="txtCodProvincia" styleClass="labelDerecha" value="Código Cantón" />
-                <p:inputText id="txtCodProvincia" value="#{mbVLocalizacion.tCanton.id}" required="true" maxlength="5"/>
-                
-                <p:outputLabel for="txtNombreProv" styleClass="labelDerecha" value="Nombre:" />
-                <p:inputText id="txtNombreProv" value="#{mbVLocalizacion.tCanton.nombre}" required="true" maxlength="40"/>
-                
-                <h:outputText id="display" value="" />
-                <p:commandButton value="Guardar" update="frmRegistrarCanton,msgs" styleClass="anchoBotones" icon="ui-icon-disk"
-                                 actionListener="#{mbVLocalizacion.registrarCanton()}" />
-                
-            </p:panelGrid>
-            
-            <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
-            <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
-                <p:graphicImage class="imgAjax" value="#{resource['img/ajax-loader.gif']}"  />
-            </p:dialog>
+            <h:form id="frmRegistrarCanton">
+                <p:remoteCommand name="frmRegistrarCanton" autoRun="true" action="#{mbVLocalizacion.load()}" />
+                <p:growl id="msgs" showDetail="true" />
+                <p:tab id="personal" title="RegistrarCanton">
+                    <p:panel header="Registrar Cantón" >
+                        <p:focus context="pais"/>
+                        <p:panelGrid columns="2" columnClasses="ui-grid-col-3,ui-grid-col-6" layout="grid" styleClass="ui-panelgrid-blank">
+
+                            <h:outputLabel for="pais" styleClass="labelDerecha" value="País: "/>
+                            <h:selectOneMenu id="pais" class="form-control" value="#{mbVLocalizacion.idPaisOrigen}">
+                                <p:ajax listener="#{mbVLocalizacion.onPaisChange()}" update="group group2" />
+                                <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{mbVLocalizacion.lstPais}"  /> 
+
+                            </h:selectOneMenu>
+                            <h:panelGroup id="group">
+                                <h:outputLabel for="provinciaNac" styleClass="labelDerecha"  value="Provincia: "/>
+                            </h:panelGroup>
+                            <h:panelGroup id="group2">
+                                <h:selectOneMenu id="provinciaNac" class="form-control" value="#{mbVLocalizacion.idProvinciaNac}">
+                                    <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
+                                    <f:selectItems value="#{mbVLocalizacion.lstProvincia}"  />  
+                                </h:selectOneMenu>
+                            </h:panelGroup>
+
+                            <p:outputLabel for="txtCodProvincia" styleClass="labelDerecha" value="Código Cantón" />
+                            <p:inputText id="txtCodProvincia" value="#{mbVLocalizacion.tCanton.id}" required="true" maxlength="5"/>
+
+                            <p:outputLabel for="txtNombreProv" styleClass="labelDerecha" value="Nombre:" />
+                            <p:inputText id="txtNombreProv" value="#{mbVLocalizacion.tCanton.nombre}" required="true" maxlength="40"/>
+
+                            <h:outputText id="display" value="" />
+                            <p:commandButton value="Guardar" update="frmRegistrarCanton,msgs" styleClass="anchoBotones" icon="ui-icon-disk"
+                                             actionListener="#{mbVLocalizacion.registrarCanton()}" />
+
+                        </p:panelGrid>
+
+                        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                            <p:graphicImage class="imgAjax" value="#{resource['img/ajax-loader.gif']}"  />
+                        </p:dialog>
+                    </p:panel>
+                </p:tab>
+
+                <br></br>
+
+                <p:panel id="panelTabla" style="height: 30%; width: 100%;">
+                    <p:dataTable class="tblDatos fuenteTamanio" id="tblProvincia" var="lstTbl" value="#{mbVLocalizacion.lstCantonTbl}"
+                                 editable="true" scrollable="true" scrollHeight="150"  sortMode="multiple">
+                        <p:ajax event="rowEdit" listener="#{mbVLocalizacion.onRowEditCanton}" update=":frmRegistrarCanton:msgs" />
+                        <p:ajax event="rowEditCancel" listener="#{mbVLocalizacion.onRowCancelCanton}" update=":frmRegistrarCanton:msgs" />
+
+                        <p:column headerText="Código" sortBy="#{lstTbl.id}">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.id}" /></f:facet>
+                                <f:facet name="input">
+                                    <p:inputText readonly="true" style="width:100%" required="true" value="#{lstTbl.id}"  />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+
+                        <p:column headerText="Cantón" sortBy="#{lstTbl.nombre}">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.nombre}" /></f:facet>
+                                <f:facet name="input">
+                                    <p:inputText readonly="true" style="width:100%" required="true" value="#{lstTbl.nombre}"  />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Provincia" sortBy="#{lstTbl.tbProvincia.nombre}">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.tbProvincia.nombre}" /></f:facet>
+                                <f:facet name="input"><p:inputText required="true" value="#{lstTbl.tbProvincia.nombre}" style="width:100%"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column>
+                            <p:rowEditor />   
+                        </p:column>
+
+                    </p:dataTable>
+
                 </p:panel>
-            </p:tab>
- </h:form>
-            
-    
-    
-</div>
+            </h:form>
+
+
+
+        </div>
     </h:body>
 </html>
 
