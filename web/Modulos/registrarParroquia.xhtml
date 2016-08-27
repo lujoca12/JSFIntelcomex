@@ -51,7 +51,7 @@
                 <p:inputText id="txtNombreParroquia" value="#{mbVLocalizacion.tParroquia.nombre}" required="true" maxlength="300"/>
                 
                 <h:outputText id="display" value="" />
-                <p:commandButton value="Guardar" update="frmRegistrarParroquia,msgs" styleClass="anchoBotones" icon="ui-icon-disk"
+                <p:commandButton value="Guardar" update="frmRegistrarParroquia,tblParroquia" styleClass="anchoBotones" icon="ui-icon-disk"
                                  actionListener="#{mbVLocalizacion.registrarParroquia()}" />
                 
             </p:panelGrid>
@@ -66,7 +66,7 @@
             <br></br>
 
                 <p:panel id="panelTabla" style="height: 30%; width: 100%;">
-                    <p:dataTable class="tblDatos fuenteTamanio" id="tblProvincia" var="lstTbl" value="#{mbVLocalizacion.lstParroquiaTbl}"
+                    <p:dataTable class="tblDatos fuenteTamanio" id="tblParroquia" var="lstTbl" value="#{mbVLocalizacion.lstParroquiaTbl}"
                                  editable="true" scrollable="true" scrollHeight="150"  sortMode="multiple">
                         <p:ajax event="rowEdit" listener="#{mbVLocalizacion.onRowEditParroquia}" update=":frmRegistrarParroquia:msgs" />
                         <p:ajax event="rowEditCancel" listener="#{mbVLocalizacion.onRowCancelParroquia}" update=":frmRegistrarParroquia:msgs" />
@@ -93,7 +93,35 @@
                         <p:column headerText="Cantón" sortBy="#{lstTbl.tbCanton.nombre}">
                             <p:cellEditor>
                                 <f:facet name="output"><h:outputText value="#{lstTbl.tbCanton.nombre}" /></f:facet>
-                                <f:facet name="input"><p:inputText required="true" value="#{lstTbl.tbCanton.nombre}" style="width:100%"/></f:facet>
+                                <f:facet name="input">
+                                    <h:selectOneMenu id="cboCantonNac" class="form-control" value="#{lstTbl.tbCanton.id}">
+                                        <f:selectItems value="#{mbVLocalizacion.lstCanton}"  />  
+                                    </h:selectOneMenu>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        
+                        <p:column headerText="Provincia" sortBy="#{lstTbl.tbCanton.tbProvincia.nombre}">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.tbCanton.tbProvincia.nombre}" /></f:facet>
+                                <f:facet name="input">
+                                    <h:selectOneMenu id="cboProvinciaNac" class="form-control" value="#{lstTbl.tbCanton.tbProvincia.id}">
+                                        <p:ajax listener="#{mbVLocalizacion.onProvinciaChange()}" update="cboCantonNac" />                                        
+                                        <f:selectItems value="#{mbVLocalizacion.lstProvincia}"  />  
+                                    </h:selectOneMenu>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        
+                        <p:column headerText="País" sortBy="#{lstTbl.tbCanton.tbProvincia.tbPais.nombre}">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.tbCanton.tbProvincia.tbPais.nombre}" /></f:facet>
+                                <f:facet name="input">
+                                    <h:selectOneMenu id="pais" class="form-control" value="#{lstTbl.tbCanton.tbProvincia.tbPais.id}">
+                                        <p:ajax listener="#{mbVLocalizacion.onPaisChange()}" update="cboProvinciaNac cboCantonNac" />
+                                        <f:selectItems value="#{mbVLocalizacion.lstPais}"  /> 
+                                    </h:selectOneMenu>
+                                </f:facet>
                             </p:cellEditor>
                         </p:column>
 

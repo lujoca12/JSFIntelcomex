@@ -41,7 +41,7 @@
                             <p:inputText id="txtNombreProv" value="#{mbVLocalizacion.tCanton.nombre}" required="true" maxlength="40"/>
 
                             <h:outputText id="display" value="" />
-                            <p:commandButton value="Guardar" update="frmRegistrarCanton,msgs" styleClass="anchoBotones" icon="ui-icon-disk"
+                            <p:commandButton value="Guardar" update="frmRegistrarCanton,tblCanton" styleClass="anchoBotones" icon="ui-icon-disk"
                                              actionListener="#{mbVLocalizacion.registrarCanton()}" />
 
                         </p:panelGrid>
@@ -56,7 +56,7 @@
                 <br></br>
 
                 <p:panel id="panelTabla" style="height: 30%; width: 100%;">
-                    <p:dataTable class="tblDatos fuenteTamanio" id="tblProvincia" var="lstTbl" value="#{mbVLocalizacion.lstCantonTbl}"
+                    <p:dataTable class="tblDatos fuenteTamanio" id="tblCanton" var="lstTbl" value="#{mbVLocalizacion.lstCantonTbl}"
                                  editable="true" scrollable="true" scrollHeight="150"  sortMode="multiple">
                         <p:ajax event="rowEdit" listener="#{mbVLocalizacion.onRowEditCanton}" update=":frmRegistrarCanton:msgs" />
                         <p:ajax event="rowEditCancel" listener="#{mbVLocalizacion.onRowCancelCanton}" update=":frmRegistrarCanton:msgs" />
@@ -83,12 +83,33 @@
                         <p:column headerText="Provincia" sortBy="#{lstTbl.tbProvincia.nombre}">
                             <p:cellEditor>
                                 <f:facet name="output"><h:outputText value="#{lstTbl.tbProvincia.nombre}" /></f:facet>
-                                <f:facet name="input"><p:inputText required="true" value="#{lstTbl.tbProvincia.nombre}" style="width:100%"/></f:facet>
+                                <f:facet name="input">
+                                    <h:selectOneMenu id="cboProvinciaNac" class="form-control" value="#{lstTbl.tbProvincia.id}">
+                                        <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
+                                        <f:selectItems value="#{mbVLocalizacion.lstProvinciaTabla}"  />  
+                                    </h:selectOneMenu>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        
+                        <p:column headerText="Pais" sortBy="#{lstTbl.tbProvincia.tbPais.nombre}">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.tbProvincia.tbPais.nombre}" /></f:facet>
+                                <f:facet name="input">
+                                    
+                                    <h:selectOneMenu id="cboPais" class="form-control" value="#{lstTbl.tbProvincia.tbPais.id}">
+                                        <p:ajax listener="#{mbVLocalizacion.onPaisChangeTabla(lstTbl.tbProvincia.tbPais.id)}" update="cboProvinciaNac" />
+                                        <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
+                                        <f:selectItems value="#{mbVLocalizacion.lstPais}"  />  
+                                    </h:selectOneMenu>
+                                </f:facet>
                             </p:cellEditor>
                         </p:column>
 
                         <p:column>
-                            <p:rowEditor />   
+                            <p:rowEditor> 
+                                <p:ajaxStatus oncomplete="#{mbVLocalizacion.onPaisChangeTabla(lstTbl.tbProvincia.tbPais.id)}"  />
+                            </p:rowEditor>
                         </p:column>
 
                     </p:dataTable>

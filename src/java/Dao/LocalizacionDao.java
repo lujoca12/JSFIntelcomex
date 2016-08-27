@@ -232,7 +232,7 @@ public class LocalizacionDao {
             else
                 condicion = "order by c.nombre asc";
             
-            String hql = "from TbCanton c inner join fetch c.tbProvincia p "+condicion+"";
+            String hql = "from TbCanton c inner join fetch c.tbProvincia p inner join fetch p.tbPais pais "+condicion+"";
             Query query = sesion.createQuery(hql);
             lst = (List<TbCanton>) query.list();
             sesion.close();
@@ -268,7 +268,7 @@ public class LocalizacionDao {
             else
                 condicion = "order by p.nombre asc";
             
-            String hql = "from TbParroquia p inner join fetch p.tbCanton c "+condicion+"";
+            String hql = "from TbParroquia p inner join fetch p.tbCanton c inner join fetch c.tbProvincia prov inner join fecth prov.tbPais pais "+condicion+"";
             Query query = sesion.createQuery(hql);
             lst = (List<TbParroquia>) query.list();
             sesion.close();

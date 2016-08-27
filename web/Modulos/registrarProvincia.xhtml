@@ -29,7 +29,7 @@
                 <p:inputText id="txtNombreProv" value="#{mbVLocalizacion.tProvincia.nombre}" required="true" maxlength="30"/>
                 
                 <h:outputText id="display" value="" />
-                <p:commandButton value="Guardar" update="frmRegistrarProvincia,msgs" styleClass="anchoBotones" icon="ui-icon-disk"
+                <p:commandButton value="Guardar" update="frmRegistrarProvincia,tblProvincia" styleClass="anchoBotones" icon="ui-icon-disk"
                                  actionListener="#{mbVLocalizacion.registrarProvincia()}" />
                 
             </p:panelGrid>
@@ -73,7 +73,11 @@
                         <p:column headerText="Pais" sortBy="#{lstTbl.tbPais.nombre}">
                             <p:cellEditor>
                                 <f:facet name="output"><h:outputText value="#{lstTbl.tbPais.nombre}" /></f:facet>
-                                <f:facet name="input"><p:inputText required="true" value="#{lstTbl.tbPais.nombre}" style="width:100%"/></f:facet>
+                                <f:facet name="input">
+                                    <h:selectOneMenu style="width:100%" id="cboPais" class="form-control" value="#{lstTbl.tbPais.id}">
+                                        <f:selectItems value="#{mbVLocalizacion.lstPais}"  /> 
+                                    </h:selectOneMenu>
+                                </f:facet>
                             </p:cellEditor>
                         </p:column>
                         

@@ -50,6 +50,7 @@ public class MbVLocalizacion implements Serializable{
     
     private List<SelectItem> lstPais;
     private List<SelectItem> lstProvincia;
+    private List<SelectItem> lstProvinciaTabla;
     private List<SelectItem> lstCanton;
     private List<SelectItem> lstParroquia;
     private List<SelectItem> lstTipoEmpresa;
@@ -102,6 +103,18 @@ public class MbVLocalizacion implements Serializable{
         for (TbProvincia p : provincia) {
             SelectItem item = new SelectItem(p.getId(), p.getNombre());
             lstProvincia.add(item);
+        }
+    }
+    
+    public void onPaisChangeTabla(String idPais) {
+        lstProvinciaTabla = new ArrayList<>();
+        //lstCanton = new ArrayList<>();
+        //lstParroquia = new ArrayList<>();
+        LocalizacionDao locDao = new LocalizacionDao();
+        List<TbProvincia> provincia = locDao.getProvincias(idPais);
+        for (TbProvincia p : provincia) {
+            SelectItem item = new SelectItem(p.getId(), p.getNombre());
+            lstProvinciaTabla.add(item);
         }
     }
     
@@ -182,6 +195,14 @@ public class MbVLocalizacion implements Serializable{
         }
     }
 
+    public List<SelectItem> getLstProvinciaTabla() {
+        return lstProvinciaTabla;
+    }
+
+    public void setLstProvinciaTabla(List<SelectItem> lstProvinciaTabla) {
+        this.lstProvinciaTabla = lstProvinciaTabla;
+    }
+    
     public List<TbProvincia> getLstProvinciaTbl() {
         return lstProvinciaTbl;
     }
@@ -418,6 +439,7 @@ public class MbVLocalizacion implements Serializable{
             if(msg){
                 mensajesOk("Datos procesados correctamente");
                 vaciarCajas();
+                cargarPaises();
             }else{
                 mensajesError("Error al procesar los Datos");
             }
@@ -440,6 +462,7 @@ public class MbVLocalizacion implements Serializable{
             if(msg){
                 mensajesOk("Datos procesados correctamente");
                 vaciarCajas();
+                cargarTablaProvincias();
             }else{
                 mensajesError("Error al procesar los Datos");
             }
@@ -462,6 +485,7 @@ public class MbVLocalizacion implements Serializable{
             if(msg){
                 mensajesOk("Datos procesados correctamente");
                 vaciarCajas();
+                cargarTablaCanton();
             }else{
                 mensajesError("Error al procesar los Datos");
             }
@@ -484,6 +508,7 @@ public class MbVLocalizacion implements Serializable{
             if(msg){
                 mensajesOk("Datos procesados correctamente");
                 vaciarCajas();
+                cargarTablaParroquia();
             }else{
                 mensajesError("Error al procesar los Datos");
             }
