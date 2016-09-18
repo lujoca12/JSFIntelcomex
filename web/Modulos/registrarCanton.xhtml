@@ -35,7 +35,7 @@
                             </h:panelGroup>
 
                             <p:outputLabel for="txtCodProvincia" styleClass="labelDerecha" value="Código Cantón" />
-                            <p:inputText id="txtCodProvincia" value="#{mbVLocalizacion.tCanton.id}" required="true" maxlength="5"/>
+                            <p:inputText id="txtCodProvincia" value="#{mbVLocalizacion.tCanton.idCanton}" required="true" maxlength="5"/>
 
                             <p:outputLabel for="txtNombreProv" styleClass="labelDerecha" value="Nombre:" />
                             <p:inputText id="txtNombreProv" value="#{mbVLocalizacion.tCanton.nombre}" required="true" maxlength="40"/>
@@ -61,11 +61,11 @@
                         <p:ajax event="rowEdit" listener="#{mbVLocalizacion.onRowEditCanton}" update=":frmRegistrarCanton:msgs" />
                         <p:ajax event="rowEditCancel" listener="#{mbVLocalizacion.onRowCancelCanton}" update=":frmRegistrarCanton:msgs" />
 
-                        <p:column headerText="Código" sortBy="#{lstTbl.id}">
+                        <p:column headerText="Código" sortBy="#{lstTbl.idCanton}">
                             <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{lstTbl.id}" /></f:facet>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.idCanton}" /></f:facet>
                                 <f:facet name="input">
-                                    <p:inputText readonly="true" style="width:100%" required="true" value="#{lstTbl.id}"  />
+                                    <p:inputText readonly="true" style="width:100%" required="true" value="#{lstTbl.idCanton}"  />
                                 </f:facet>
                             </p:cellEditor>
                         </p:column>
