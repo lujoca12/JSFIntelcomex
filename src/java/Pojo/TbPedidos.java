@@ -1,5 +1,5 @@
 package Pojo;
-// Generated 04-ago-2016 23:19:04 by Hibernate Tools 4.3.1
+// Generated 17-sep-2016 17:20:14 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -13,9 +13,9 @@ public class TbPedidos  implements java.io.Serializable {
 
 
      private Integer id;
-     private TbParametrodetalle tbParametrodetalleByTbParametrodetalleTipopedido;
-     private TbParametrodetalle tbParametrodetalleByTbParametrodetalleTipopago;
      private TbPersona tbPersona;
+     private TbTipopago tbTipopago;
+     private TbTipopedido tbTipopedido;
      private TbUsuarios tbUsuarios;
      private Date fechaPedido;
      private Date fechaEntrega;
@@ -26,16 +26,16 @@ public class TbPedidos  implements java.io.Serializable {
     }
 
 	
-    public TbPedidos(TbParametrodetalle tbParametrodetalleByTbParametrodetalleTipopedido, TbParametrodetalle tbParametrodetalleByTbParametrodetalleTipopago, TbPersona tbPersona, TbUsuarios tbUsuarios) {
-        this.tbParametrodetalleByTbParametrodetalleTipopedido = tbParametrodetalleByTbParametrodetalleTipopedido;
-        this.tbParametrodetalleByTbParametrodetalleTipopago = tbParametrodetalleByTbParametrodetalleTipopago;
+    public TbPedidos(TbPersona tbPersona, TbTipopago tbTipopago, TbTipopedido tbTipopedido, TbUsuarios tbUsuarios) {
         this.tbPersona = tbPersona;
+        this.tbTipopago = tbTipopago;
+        this.tbTipopedido = tbTipopedido;
         this.tbUsuarios = tbUsuarios;
     }
-    public TbPedidos(TbParametrodetalle tbParametrodetalleByTbParametrodetalleTipopedido, TbParametrodetalle tbParametrodetalleByTbParametrodetalleTipopago, TbPersona tbPersona, TbUsuarios tbUsuarios, Date fechaPedido, Date fechaEntrega, Integer estado, Set tbDetallepedidoses) {
-       this.tbParametrodetalleByTbParametrodetalleTipopedido = tbParametrodetalleByTbParametrodetalleTipopedido;
-       this.tbParametrodetalleByTbParametrodetalleTipopago = tbParametrodetalleByTbParametrodetalleTipopago;
+    public TbPedidos(TbPersona tbPersona, TbTipopago tbTipopago, TbTipopedido tbTipopedido, TbUsuarios tbUsuarios, Date fechaPedido, Date fechaEntrega, Integer estado, Set tbDetallepedidoses) {
        this.tbPersona = tbPersona;
+       this.tbTipopago = tbTipopago;
+       this.tbTipopedido = tbTipopedido;
        this.tbUsuarios = tbUsuarios;
        this.fechaPedido = fechaPedido;
        this.fechaEntrega = fechaEntrega;
@@ -50,26 +50,26 @@ public class TbPedidos  implements java.io.Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-    public TbParametrodetalle getTbParametrodetalleByTbParametrodetalleTipopedido() {
-        return this.tbParametrodetalleByTbParametrodetalleTipopedido;
-    }
-    
-    public void setTbParametrodetalleByTbParametrodetalleTipopedido(TbParametrodetalle tbParametrodetalleByTbParametrodetalleTipopedido) {
-        this.tbParametrodetalleByTbParametrodetalleTipopedido = tbParametrodetalleByTbParametrodetalleTipopedido;
-    }
-    public TbParametrodetalle getTbParametrodetalleByTbParametrodetalleTipopago() {
-        return this.tbParametrodetalleByTbParametrodetalleTipopago;
-    }
-    
-    public void setTbParametrodetalleByTbParametrodetalleTipopago(TbParametrodetalle tbParametrodetalleByTbParametrodetalleTipopago) {
-        this.tbParametrodetalleByTbParametrodetalleTipopago = tbParametrodetalleByTbParametrodetalleTipopago;
-    }
     public TbPersona getTbPersona() {
         return this.tbPersona;
     }
     
     public void setTbPersona(TbPersona tbPersona) {
         this.tbPersona = tbPersona;
+    }
+    public TbTipopago getTbTipopago() {
+        return this.tbTipopago;
+    }
+    
+    public void setTbTipopago(TbTipopago tbTipopago) {
+        this.tbTipopago = tbTipopago;
+    }
+    public TbTipopedido getTbTipopedido() {
+        return this.tbTipopedido;
+    }
+    
+    public void setTbTipopedido(TbTipopedido tbTipopedido) {
+        this.tbTipopedido = tbTipopedido;
     }
     public TbUsuarios getTbUsuarios() {
         return this.tbUsuarios;

@@ -5,7 +5,7 @@
  */
 package Interface;
 
-import Pojo.TbTipoUsuario;
+import Pojo.TbTipousuario;
 import java.util.List;
 
 /**
@@ -13,8 +13,8 @@ import java.util.List;
  * @author server
  */
 public interface InterfaceTipoUsuario {
-    public boolean registrar(TbTipoUsuario tTipoUsuario) throws Exception;
-    public List<TbTipoUsuario> getTodosTipoUsuarios() throws Exception;
-    public TbTipoUsuario getTipoUsuarios(String rol) throws Exception;
-    public boolean update(TbTipoUsuario tTipoUsuario) throws Exception;
+    public boolean registrar(TbTipousuario tTipoUsuario) throws Exception;
+    public List<TbTipousuario> getTodosTipoUsuarios() throws Exception;
+    public TbTipousuario getTipoUsuarios(String rol) throws Exception;
+    public boolean update(TbTipousuario tTipoUsuario) throws Exception;
 }

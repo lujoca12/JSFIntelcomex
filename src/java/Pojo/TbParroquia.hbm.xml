@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 04-ago-2016 23:19:11 by Hibernate Tools 4.3.1 -->
+<!-- Generated 17-sep-2016 17:20:33 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="Pojo.TbParroquia" table="tb_parroquia" catalog="intelcomex" optimistic-lock="version">
         <id name="id" type="string">
@@ -9,26 +9,26 @@
             <generator class="assigned" />
         </id>
         <many-to-one name="tbCanton" class="Pojo.TbCanton" fetch="select">
-            <column name="tb_canton_id" length="5" not-null="true" />
+            <column name="tb_canton_id_canton" length="5" not-null="true" />
         </many-to-one>
         <property name="nombre" type="string">
             <column name="nombre" length="300" />
         </property>
         <set name="tbUsuarioses" table="tb_usuarios" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="tb_parroquia_id" length="5" not-null="true" />
+                <column name="tb_parroquia_id" length="6" not-null="true" />
             </key>
             <one-to-many class="Pojo.TbUsuarios" />
         </set>
         <set name="tbEmpresas" table="tb_empresa" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="tb_parroquia_id" length="5" not-null="true" />
+                <column name="tb_parroquia_id" length="6" not-null="true" />
             </key>
             <one-to-many class="Pojo.TbEmpresa" />
         </set>
         <set name="tbPersonas" table="tb_persona" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="tb_parroquia_id" length="5" not-null="true" />
+                <column name="tb_parroquia_id" length="6" not-null="true" />
             </key>
             <one-to-many class="Pojo.TbPersona" />
         </set>

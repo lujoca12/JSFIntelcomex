@@ -1,21 +1,21 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 04-ago-2016 23:19:11 by Hibernate Tools 4.3.1 -->
+<!-- Generated 17-sep-2016 17:20:33 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="Pojo.TbPersona" table="tb_persona" catalog="intelcomex" optimistic-lock="version">
         <id name="cedula" type="string">
             <column name="cedula" length="10" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="tbParametrodetalleByTbParametrodetalleTipoempresa" class="Pojo.TbParametrodetalle" fetch="select">
-            <column name="tb_parametrodetalle_tipoempresa" not-null="true" />
-        </many-to-one>
-        <many-to-one name="tbParametrodetalleByTbParametrodetalleTipopersona" class="Pojo.TbParametrodetalle" fetch="select">
-            <column name="tb_parametrodetalle_tipopersona" not-null="true" />
-        </many-to-one>
         <many-to-one name="tbParroquia" class="Pojo.TbParroquia" fetch="select">
-            <column name="tb_parroquia_id" length="5" not-null="true" />
+            <column name="tb_parroquia_id" length="6" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbTipoempresa" class="Pojo.TbTipoempresa" fetch="select">
+            <column name="id_tipo_empresa" />
+        </many-to-one>
+        <many-to-one name="tbTipopersona" class="Pojo.TbTipopersona" fetch="select">
+            <column name="tb_tipopersona_id" not-null="true" />
         </many-to-one>
         <property name="nombres" type="string">
             <column name="nombres" length="150" />
@@ -33,7 +33,7 @@
             <column name="direccion" length="30" />
         </property>
         <property name="nacionalidad" type="string">
-            <column name="nacionalidad" length="5" />
+            <column name="nacionalidad" length="30" />
         </property>
         <set name="tbPedidoses" table="tb_pedidos" inverse="true" lazy="true" fetch="select">
             <key>
@@ -49,7 +49,7 @@
         </set>
         <set name="tbProductos" table="tb_producto" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="tb_proveedor_cedula" length="10" not-null="true" />
+                <column name="tb_persona_cedula" length="10" not-null="true" />
             </key>
             <one-to-many class="Pojo.TbProducto" />
         </set>

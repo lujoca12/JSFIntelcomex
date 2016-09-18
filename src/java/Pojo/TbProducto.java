@@ -1,5 +1,5 @@
 package Pojo;
-// Generated 04-ago-2016 23:19:04 by Hibernate Tools 4.3.1
+// Generated 17-sep-2016 17:20:14 by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -14,11 +14,11 @@ public class TbProducto  implements java.io.Serializable {
 
 
      private String id;
-     private TbParametrodetalle tbParametrodetalleByTbParametrodetalleAlmacenes;
-     private TbParametrodetalle tbParametrodetalleByTbParametrodetalleClasificacion;
-     private TbParametrodetalle tbParametrodetalleByTbParametrodetalleTasaiva;
-     private TbParametrodetalle tbParametrodetalleByTbParametrodetalleUnidadmedida;
      private TbPersona tbPersona;
+     private TbTipoalmacenes tbTipoalmacenes;
+     private TbTipoclasificacion tbTipoclasificacion;
+     private TbTipotasaiva tbTipotasaiva;
+     private TbTipounidadmedida tbTipounidadmedida;
      private String nombre;
      private BigDecimal precio1;
      private BigDecimal precio2;
@@ -33,21 +33,21 @@ public class TbProducto  implements java.io.Serializable {
     }
 
 	
-    public TbProducto(String id, TbParametrodetalle tbParametrodetalleByTbParametrodetalleAlmacenes, TbParametrodetalle tbParametrodetalleByTbParametrodetalleClasificacion, TbParametrodetalle tbParametrodetalleByTbParametrodetalleTasaiva, TbParametrodetalle tbParametrodetalleByTbParametrodetalleUnidadmedida, TbPersona tbPersona) {
+    public TbProducto(String id, TbPersona tbPersona, TbTipoalmacenes tbTipoalmacenes, TbTipoclasificacion tbTipoclasificacion, TbTipotasaiva tbTipotasaiva, TbTipounidadmedida tbTipounidadmedida) {
         this.id = id;
-        this.tbParametrodetalleByTbParametrodetalleAlmacenes = tbParametrodetalleByTbParametrodetalleAlmacenes;
-        this.tbParametrodetalleByTbParametrodetalleClasificacion = tbParametrodetalleByTbParametrodetalleClasificacion;
-        this.tbParametrodetalleByTbParametrodetalleTasaiva = tbParametrodetalleByTbParametrodetalleTasaiva;
-        this.tbParametrodetalleByTbParametrodetalleUnidadmedida = tbParametrodetalleByTbParametrodetalleUnidadmedida;
         this.tbPersona = tbPersona;
+        this.tbTipoalmacenes = tbTipoalmacenes;
+        this.tbTipoclasificacion = tbTipoclasificacion;
+        this.tbTipotasaiva = tbTipotasaiva;
+        this.tbTipounidadmedida = tbTipounidadmedida;
     }
-    public TbProducto(String id, TbParametrodetalle tbParametrodetalleByTbParametrodetalleAlmacenes, TbParametrodetalle tbParametrodetalleByTbParametrodetalleClasificacion, TbParametrodetalle tbParametrodetalleByTbParametrodetalleTasaiva, TbParametrodetalle tbParametrodetalleByTbParametrodetalleUnidadmedida, TbPersona tbPersona, String nombre, BigDecimal precio1, BigDecimal precio2, String marca, Date fechaIngreso, String imagendir, Set tbDetallepedidoses, Set tbInventarios, Set tbDetallefacturas) {
+    public TbProducto(String id, TbPersona tbPersona, TbTipoalmacenes tbTipoalmacenes, TbTipoclasificacion tbTipoclasificacion, TbTipotasaiva tbTipotasaiva, TbTipounidadmedida tbTipounidadmedida, String nombre, BigDecimal precio1, BigDecimal precio2, String marca, Date fechaIngreso, String imagendir, Set tbDetallepedidoses, Set tbInventarios, Set tbDetallefacturas) {
        this.id = id;
-       this.tbParametrodetalleByTbParametrodetalleAlmacenes = tbParametrodetalleByTbParametrodetalleAlmacenes;
-       this.tbParametrodetalleByTbParametrodetalleClasificacion = tbParametrodetalleByTbParametrodetalleClasificacion;
-       this.tbParametrodetalleByTbParametrodetalleTasaiva = tbParametrodetalleByTbParametrodetalleTasaiva;
-       this.tbParametrodetalleByTbParametrodetalleUnidadmedida = tbParametrodetalleByTbParametrodetalleUnidadmedida;
        this.tbPersona = tbPersona;
+       this.tbTipoalmacenes = tbTipoalmacenes;
+       this.tbTipoclasificacion = tbTipoclasificacion;
+       this.tbTipotasaiva = tbTipotasaiva;
+       this.tbTipounidadmedida = tbTipounidadmedida;
        this.nombre = nombre;
        this.precio1 = precio1;
        this.precio2 = precio2;
@@ -66,40 +66,40 @@ public class TbProducto  implements java.io.Serializable {
     public void setId(String id) {
         this.id = id;
     }
-    public TbParametrodetalle getTbParametrodetalleByTbParametrodetalleAlmacenes() {
-        return this.tbParametrodetalleByTbParametrodetalleAlmacenes;
-    }
-    
-    public void setTbParametrodetalleByTbParametrodetalleAlmacenes(TbParametrodetalle tbParametrodetalleByTbParametrodetalleAlmacenes) {
-        this.tbParametrodetalleByTbParametrodetalleAlmacenes = tbParametrodetalleByTbParametrodetalleAlmacenes;
-    }
-    public TbParametrodetalle getTbParametrodetalleByTbParametrodetalleClasificacion() {
-        return this.tbParametrodetalleByTbParametrodetalleClasificacion;
-    }
-    
-    public void setTbParametrodetalleByTbParametrodetalleClasificacion(TbParametrodetalle tbParametrodetalleByTbParametrodetalleClasificacion) {
-        this.tbParametrodetalleByTbParametrodetalleClasificacion = tbParametrodetalleByTbParametrodetalleClasificacion;
-    }
-    public TbParametrodetalle getTbParametrodetalleByTbParametrodetalleTasaiva() {
-        return this.tbParametrodetalleByTbParametrodetalleTasaiva;
-    }
-    
-    public void setTbParametrodetalleByTbParametrodetalleTasaiva(TbParametrodetalle tbParametrodetalleByTbParametrodetalleTasaiva) {
-        this.tbParametrodetalleByTbParametrodetalleTasaiva = tbParametrodetalleByTbParametrodetalleTasaiva;
-    }
-    public TbParametrodetalle getTbParametrodetalleByTbParametrodetalleUnidadmedida() {
-        return this.tbParametrodetalleByTbParametrodetalleUnidadmedida;
-    }
-    
-    public void setTbParametrodetalleByTbParametrodetalleUnidadmedida(TbParametrodetalle tbParametrodetalleByTbParametrodetalleUnidadmedida) {
-        this.tbParametrodetalleByTbParametrodetalleUnidadmedida = tbParametrodetalleByTbParametrodetalleUnidadmedida;
-    }
     public TbPersona getTbPersona() {
         return this.tbPersona;
     }
     
     public void setTbPersona(TbPersona tbPersona) {
         this.tbPersona = tbPersona;
+    }
+    public TbTipoalmacenes getTbTipoalmacenes() {
+        return this.tbTipoalmacenes;
+    }
+    
+    public void setTbTipoalmacenes(TbTipoalmacenes tbTipoalmacenes) {
+        this.tbTipoalmacenes = tbTipoalmacenes;
+    }
+    public TbTipoclasificacion getTbTipoclasificacion() {
+        return this.tbTipoclasificacion;
+    }
+    
+    public void setTbTipoclasificacion(TbTipoclasificacion tbTipoclasificacion) {
+        this.tbTipoclasificacion = tbTipoclasificacion;
+    }
+    public TbTipotasaiva getTbTipotasaiva() {
+        return this.tbTipotasaiva;
+    }
+    
+    public void setTbTipotasaiva(TbTipotasaiva tbTipotasaiva) {
+        this.tbTipotasaiva = tbTipotasaiva;
+    }
+    public TbTipounidadmedida getTbTipounidadmedida() {
+        return this.tbTipounidadmedida;
+    }
+    
+    public void setTbTipounidadmedida(TbTipounidadmedida tbTipounidadmedida) {
+        this.tbTipounidadmedida = tbTipounidadmedida;
     }
     public String getNombre() {
         return this.nombre;

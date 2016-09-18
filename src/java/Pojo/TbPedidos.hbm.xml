@@ -1,21 +1,21 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 04-ago-2016 23:19:11 by Hibernate Tools 4.3.1 -->
+<!-- Generated 17-sep-2016 17:20:33 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="Pojo.TbPedidos" table="tb_pedidos" catalog="intelcomex" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
         </id>
-        <many-to-one name="tbParametrodetalleByTbParametrodetalleTipopedido" class="Pojo.TbParametrodetalle" fetch="select">
-            <column name="tb_parametrodetalle_tipopedido" not-null="true" />
-        </many-to-one>
-        <many-to-one name="tbParametrodetalleByTbParametrodetalleTipopago" class="Pojo.TbParametrodetalle" fetch="select">
-            <column name="tb_parametrodetalle_tipopago" not-null="true" />
-        </many-to-one>
         <many-to-one name="tbPersona" class="Pojo.TbPersona" fetch="select">
             <column name="tb_persona_cedula" length="10" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbTipopago" class="Pojo.TbTipopago" fetch="select">
+            <column name="tb_tipopago_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbTipopedido" class="Pojo.TbTipopedido" fetch="select">
+            <column name="tb_tipopedido_id" not-null="true" />
         </many-to-one>
         <many-to-one name="tbUsuarios" class="Pojo.TbUsuarios" fetch="select">
             <column name="tb_usuarios_cedula" length="10" not-null="true" />

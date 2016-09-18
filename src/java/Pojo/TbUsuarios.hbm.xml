@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 04-ago-2016 23:19:11 by Hibernate Tools 4.3.1 -->
+<!-- Generated 17-sep-2016 17:20:33 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="Pojo.TbUsuarios" table="tb_usuarios" catalog="intelcomex" optimistic-lock="version">
         <id name="cedula" type="string">
@@ -9,13 +9,13 @@
             <generator class="assigned" />
         </id>
         <many-to-one name="tbEmpresa" class="Pojo.TbEmpresa" fetch="select">
-            <column name="tb_empresa_id" not-null="true" />
+            <column name="tb_empresa_id_empresa" not-null="true" />
         </many-to-one>
         <many-to-one name="tbParroquia" class="Pojo.TbParroquia" fetch="select">
             <column name="tb_parroquia_id" length="6" not-null="true" />
         </many-to-one>
-        <many-to-one name="tbTipoUsuario" class="Pojo.TbTipoUsuario" fetch="select">
-            <column name="tb_tipo_usuario_id" not-null="true" />
+        <many-to-one name="tbTipousuario" class="Pojo.TbTipousuario" fetch="select">
+            <column name="tb_tipousuario_id" not-null="true" />
         </many-to-one>
         <property name="nombres" type="string">
             <column name="nombres" length="60" />
@@ -50,6 +50,18 @@
         <property name="estado" type="java.lang.Character">
             <column name="estado" length="1" />
         </property>
+        <set name="tbDetallePermisos" table="tb_detalle_permiso" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_usuario" length="10" />
+            </key>
+            <one-to-many class="Pojo.TbDetallePermiso" />
+        </set>
+        <set name="tbAccesos" table="tb_acceso" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tb_usuarios_cedula" length="10" not-null="true" />
+            </key>
+            <one-to-many class="Pojo.TbAcceso" />
+        </set>
         <set name="tbFacturas" table="tb_factura" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="tb_usuarios_cedula" length="10" not-null="true" />
@@ -61,12 +73,6 @@
                 <column name="tb_usuarios_cedula" length="10" not-null="true" />
             </key>
             <one-to-many class="Pojo.TbPedidos" />
-        </set>
-        <set name="tbDetallePermisos" table="tb_detalle_permiso" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="usuario_cedula" length="10" not-null="true" />
-            </key>
-            <one-to-many class="Pojo.TbDetallePermiso" />
         </set>
     </class>
 </hibernate-mapping>

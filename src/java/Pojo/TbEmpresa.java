@@ -1,5 +1,5 @@
 package Pojo;
-// Generated 04-ago-2016 23:19:04 by Hibernate Tools 4.3.1
+// Generated 17-sep-2016 17:20:14 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -11,7 +11,7 @@ import java.util.Set;
 public class TbEmpresa  implements java.io.Serializable {
 
 
-     private Integer id;
+     private Integer idEmpresa;
      private TbParroquia tbParroquia;
      private TbTipoempresa tbTipoempresa;
      private String razonSocial;
@@ -36,12 +36,12 @@ public class TbEmpresa  implements java.io.Serializable {
        this.tbUsuarioses = tbUsuarioses;
     }
    
-    public Integer getId() {
-        return this.id;
+    public Integer getIdEmpresa() {
+        return this.idEmpresa;
     }
     
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdEmpresa(Integer idEmpresa) {
+        this.idEmpresa = idEmpresa;
     }
     public TbParroquia getTbParroquia() {
         return this.tbParroquia;

@@ -6,7 +6,7 @@
 package Dao;
 
 import Interface.InterfaceTipoUsuario;
-import Pojo.TbTipoUsuario;
+import Pojo.TbTipousuario;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -41,7 +41,7 @@ public class DaoTTipoUsuario implements InterfaceTipoUsuario{
     }
 
     @Override
-    public boolean registrar(TbTipoUsuario tTipoUsuario) throws Exception {
+    public boolean registrar(TbTipousuario tTipoUsuario) throws Exception {
         boolean band = false;
         try {
             iniciaOperacion();
@@ -59,30 +59,30 @@ public class DaoTTipoUsuario implements InterfaceTipoUsuario{
     }
 
     @Override
-    public List<TbTipoUsuario> getTodosTipoUsuarios() throws Exception {
+    public List<TbTipousuario> getTodosTipoUsuarios() throws Exception {
         this.sesion = null;
         this.tx = null;
         iniciaOperacion();
-        String hql="from TbTipoUsuario as t order by t.descripcion asc";
+        String hql="from TbTipousuario as t order by t.descripcion asc";
         Query query = sesion.createQuery(hql);
-        List<TbTipoUsuario> tipoUsuario= (List<TbTipoUsuario>) query.list();
+        List<TbTipousuario> tipoUsuario= (List<TbTipousuario>) query.list();
         sesion.close();
         return tipoUsuario;
     }
 
     @Override
-    public boolean update(TbTipoUsuario tTipoUsuario) throws Exception {
+    public boolean update(TbTipousuario tTipoUsuario) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public TbTipoUsuario getTipoUsuarios(String rol) throws Exception {
+    public TbTipousuario getTipoUsuarios(String rol) throws Exception {
         this.sesion = null;
         this.tx = null;
         iniciaOperacion();
-        String hql="from TbTipoUsuario as t where t.descripcion like '%"+rol+"%' order by t.descripcion asc";
+        String hql="from TbTipousuario as t where t.descripcion like '%"+rol+"%' order by t.descripcion asc";
         Query query = sesion.createQuery(hql);
-        TbTipoUsuario tipoUsuario= (TbTipoUsuario) query.uniqueResult();
+        TbTipousuario tipoUsuario= (TbTipousuario) query.uniqueResult();
         sesion.close();
         return tipoUsuario;
     }

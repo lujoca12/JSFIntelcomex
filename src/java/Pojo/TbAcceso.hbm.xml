@@ -3,19 +3,19 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 17-sep-2016 17:20:33 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="Pojo.TbDetallePermiso" table="tb_detalle_permiso" catalog="intelcomex" optimistic-lock="version">
+    <class name="Pojo.TbAcceso" table="tb_acceso" catalog="intelcomex" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
         </id>
-        <many-to-one name="tbPermiso" class="Pojo.TbPermiso" fetch="select">
-            <column name="id_permiso" />
-        </many-to-one>
         <many-to-one name="tbUsuarios" class="Pojo.TbUsuarios" fetch="select">
-            <column name="id_usuario" length="10" />
+            <column name="tb_usuarios_cedula" length="10" not-null="true" />
         </many-to-one>
-        <property name="estado" type="java.lang.Character">
-            <column name="estado" length="1" />
+        <property name="login" type="string">
+            <column name="login" length="10" not-null="true" />
+        </property>
+        <property name="pass" type="string">
+            <column name="pass" length="20" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>

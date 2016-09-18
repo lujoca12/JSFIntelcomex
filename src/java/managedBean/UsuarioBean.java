@@ -6,7 +6,7 @@
 package managedBean;
 
 import Dao.UsuarioDAO;
-import Pojo.TbTipoUsuario;
+import Pojo.TbTipousuario;
 import Pojo.TbUsuarios;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;

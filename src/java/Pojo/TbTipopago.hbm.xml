@@ -3,7 +3,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 17-sep-2016 17:20:33 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="Pojo.TbTipoempresa" table="tb_tipoempresa" catalog="intelcomex" optimistic-lock="version">
+    <class name="Pojo.TbTipopago" table="tb_tipopago" catalog="intelcomex" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
@@ -14,17 +14,17 @@
         <property name="descripcion" type="string">
             <column name="descripcion" not-null="true" />
         </property>
-        <set name="tbPersonas" table="tb_persona" inverse="true" lazy="true" fetch="select">
+        <set name="tbFacturas" table="tb_factura" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="id_tipo_empresa" />
+                <column name="tb_tipopago_id" not-null="true" />
             </key>
-            <one-to-many class="Pojo.TbPersona" />
+            <one-to-many class="Pojo.TbFactura" />
         </set>
-        <set name="tbEmpresas" table="tb_empresa" inverse="true" lazy="true" fetch="select">
+        <set name="tbPedidoses" table="tb_pedidos" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="tb_tipoempresa_id" not-null="true" />
+                <column name="tb_tipopago_id" not-null="true" />
             </key>
-            <one-to-many class="Pojo.TbEmpresa" />
+            <one-to-many class="Pojo.TbPedidos" />
         </set>
     </class>
 </hibernate-mapping>

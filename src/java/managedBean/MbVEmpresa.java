@@ -238,7 +238,7 @@ public class MbVEmpresa implements Serializable{
             LocalizacionDao locDao = new LocalizacionDao();
             List<TbCanton> canton = locDao.getCantonProvicia(idProvinciaNac);
             for (TbCanton c : canton) {
-                SelectItem item = new SelectItem(c.getId(), c.getNombre());
+                SelectItem item = new SelectItem(c.getIdCanton(), c.getNombre());
                 lstCanton.add(item);
             }
         } catch (Exception ex) {
@@ -277,7 +277,7 @@ public class MbVEmpresa implements Serializable{
 
             DaoTEmpresa daoEmpresa = new DaoTEmpresa();
             TbTipoempresa tbTipoEmpresa = new TbTipoempresa();
-            tbTipoEmpresa.setIdTipoEmpresa(Integer.valueOf(tipoEmpresa));
+            tbTipoEmpresa.setId(Integer.valueOf(tipoEmpresa));
             tbEmpresa.setTbTipoempresa(tbTipoEmpresa);
             TbParroquia tParroquia = new TbParroquia();
             tParroquia.setId(idParroquiaNac);

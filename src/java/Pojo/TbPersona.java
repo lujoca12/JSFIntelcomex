@@ -1,5 +1,5 @@
 package Pojo;
-// Generated 04-ago-2016 23:19:04 by Hibernate Tools 4.3.1
+// Generated 17-sep-2016 17:20:14 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -12,9 +12,9 @@ public class TbPersona  implements java.io.Serializable {
 
 
      private String cedula;
-     private TbParametrodetalle tbParametrodetalleByTbParametrodetalleTipoempresa;
-     private TbParametrodetalle tbParametrodetalleByTbParametrodetalleTipopersona;
      private TbParroquia tbParroquia;
+     private TbTipoempresa tbTipoempresa;
+     private TbTipopersona tbTipopersona;
      private String nombres;
      private String apellidos;
      private String telefono;
@@ -29,17 +29,16 @@ public class TbPersona  implements java.io.Serializable {
     }
 
 	
-    public TbPersona(String cedula, TbParametrodetalle tbParametrodetalleByTbParametrodetalleTipoempresa, TbParametrodetalle tbParametrodetalleByTbParametrodetalleTipopersona, TbParroquia tbParroquia) {
+    public TbPersona(String cedula, TbParroquia tbParroquia, TbTipopersona tbTipopersona) {
         this.cedula = cedula;
-        this.tbParametrodetalleByTbParametrodetalleTipoempresa = tbParametrodetalleByTbParametrodetalleTipoempresa;
-        this.tbParametrodetalleByTbParametrodetalleTipopersona = tbParametrodetalleByTbParametrodetalleTipopersona;
         this.tbParroquia = tbParroquia;
+        this.tbTipopersona = tbTipopersona;
     }
-    public TbPersona(String cedula, TbParametrodetalle tbParametrodetalleByTbParametrodetalleTipoempresa, TbParametrodetalle tbParametrodetalleByTbParametrodetalleTipopersona, TbParroquia tbParroquia, String nombres, String apellidos, String telefono, String email, String direccion, String nacionalidad, Set tbPedidoses, Set tbFacturas, Set tbProductos) {
+    public TbPersona(String cedula, TbParroquia tbParroquia, TbTipoempresa tbTipoempresa, TbTipopersona tbTipopersona, String nombres, String apellidos, String telefono, String email, String direccion, String nacionalidad, Set tbPedidoses, Set tbFacturas, Set tbProductos) {
        this.cedula = cedula;
-       this.tbParametrodetalleByTbParametrodetalleTipoempresa = tbParametrodetalleByTbParametrodetalleTipoempresa;
-       this.tbParametrodetalleByTbParametrodetalleTipopersona = tbParametrodetalleByTbParametrodetalleTipopersona;
        this.tbParroquia = tbParroquia;
+       this.tbTipoempresa = tbTipoempresa;
+       this.tbTipopersona = tbTipopersona;
        this.nombres = nombres;
        this.apellidos = apellidos;
        this.telefono = telefono;
@@ -58,26 +57,26 @@ public class TbPersona  implements java.io.Serializable {
     public void setCedula(String cedula) {
         this.cedula = cedula;
     }
-    public TbParametrodetalle getTbParametrodetalleByTbParametrodetalleTipoempresa() {
-        return this.tbParametrodetalleByTbParametrodetalleTipoempresa;
-    }
-    
-    public void setTbParametrodetalleByTbParametrodetalleTipoempresa(TbParametrodetalle tbParametrodetalleByTbParametrodetalleTipoempresa) {
-        this.tbParametrodetalleByTbParametrodetalleTipoempresa = tbParametrodetalleByTbParametrodetalleTipoempresa;
-    }
-    public TbParametrodetalle getTbParametrodetalleByTbParametrodetalleTipopersona() {
-        return this.tbParametrodetalleByTbParametrodetalleTipopersona;
-    }
-    
-    public void setTbParametrodetalleByTbParametrodetalleTipopersona(TbParametrodetalle tbParametrodetalleByTbParametrodetalleTipopersona) {
-        this.tbParametrodetalleByTbParametrodetalleTipopersona = tbParametrodetalleByTbParametrodetalleTipopersona;
-    }
     public TbParroquia getTbParroquia() {
         return this.tbParroquia;
     }
     
     public void setTbParroquia(TbParroquia tbParroquia) {
         this.tbParroquia = tbParroquia;
+    }
+    public TbTipoempresa getTbTipoempresa() {
+        return this.tbTipoempresa;
+    }
+    
+    public void setTbTipoempresa(TbTipoempresa tbTipoempresa) {
+        this.tbTipoempresa = tbTipoempresa;
+    }
+    public TbTipopersona getTbTipopersona() {
+        return this.tbTipopersona;
+    }
+    
+    public void setTbTipopersona(TbTipopersona tbTipopersona) {
+        this.tbTipopersona = tbTipopersona;
     }
     public String getNombres() {
         return this.nombres;

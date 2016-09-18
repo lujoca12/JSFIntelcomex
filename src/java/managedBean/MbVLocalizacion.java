@@ -125,7 +125,7 @@ public class MbVLocalizacion implements Serializable{
             LocalizacionDao locDao = new LocalizacionDao();
             List<TbCanton> canton = locDao.getCantonProvicia(idProvinciaNac);
             for (TbCanton c : canton) {
-                SelectItem item = new SelectItem(c.getId(), c.getNombre());
+                SelectItem item = new SelectItem(c.getIdCanton(), c.getNombre());
                 lstCanton.add(item);
             }
         } catch (Exception ex) {
@@ -501,7 +501,7 @@ public class MbVLocalizacion implements Serializable{
 
             LocalizacionDao localizacion = new LocalizacionDao();  
             TbCanton tbCanton = new TbCanton();
-            tbCanton.setId(idCantonNac);
+            tbCanton.setIdCanton(idCantonNac);
             tParroquia.setTbCanton(tbCanton);
             msg = localizacion.registrarParroquia(tParroquia);
             

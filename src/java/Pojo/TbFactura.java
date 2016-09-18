@@ -1,5 +1,5 @@
 package Pojo;
-// Generated 04-ago-2016 23:19:04 by Hibernate Tools 4.3.1
+// Generated 17-sep-2016 17:20:14 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -13,8 +13,8 @@ public class TbFactura  implements java.io.Serializable {
 
 
      private Integer id;
-     private TbParametrodetalle tbParametrodetalle;
      private TbPersona tbPersona;
+     private TbTipopago tbTipopago;
      private TbUsuarios tbUsuarios;
      private Date fecha;
      private Set tbDetallefacturas = new HashSet(0);
@@ -23,14 +23,14 @@ public class TbFactura  implements java.io.Serializable {
     }
 
 	
-    public TbFactura(TbParametrodetalle tbParametrodetalle, TbPersona tbPersona, TbUsuarios tbUsuarios) {
-        this.tbParametrodetalle = tbParametrodetalle;
+    public TbFactura(TbPersona tbPersona, TbTipopago tbTipopago, TbUsuarios tbUsuarios) {
         this.tbPersona = tbPersona;
+        this.tbTipopago = tbTipopago;
         this.tbUsuarios = tbUsuarios;
     }
-    public TbFactura(TbParametrodetalle tbParametrodetalle, TbPersona tbPersona, TbUsuarios tbUsuarios, Date fecha, Set tbDetallefacturas) {
-       this.tbParametrodetalle = tbParametrodetalle;
+    public TbFactura(TbPersona tbPersona, TbTipopago tbTipopago, TbUsuarios tbUsuarios, Date fecha, Set tbDetallefacturas) {
        this.tbPersona = tbPersona;
+       this.tbTipopago = tbTipopago;
        this.tbUsuarios = tbUsuarios;
        this.fecha = fecha;
        this.tbDetallefacturas = tbDetallefacturas;
@@ -43,19 +43,19 @@ public class TbFactura  implements java.io.Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-    public TbParametrodetalle getTbParametrodetalle() {
-        return this.tbParametrodetalle;
-    }
-    
-    public void setTbParametrodetalle(TbParametrodetalle tbParametrodetalle) {
-        this.tbParametrodetalle = tbParametrodetalle;
-    }
     public TbPersona getTbPersona() {
         return this.tbPersona;
     }
     
     public void setTbPersona(TbPersona tbPersona) {
         this.tbPersona = tbPersona;
+    }
+    public TbTipopago getTbTipopago() {
+        return this.tbTipopago;
+    }
+    
+    public void setTbTipopago(TbTipopago tbTipopago) {
+        this.tbTipopago = tbTipopago;
     }
     public TbUsuarios getTbUsuarios() {
         return this.tbUsuarios;

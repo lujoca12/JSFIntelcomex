@@ -1,5 +1,5 @@
 package Pojo;
-// Generated 04-ago-2016 23:19:04 by Hibernate Tools 4.3.1
+// Generated 17-sep-2016 17:20:14 by Hibernate Tools 4.3.1
 
 
 
@@ -17,11 +17,6 @@ public class TbDetallePermiso  implements java.io.Serializable {
     public TbDetallePermiso() {
     }
 
-	
-    public TbDetallePermiso(TbPermiso tbPermiso, TbUsuarios tbUsuarios) {
-        this.tbPermiso = tbPermiso;
-        this.tbUsuarios = tbUsuarios;
-    }
     public TbDetallePermiso(TbPermiso tbPermiso, TbUsuarios tbUsuarios, Character estado) {
        this.tbPermiso = tbPermiso;
        this.tbUsuarios = tbUsuarios;

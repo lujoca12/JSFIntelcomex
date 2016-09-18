@@ -6,10 +6,7 @@
 package managedBean;
 
 import Dao.DaoTEmpresa;
-import Dao.DaoTParametro;
 import Pojo.TbEmpresa;
-import Pojo.TbParametro;
-import Pojo.TbParametrodetalle;
 import Pojo.TbParroquia;
 import Pojo.TbTipoempresa;
 import java.io.Serializable;
@@ -34,27 +31,23 @@ public class MbVParametro implements Serializable{
     /**
      * Creates a new instance of MbVParametro
      */
-    private TbParametro tbParametro;
-    private TbParametrodetalle tbParametroDetalle;
     private boolean msg;
     
     private List<SelectItem> lstParametro;
     
     public MbVParametro() {
-        tbParametro = new TbParametro();
-        tbParametroDetalle = new TbParametrodetalle();
         cargarParametrosOrd();
     }
     
     public void cargarParametrosOrd(){
         try {
             lstParametro = new ArrayList<>();
-            DaoTParametro daoParametros = new DaoTParametro();
-            List<TbParametro> parametro = daoParametros.getParametro();
-            for (TbParametro p : parametro) {
-                SelectItem item = new SelectItem(p.getId(), p.getCategoria());
-                lstParametro.add(item);
-            }
+//            DaoTParametro daoParametros = new DaoTParametro();
+//            List<TbParametro> parametro = daoParametros.getParametro();
+//            for (TbParametro p : parametro) {
+//                SelectItem item = new SelectItem(p.getId(), p.getCategoria());
+//                lstParametro.add(item);
+//            }
         } catch (Exception ex) {
             Logger.getLogger(MbVParametro.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -68,27 +61,27 @@ public class MbVParametro implements Serializable{
         this.lstParametro = lstParametro;
     }
     
-    public TbParametro getTbParametro() {
-        return tbParametro;
-    }
-
-    public void setTbParametro(TbParametro tbParametro) {
-        this.tbParametro = tbParametro;
-    }
-
-    public TbParametrodetalle getTbParametroDetalle() {
-        return tbParametroDetalle;
-    }
-
-    public void setTbParametroDetalle(TbParametrodetalle tbParametroDetalle) {
-        this.tbParametroDetalle = tbParametroDetalle;
-    }
+//    public TbParametro getTbParametro() {
+//        return tbParametro;
+//    }
+//
+//    public void setTbParametro(TbParametro tbParametro) {
+//        this.tbParametro = tbParametro;
+//    }
+//
+//    public TbParametrodetalle getTbParametroDetalle() {
+//        return tbParametroDetalle;
+//    }
+//
+//    public void setTbParametroDetalle(TbParametrodetalle tbParametroDetalle) {
+//        this.tbParametroDetalle = tbParametroDetalle;
+//    }
     
     public void registrarParametro(){
         try {
             
-            DaoTParametro daoParametro = new DaoTParametro();
-            msg = daoParametro.registrarParametro(tbParametro);
+//            DaoTParametro daoParametro = new DaoTParametro();
+//            msg = daoParametro.registrarParametro(tbParametro);
             
             if(msg){
                 mensajesOk("Datos procesados correctamente");
@@ -105,9 +98,9 @@ public class MbVParametro implements Serializable{
     public void registrarParametroDetalle(){
         try {
             
-            DaoTParametro daoParametro = new DaoTParametro();
-            tbParametroDetalle.setTbParametro(tbParametro);
-            msg = daoParametro.registrarParametroDetalle(tbParametroDetalle);
+//            DaoTParametro daoParametro = new DaoTParametro();
+//            tbParametroDetalle.setTbParametro(tbParametro);
+//            msg = daoParametro.registrarParametroDetalle(tbParametroDetalle);
             
             if(msg){
                 mensajesOk("Datos procesados correctamente");
@@ -132,7 +125,7 @@ public class MbVParametro implements Serializable{
     }
     
     private void vaciarCajas(){
-        tbParametro = new TbParametro();
-        tbParametroDetalle = new TbParametrodetalle();
+//        tbParametro = new TbParametro();
+//        tbParametroDetalle = new TbParametrodetalle();
     }
 }

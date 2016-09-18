@@ -11,7 +11,6 @@ import Dao.LocalizacionDao;
 import Pojo.TbCanton;
 import Pojo.TbEmpresa;
 import Pojo.TbPais;
-import Pojo.TbParametrodetalle;
 import Pojo.TbParroquia;
 import Pojo.TbPersona;
 import Pojo.TbProvincia;
@@ -52,15 +51,15 @@ public class MbVProveedor implements Serializable{
     private String idEcuador;
     
     private TbPersona tbPersona;
-    private TbParametrodetalle tipoEmpresa;
-    private TbParametrodetalle tipoPersona;
+//    private TbParametrodetalle tipoEmpresa;
+//    private TbParametrodetalle tipoPersona;
     
     boolean msg = false;
     
     public MbVProveedor() {
         tbPersona = new TbPersona();
-        tipoEmpresa = new TbParametrodetalle();
-        tipoPersona = new TbParametrodetalle();
+//        tipoEmpresa = new TbParametrodetalle();
+//        tipoPersona = new TbParametrodetalle();
         cargarPaises();
     }
 
@@ -72,21 +71,21 @@ public class MbVProveedor implements Serializable{
         this.tbPersona = tbPersona;
     }
 
-    public TbParametrodetalle getTipoEmpresa() {
-        return tipoEmpresa;
-    }
-
-    public void setTipoEmpresa(TbParametrodetalle tipoEmpresa) {
-        this.tipoEmpresa = tipoEmpresa;
-    }
-
-    public TbParametrodetalle getTipoPersona() {
-        return tipoPersona;
-    }
-
-    public void setTipoPersona(TbParametrodetalle tipoPersona) {
-        this.tipoPersona = tipoPersona;
-    }
+//    public TbParametrodetalle getTipoEmpresa() {
+//        return tipoEmpresa;
+//    }
+//
+//    public void setTipoEmpresa(TbParametrodetalle tipoEmpresa) {
+//        this.tipoEmpresa = tipoEmpresa;
+//    }
+//
+//    public TbParametrodetalle getTipoPersona() {
+//        return tipoPersona;
+//    }
+//
+//    public void setTipoPersona(TbParametrodetalle tipoPersona) {
+//        this.tipoPersona = tipoPersona;
+//    }
     
     public String getIdPaisOrigen() {
         return idPaisOrigen;
@@ -201,7 +200,7 @@ public class MbVProveedor implements Serializable{
             LocalizacionDao locDao = new LocalizacionDao();
             List<TbCanton> canton = locDao.getCantonProvicia(idProvinciaNac);
             for (TbCanton c : canton) {
-                SelectItem item = new SelectItem(c.getId(), c.getNombre());
+                SelectItem item = new SelectItem(c.getIdCanton(), c.getNombre());
                 lstCanton.add(item);
             }
         } catch (Exception ex) {
@@ -238,8 +237,8 @@ public class MbVProveedor implements Serializable{
         
         try {
             DaoTProveedor daoProveedor = new DaoTProveedor();
-            tbPersona.setTbParametrodetalleByTbParametrodetalleTipoempresa(tipoEmpresa);
-            tbPersona.setTbParametrodetalleByTbParametrodetalleTipopersona(tipoPersona);
+            //tbPersona.setTbParametrodetalleByTbParametrodetalleTipoempresa(tipoEmpresa);
+            //tbPersona.setTbParametrodetalleByTbParametrodetalleTipopersona(tipoPersona);
             TbParroquia tParroquia = new TbParroquia();
             tParroquia.setId(idParroquiaNac);
             tbPersona.setTbParroquia(tParroquia);

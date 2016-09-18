@@ -1,27 +1,27 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 04-ago-2016 23:19:11 by Hibernate Tools 4.3.1 -->
+<!-- Generated 17-sep-2016 17:20:33 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="Pojo.TbProducto" table="tb_producto" catalog="intelcomex" optimistic-lock="version">
         <id name="id" type="string">
             <column name="id" length="5" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="tbParametrodetalleByTbParametrodetalleAlmacenes" class="Pojo.TbParametrodetalle" fetch="select">
-            <column name="tb_parametrodetalle_almacenes" not-null="true" />
-        </many-to-one>
-        <many-to-one name="tbParametrodetalleByTbParametrodetalleClasificacion" class="Pojo.TbParametrodetalle" fetch="select">
-            <column name="tb_parametrodetalle_clasificacion" not-null="true" />
-        </many-to-one>
-        <many-to-one name="tbParametrodetalleByTbParametrodetalleTasaiva" class="Pojo.TbParametrodetalle" fetch="select">
-            <column name="tb_parametrodetalle_tasaiva" not-null="true" />
-        </many-to-one>
-        <many-to-one name="tbParametrodetalleByTbParametrodetalleUnidadmedida" class="Pojo.TbParametrodetalle" fetch="select">
-            <column name="tb_parametrodetalle_unidadmedida" not-null="true" />
-        </many-to-one>
         <many-to-one name="tbPersona" class="Pojo.TbPersona" fetch="select">
-            <column name="tb_proveedor_cedula" length="10" not-null="true" />
+            <column name="tb_persona_cedula" length="10" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbTipoalmacenes" class="Pojo.TbTipoalmacenes" fetch="select">
+            <column name="tb_tipoalmacenes_id_tipo_almacenes" length="5" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbTipoclasificacion" class="Pojo.TbTipoclasificacion" fetch="select">
+            <column name="tb_tipoclasificacion_id_tipo_clasificacion" length="5" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbTipotasaiva" class="Pojo.TbTipotasaiva" fetch="select">
+            <column name="tb_tipotasaiva_id_tipo_tasa" length="5" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbTipounidadmedida" class="Pojo.TbTipounidadmedida" fetch="select">
+            <column name="tb_tipounidadmedida_id_tipo_unidadmedida" length="5" not-null="true" />
         </many-to-one>
         <property name="nombre" type="string">
             <column name="nombre" length="60" />

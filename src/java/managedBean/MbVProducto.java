@@ -6,9 +6,6 @@
 package managedBean;
 
 import Dao.DaoProducto;
-import Dao.DaoTParametro;
-import Pojo.TbParametro;
-import Pojo.TbParametrodetalle;
 import Pojo.TbPersona;
 import Pojo.TbProducto;
 import Pojo.TbProvincia;
@@ -37,10 +34,10 @@ public class MbVProducto implements Serializable{
     
     private TbProducto tbProducto;
     private TbPersona tbPersona;
-    private TbParametrodetalle undMedida;
-    private TbParametrodetalle iva;
-    private TbParametrodetalle clasificacion;
-    private TbParametrodetalle almacen;
+//    private TbParametrodetalle undMedida;
+//    private TbParametrodetalle iva;
+//    private TbParametrodetalle clasificacion;
+//    private TbParametrodetalle almacen;
     
     private int idUndMedida;
     private int idIva;
@@ -50,43 +47,43 @@ public class MbVProducto implements Serializable{
     public MbVProducto() {
         tbProducto = new TbProducto();
         tbPersona = new TbPersona();
-        undMedida = new TbParametrodetalle();
-        iva = new TbParametrodetalle();
-        clasificacion = new TbParametrodetalle();
-        almacen = new TbParametrodetalle();
+//        undMedida = new TbParametrodetalle();
+//        iva = new TbParametrodetalle();
+//        clasificacion = new TbParametrodetalle();
+//        almacen = new TbParametrodetalle();
     }
 
-    public TbParametrodetalle getUndMedida() {
-        return undMedida;
-    }
-
-    public void setUndMedida(TbParametrodetalle undMedida) {
-        this.undMedida = undMedida;
-    }
-
-    public TbParametrodetalle getIva() {
-        return iva;
-    }
-
-    public void setIva(TbParametrodetalle iva) {
-        this.iva = iva;
-    }
-
-    public TbParametrodetalle getClasificacion() {
-        return clasificacion;
-    }
-
-    public void setClasificacion(TbParametrodetalle clasificacion) {
-        this.clasificacion = clasificacion;
-    }
-
-    public TbParametrodetalle getAlmacen() {
-        return almacen;
-    }
-
-    public void setAlmacen(TbParametrodetalle almacen) {
-        this.almacen = almacen;
-    }
+//    public TbParametrodetalle getUndMedida() {
+//        return undMedida;
+//    }
+//
+//    public void setUndMedida(TbParametrodetalle undMedida) {
+//        this.undMedida = undMedida;
+//    }
+//
+//    public TbParametrodetalle getIva() {
+//        return iva;
+//    }
+//
+//    public void setIva(TbParametrodetalle iva) {
+//        this.iva = iva;
+//    }
+//
+//    public TbParametrodetalle getClasificacion() {
+//        return clasificacion;
+//    }
+//
+//    public void setClasificacion(TbParametrodetalle clasificacion) {
+//        this.clasificacion = clasificacion;
+//    }
+//
+//    public TbParametrodetalle getAlmacen() {
+//        return almacen;
+//    }
+//
+//    public void setAlmacen(TbParametrodetalle almacen) {
+//        this.almacen = almacen;
+//    }
     
     public TbPersona getTbPersona() {
         return tbPersona;
@@ -148,10 +145,10 @@ public class MbVProducto implements Serializable{
         try {
             
             DaoProducto daoProducto = new DaoProducto();
-            tbProducto.setTbParametrodetalleByTbParametrodetalleAlmacenes(almacen);
-            tbProducto.setTbParametrodetalleByTbParametrodetalleClasificacion(clasificacion);
-            tbProducto.setTbParametrodetalleByTbParametrodetalleTasaiva(iva);
-            tbProducto.setTbParametrodetalleByTbParametrodetalleUnidadmedida(undMedida);
+//            tbProducto.setTbParametrodetalleByTbParametrodetalleAlmacenes(almacen);
+//            tbProducto.setTbParametrodetalleByTbParametrodetalleClasificacion(clasificacion);
+//            tbProducto.setTbParametrodetalleByTbParametrodetalleTasaiva(iva);
+//            tbProducto.setTbParametrodetalleByTbParametrodetalleUnidadmedida(undMedida);
             tbProducto.setTbPersona(tbPersona);
             msg = daoProducto.registrarProducto(tbProducto);
             

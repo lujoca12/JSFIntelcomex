@@ -3,7 +3,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 17-sep-2016 17:20:33 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="Pojo.TbTipoempresa" table="tb_tipoempresa" catalog="intelcomex" optimistic-lock="version">
+    <class name="Pojo.TbTipopersona" table="tb_tipopersona" catalog="intelcomex" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
@@ -16,15 +16,9 @@
         </property>
         <set name="tbPersonas" table="tb_persona" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="id_tipo_empresa" />
+                <column name="tb_tipopersona_id" not-null="true" />
             </key>
             <one-to-many class="Pojo.TbPersona" />
-        </set>
-        <set name="tbEmpresas" table="tb_empresa" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="tb_tipoempresa_id" not-null="true" />
-            </key>
-            <one-to-many class="Pojo.TbEmpresa" />
         </set>
     </class>
 </hibernate-mapping>

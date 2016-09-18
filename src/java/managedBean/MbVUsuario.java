@@ -24,7 +24,7 @@ import Pojo.TbParroquia;
 import Pojo.TbPermiso;
 import Pojo.TbProvincia;
 
-import Pojo.TbTipoUsuario;
+import Pojo.TbTipousuario;
 import Pojo.TbUsuarios;
 import encriptacion.Class_Encript;
 import java.io.Serializable;
@@ -135,7 +135,7 @@ public class MbVUsuario implements Serializable {
             DaoTEmpresa daoEmpresa = new DaoTEmpresa();
             List<TbEmpresa> empresa = daoEmpresa.getEmpresa();
             for (TbEmpresa e : empresa) {
-                SelectItem item = new SelectItem(e.getId(), e.getRazonSocial());
+                SelectItem item = new SelectItem(e.getIdEmpresa(), e.getRazonSocial());
                 lstEmpresa.add(item);
             }
         } catch (Exception ex) {
@@ -163,7 +163,7 @@ public class MbVUsuario implements Serializable {
             LocalizacionDao locDao = new LocalizacionDao();
             List<TbCanton> canton = locDao.getCantonProvicia(idProvinciaNac);
             for (TbCanton c : canton) {
-                SelectItem item = new SelectItem(c.getId(), c.getNombre());
+                SelectItem item = new SelectItem(c.getIdCanton(), c.getNombre());
                 lstCanton.add(item);
             }
         } catch (Exception ex) {
@@ -421,7 +421,7 @@ public class MbVUsuario implements Serializable {
             for (TbUsuarios user : lstUsuario) {
                 this.lstTheme.add(new ClsEmpleado(user.getCedula(), 
                         user.getApellidos() + " " + user.getNombres(), 
-                        String.valueOf(user.getTbTipoUsuario().getId())));
+                        String.valueOf(user.getTbTipousuario().getId())));
             }
         } catch (Exception ex) {
 
@@ -442,8 +442,8 @@ public class MbVUsuario implements Serializable {
             this.lstThemeUsuarios.add(new ClsEmpleado("-1", "Ninguno", "Ninguno"));
             for (TbUsuarios user : lstUsuario) {
                 this.lstThemeUsuarios.add(new ClsEmpleado(user.getCedula(), 
-                        user.getApellidos() + " " + user.getNombres()+" ("+user.getTbTipoUsuario().getDescripcion()+")", 
-                        String.valueOf(user.getTbTipoUsuario().getId())));
+                        user.getApellidos() + " " + user.getNombres()+" ("+user.getTbTipousuario().getNombre()+")", 
+                        String.valueOf(user.getTbTipousuario().getId())));
             }
         } catch (Exception ex) {
 
@@ -455,11 +455,11 @@ public class MbVUsuario implements Serializable {
         try {
             DaoTTipoUsuario daoTtipoUsuario = new DaoTTipoUsuario();
 
-            List<TbTipoUsuario> lstTtipoUsuario = daoTtipoUsuario.getTodosTipoUsuarios();
+            List<TbTipousuario> lstTtipoUsuario = daoTtipoUsuario.getTodosTipoUsuarios();
             if(lstTodosUsuarios.size() > 0)
                 lstTodosUsuarios.clear();
-            for (TbTipoUsuario tipoUser : lstTtipoUsuario) {
-                SelectItem usuarioItem = new SelectItem(tipoUser.getId(), tipoUser.getDescripcion());
+            for (TbTipousuario tipoUser : lstTtipoUsuario) {
+                SelectItem usuarioItem = new SelectItem(tipoUser.getId(), tipoUser.getNombre());
                 this.lstTodosUsuarios.add(usuarioItem);
             }
         } catch (Exception ex) {
@@ -577,8 +577,8 @@ public class MbVUsuario implements Serializable {
 
         try {
             DaoTTipoUsuario daoTipoUsuario = new DaoTTipoUsuario();
-            TbTipoUsuario tipoUsuario = new TbTipoUsuario();
-            tipoUsuario = (TbTipoUsuario) daoTipoUsuario.getTipoUsuarios("cliente");
+            TbTipousuario tipoUsuario = new TbTipousuario();
+            tipoUsuario = (TbTipousuario) daoTipoUsuario.getTipoUsuarios("cliente");
 
             //tUsuario.setClave(Class_Encript.getStringMessageDigest(this.clave, Class_Encript.SHA256));
             tUsuario.setTelefono(tUsuario.getTelefono().replaceAll("[()-]", ""));
@@ -592,7 +592,7 @@ public class MbVUsuario implements Serializable {
             band = daoTusuario.verificarUsuarioNick(tUsuario.getLogin());
             if (band) {
                 if (tipoUsuario != null) {
-                    tUsuario.setTbTipoUsuario(tipoUsuario);
+                    tUsuario.setTbTipousuario(tipoUsuario);
                     //enviarEmail(claveGenerada);
 //                    if(estadoCorreo){
                         tUsuario.setTbEmpresa(tEmpresa);
@@ -623,9 +623,9 @@ public class MbVUsuario implements Serializable {
     public void actualizarDatos(){
         DaoTUsuario daoTusuario = new DaoTUsuario();
         try {
-            TbTipoUsuario tipoUser = new TbTipoUsuario();
+            TbTipousuario tipoUser = new TbTipousuario();
             tipoUser.setId(Integer.parseInt(this.theme.getName()));
-            tUsuario.setTbTipoUsuario(tipoUser);
+            tUsuario.setTbTipousuario(tipoUser);
             tUsuario.setTelefono(tUsuario.getTelefono().replaceAll("[()-]", ""));
             tUsuario.setTelefono(tUsuario.getTelefono().replaceAll("[()-]", ""));
             
@@ -658,9 +658,9 @@ public class MbVUsuario implements Serializable {
     public void recuperar(){
         DaoTUsuario daoTusuario = new DaoTUsuario();
         try {
-            TbTipoUsuario tipoUser = new TbTipoUsuario();
+            TbTipousuario tipoUser = new TbTipousuario();
             tipoUser.setId(Integer.parseInt(this.theme.getName()));
-            tUsuario.setTbTipoUsuario(tipoUser);
+            tUsuario.setTbTipousuario(tipoUser);
             tUsuario.setTelefono(tUsuario.getTelefono().replaceAll("[()-]", ""));
             //tUsuario.setCelular(tUsuario.getCelular().replaceAll("[()-]", ""));
             
@@ -693,9 +693,9 @@ public class MbVUsuario implements Serializable {
     public void eliminarDatos(){
         DaoTUsuario daoTusuario = new DaoTUsuario();
         try {
-            TbTipoUsuario tipoUser = new TbTipoUsuario();
+            TbTipousuario tipoUser = new TbTipousuario();
             tipoUser.setId(Integer.parseInt(this.theme.getName()));
-            tUsuario.setTbTipoUsuario(tipoUser);
+            tUsuario.setTbTipousuario(tipoUser);
             tUsuario.setEstado('0');
             tUsuario.setTelefono(tUsuario.getTelefono().replaceAll("[()-]", ""));
             //tUsuario.setCelular(tUsuario.getCelular().replaceAll("[()-]", ""));
@@ -720,7 +720,7 @@ public class MbVUsuario implements Serializable {
 
         try {
             DaoTTipoUsuario daoTipoUsuario = new DaoTTipoUsuario();
-            TbTipoUsuario tipoUsuario = new TbTipoUsuario();
+            TbTipousuario tipoUsuario = new TbTipousuario();
 
             //tUsuario.setClave(Class_Encript.getStringMessageDigest(this.clave, Class_Encript.SHA256));
             tUsuario.setTelefono(telefono.replaceAll("[()-]", ""));
@@ -735,7 +735,7 @@ public class MbVUsuario implements Serializable {
             band = daoTusuario.verificarUsuarioNick(tUsuario.getLogin());
             if (band) {
                 tipoUsuario.setId(idRol);
-                tUsuario.setTbTipoUsuario(tipoUsuario);
+                tUsuario.setTbTipousuario(tipoUsuario);
 //                if(validarCedula()){
                     //enviarEmail(claveGenerada);
                     if(estadoCorreo){
