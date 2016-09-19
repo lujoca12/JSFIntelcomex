@@ -27,6 +27,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import org.primefaces.event.RowEditEvent;
 
 /**
  *
@@ -60,15 +61,43 @@ public class MbVEmpresa implements Serializable{
     private List<SelectItem> lstProvincia;
     private List<SelectItem> lstParroquia;
     private List<SelectItem> lstTipoEmpresa;
+    private List<TbEmpresa> lstEmpresa;
+    private TbEmpresa tblEmpresa;
     
     boolean msg = false;
     
     public MbVEmpresa() {
         tbEmpresa = new TbEmpresa();
         cargarPaises();
+        cargarTablaProveedores();
        // cargarProvCantParroq();
     }
+    private void cargarTablaProveedores(){
+        lstEmpresa = new ArrayList<>();
+        DaoTEmpresa daoEmpresa = new DaoTEmpresa();
+        try {
+            lstEmpresa = daoEmpresa.getEmpresa();
+        } catch (Exception ex) {
+            Logger.getLogger(MbVLocalizacion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
+    public List<TbEmpresa> getLstEmpresa() {
+        return lstEmpresa;
+    }
+
+    public void setLstEmpresa(List<TbEmpresa> lstEmpresa) {
+        this.lstEmpresa = lstEmpresa;
+    }
+
+    public TbEmpresa getTblEmpresa() {
+        return tblEmpresa;
+    }
+
+    public void setTblEmpresa(TbEmpresa tblEmpresa) {
+        this.tblEmpresa = tblEmpresa;
+    }
+    
     public List<SelectItem> getLstCanton() {
         return lstCanton;
     }
@@ -304,5 +333,13 @@ public class MbVEmpresa implements Serializable{
         idPaisOrigen = "";
         idProvinciaNac = "";
         idCantonNac = "";
+    }
+    public void onRowEdit(RowEditEvent event) {
+
+        
+    }
+    
+    public void onRowCancel(RowEditEvent event) {
+
     }
 }

@@ -6,7 +6,7 @@
 package managedBean;
 
 import Dao.DaoTEmpresa;
-import Dao.DaoTProveedor;
+import Dao.DaoTCliente;
 import Dao.LocalizacionDao;
 import Pojo.TbCanton;
 import Pojo.TbEmpresa;
@@ -25,6 +25,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import org.primefaces.event.RowEditEvent;
 
 /**
  *
@@ -32,10 +33,10 @@ import javax.faces.view.ViewScoped;
  */
 @Named(value = "mbVProveedor")
 @ViewScoped
-public class MbVProveedor implements Serializable{
+public class MbVCliente implements Serializable{
 
     /**
-     * Creates a new instance of MbVProveedor
+     * Creates a new instance of MbVCliente
      */
     
     private List<SelectItem> lstPais;
@@ -43,12 +44,13 @@ public class MbVProveedor implements Serializable{
     private List<SelectItem> lstProvincia;
     private List<SelectItem> lstParroquia;
     private List<SelectItem> lstTipoEmpresa;
-    
+        
     private String idPaisOrigen;
     private String idProvinciaNac = "";
     private String idCantonNac = "";
     private String idParroquiaNac = "";
     private String idEcuador;
+    
     
     private TbPersona tbPersona;
 //    private TbParametrodetalle tipoEmpresa;
@@ -56,12 +58,21 @@ public class MbVProveedor implements Serializable{
     
     boolean msg = false;
     
-    public MbVProveedor() {
+    public MbVCliente() {
         tbPersona = new TbPersona();
 //        tipoEmpresa = new TbParametrodetalle();
 //        tipoPersona = new TbParametrodetalle();
         cargarPaises();
     }
+//    private void cargarTablaProveedores(){
+//        lstEmpresa = new ArrayList<>();
+//        DaoTEmpresa daoEmpresa = new DaoTEmpresa();
+//        try {
+//            lstEmpresa = daoEmpresa.getEmpresa();
+//        } catch (Exception ex) {
+//            Logger.getLogger(MbVLocalizacion.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
 
     public TbPersona getTbPersona() {
         return tbPersona;
@@ -236,7 +247,7 @@ public class MbVProveedor implements Serializable{
     public void registrar() {
         
         try {
-            DaoTProveedor daoProveedor = new DaoTProveedor();
+            DaoTCliente daoProveedor = new DaoTCliente();
             //tbPersona.setTbParametrodetalleByTbParametrodetalleTipoempresa(tipoEmpresa);
             //tbPersona.setTbParametrodetalleByTbParametrodetalleTipopersona(tipoPersona);
             TbParroquia tParroquia = new TbParroquia();
@@ -265,5 +276,12 @@ public class MbVProveedor implements Serializable{
         idCantonNac = "";
         
     }
+    public void onRowEdit(RowEditEvent event) {
+
+        
+    }
     
+    public void onRowCancel(RowEditEvent event) {
+
+    }
 }

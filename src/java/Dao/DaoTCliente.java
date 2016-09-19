@@ -18,7 +18,7 @@ import util.HibernateUtil;
  *
  * @author server
  */
-public class DaoTProveedor implements InterfaceProveedor{
+public class DaoTCliente implements InterfaceProveedor{
     
     private Session sesion;
     private Transaction tx;

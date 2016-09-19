@@ -63,7 +63,7 @@ public class DaoTEmpresa implements InterfaceEmpresa{
         this.sesion = null;
         this.tx = null;
         iniciaOperacion();
-        String hql="from TbEmpresa as e order by e.razonSocial asc";
+        String hql="from TbEmpresa as e inner join fetch e.tbParroquia parr inner join fetch e.tbTipoempresa tipo order by e.razonSocial asc";
         Query query = sesion.createQuery(hql);
         List<TbEmpresa> empresa= (List<TbEmpresa>) query.list();
         sesion.close();
