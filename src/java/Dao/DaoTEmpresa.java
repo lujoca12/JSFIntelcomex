@@ -45,7 +45,7 @@ public class DaoTEmpresa implements InterfaceEmpresa{
         boolean band = false;
         try {
             iniciaOperacion();
-            sesion.save(tEmpresa);
+            sesion.saveOrUpdate(tEmpresa);
 
             tx.commit();
             sesion.close();

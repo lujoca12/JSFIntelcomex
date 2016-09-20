@@ -46,7 +46,7 @@ public class LocalizacionDao {
         boolean band = false;
         try {
             iniciaOperacion();
-            sesion.save(tPais);
+            sesion.saveOrUpdate(tPais);
 
             tx.commit();
             sesion.close();
@@ -63,7 +63,7 @@ public class LocalizacionDao {
         boolean band = false;
         try {
             iniciaOperacion();
-            sesion.save(tProvincia);
+            sesion.saveOrUpdate(tProvincia);
 
             tx.commit();
             sesion.close();
@@ -80,7 +80,7 @@ public class LocalizacionDao {
         boolean band = false;
         try {
             iniciaOperacion();
-            sesion.save(tCanton);
+            sesion.saveOrUpdate(tCanton);
 
             tx.commit();
             sesion.close();
@@ -97,7 +97,7 @@ public class LocalizacionDao {
         boolean band = false;
         try {
             iniciaOperacion();
-            sesion.save(tParroquia);
+            sesion.saveOrUpdate(tParroquia);
 
             tx.commit();
             sesion.close();

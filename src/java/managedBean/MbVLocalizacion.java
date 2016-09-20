@@ -528,7 +528,16 @@ public class MbVLocalizacion implements Serializable{
     }
     
     public void onRowEditPais(RowEditEvent event) {
-
+        LocalizacionDao localizacion = new LocalizacionDao(); 
+        tblPais = ((TbPais) event.getObject());
+        msg = localizacion.registrarPaises(tblPais);
+        if (msg) {
+            mensajesOk("Datos procesados correctamente");
+            // vaciarCajas();
+            cargarPaises();
+        } else {
+            mensajesError("Error al procesar los Datos");
+        }
         
     }
     
@@ -547,7 +556,16 @@ public class MbVLocalizacion implements Serializable{
     }
     
     public void onRowEditProvincia(RowEditEvent event) {
-
+        LocalizacionDao localizacion = new LocalizacionDao(); 
+        tblProvincia = ((TbProvincia) event.getObject());
+        msg = localizacion.registrarProvincia(tblProvincia);
+        if (msg) {
+            mensajesOk("Datos procesados correctamente");
+            // vaciarCajas();
+            cargarTablaProvincias();
+        } else {
+            mensajesError("Error al procesar los Datos");
+        }
         
     }
     
@@ -556,7 +574,16 @@ public class MbVLocalizacion implements Serializable{
     }
     
     public void onRowEditCanton(RowEditEvent event) {
-
+        LocalizacionDao localizacion = new LocalizacionDao(); 
+        tblCanton = ((TbCanton) event.getObject());
+        msg = localizacion.registrarCanton(tblCanton);
+        if (msg) {
+            mensajesOk("Datos procesados correctamente");
+            // vaciarCajas();
+            cargarTablaCanton();
+        } else {
+            mensajesError("Error al procesar los Datos");
+        }
         
     }
     
@@ -565,7 +592,16 @@ public class MbVLocalizacion implements Serializable{
     }
     
     public void onRowEditParroquia(RowEditEvent event) {
-
+        LocalizacionDao localizacion = new LocalizacionDao(); 
+        tblParroquia = ((TbParroquia) event.getObject());
+        msg = localizacion.registrarParroquia(tblParroquia);
+        if (msg) {
+            mensajesOk("Datos procesados correctamente");
+            // vaciarCajas();
+            cargarTablaParroquia();
+        } else {
+            mensajesError("Error al procesar los Datos");
+        }
         
     }
     

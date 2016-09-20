@@ -68,7 +68,7 @@ public class DaoTUsuario implements InterfaceUsuario {
         } else {
             estado = "1";
         }
-        String hql = "FROM TbUsuarios user inner join fetch user.tbTipoUsuario tuser where user.estado='" + estado + "' order by user.apellidos asc";
+        String hql = "FROM TbUsuarios user inner join fetch user.tbTipousuario tuser where user.estado='" + estado + "' order by user.apellidos asc";
         Query query = sesion.createQuery(hql);
         List<TbUsuarios> lstUsuarios = (List<TbUsuarios>) query.list();
         sesion.close();

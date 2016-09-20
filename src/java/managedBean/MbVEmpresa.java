@@ -335,7 +335,20 @@ public class MbVEmpresa implements Serializable{
         idCantonNac = "";
     }
     public void onRowEdit(RowEditEvent event) {
-
+        try {
+            DaoTEmpresa daoEmpresa = new DaoTEmpresa();
+            tblEmpresa = ((TbEmpresa) event.getObject());
+            msg = daoEmpresa.registrar(tblEmpresa);
+            if (msg) {
+                mensajesOk("Datos procesados correctamente");
+                // vaciarCajas();
+                cargarTablaProveedores();
+            } else {
+                mensajesError("Error al procesar los Datos");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(MbVEmpresa.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
     

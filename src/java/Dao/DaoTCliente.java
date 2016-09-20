@@ -46,7 +46,7 @@ public class DaoTCliente implements InterfaceCliente{
         boolean band = false;
         try {
             iniciaOperacion();
-            sesion.save(tPersona);
+            sesion.saveOrUpdate(tPersona);
 
             tx.commit();
             sesion.close();
