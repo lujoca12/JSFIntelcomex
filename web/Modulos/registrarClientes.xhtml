@@ -78,7 +78,7 @@
                 <p:inputMask id="txtTelefono" value="#{mbVCliente.tbPersona.telefono}" mask="(999)-999-999"/>
                 
                 <h:outputLabel for="cboTipoEmpresa" styleClass="labelDerecha" value="Tipo Empresa: "/>
-                <h:selectOneMenu id="cboTipoEmpresa" required="true" class="form-control" value="#{mbVCliente.tipoEmpresa.id}">
+                <h:selectOneMenu id="cboTipoEmpresa" required="true" class="form-control" value="#{mbVCliente.tbPersona.tbTipoempresa.id}">
                     <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
                     <f:selectItem itemLabel="Privada" itemValue="1" />
                     <f:selectItem itemLabel="Pública" itemValue="2" />
@@ -100,30 +100,58 @@
             
             <br></br>
             <p:panel id="panelTabla" style="height: 30%; width: 100%;">
-                <p:dataTable class="tblDatos fuenteTamanio" id="tblCanton" var="lstTbl" value="#{mbVCliente.lstEmpresa}"
+                <p:dataTable class="tblDatos fuenteTamanio" id="tblCanton" var="lstTbl" value="#{mbVCliente.lstPersona}"
                                  editable="true" scrollable="true" scrollHeight="150"  sortMode="multiple">
                         <p:ajax event="rowEdit" listener="#{mbVCliente.onRowEdit}" update=":frmRegistrarCliente:msgs" />
                         <p:ajax event="rowEditCancel" listener="#{mbVCliente.onRowCancel}" update=":frmRegistrarCliente:msgs" />
 
-                        <p:column headerText="RUC" sortBy="#{lstTbl.ruc}">
+                        <p:column headerText="Cedula" sortBy="#{lstTbl.cedula}">
                             <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{lstTbl.ruc}" /></f:facet>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.cedula}" /></f:facet>
                                 <f:facet name="input">
-                                    <p:inputText readonly="true" style="width:100%" required="true" value="#{lstTbl.ruc}"  />
+                                    <p:inputText readonly="true" style="width:100%" required="true" value="#{lstTbl.cedula}"  />
                                 </f:facet>
                             </p:cellEditor>
                         </p:column>
 
 
-                        <p:column headerText="Razôn Social" sortBy="#{lstTbl.razonSocial}">
+                        <p:column headerText="Apellidos" sortBy="#{lstTbl.cedula}">
                             <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{lstTbl.razonSocial}" /></f:facet>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.cedula}" /></f:facet>
                                 <f:facet name="input">
-                                    <p:inputText readonly="true" style="width:100%" required="true" value="#{lstTbl.razonSocial}"  />
+                                    <p:inputText readonly="false" style="width:100%" required="true" value="#{lstTbl.cedula}"  />
                                 </f:facet>
                             </p:cellEditor>
                         </p:column>
 
+                        <p:column headerText="Nombres" sortBy="#{lstTbl.nombres}">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.nombres}" /></f:facet>
+                                <f:facet name="input">
+                                    <p:inputText readonly="false" style="width:100%" required="true" value="#{lstTbl.nombres}"  />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        
+                        <p:column headerText="email" sortBy="#{lstTbl.telefono}">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.telefono}" /></f:facet>
+                                <f:facet name="input">
+                                    <p:inputText readonly="false" style="width:100%" required="true" value="#{lstTbl.telefono}"  />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        
+                        <p:column headerText="email" sortBy="#{lstTbl.email}">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.email}" /></f:facet>
+                                <f:facet name="input">
+                                    <p:inputText readonly="false" style="width:100%" required="true" value="#{lstTbl.email}"  />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        
+                        
                         <p:column headerText="Parroquia" sortBy="#{lstTbl.tbParroquia.nombre}">
                             <p:cellEditor>
                                 <f:facet name="output"><h:outputText value="#{lstTbl.tbParroquia.nombre}" /></f:facet>
@@ -133,11 +161,11 @@
                             </p:cellEditor>
                         </p:column>
                         
-                        <p:column headerText="Direcciôn" sortBy="#{lstTbl.tbProvincia.tbPais.nombre}">
+                        <p:column headerText="Direcciôn" sortBy="#{lstTbl.direccion}">
                             <p:cellEditor>
                                 <f:facet name="output"><h:outputText value="#{lstTbl.direccion}" /></f:facet>
                                 <f:facet name="input">
-                                    <p:inputText readonly="true" style="width:100%" required="true" value="#{lstTbl.direccion}"  />
+                                    <p:inputText readonly="false" style="width:100%" required="true" value="#{lstTbl.direccion}"  />
                                 </f:facet>
                             </p:cellEditor>
                         </p:column>

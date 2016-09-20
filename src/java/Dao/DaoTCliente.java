@@ -13,6 +13,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
 import Interface.InterfaceCliente;
+import Pojo.TbTipopersona;
 
 /**
  *
@@ -63,11 +64,24 @@ public class DaoTCliente implements InterfaceCliente{
         this.sesion = null;
         this.tx = null;
         iniciaOperacion();
-        String hql="from TbPersona as p order by p.apellidos asc";
+        String hql="from TbPersona as p inner join fetch p.tbTipoempresa tipo inner join fetch p.tbTipopersona tipoPersona inner join fetch p.tbParroquia parroq "
+                + "where tipoPersona.descripcion like '%cliente%' order by p.apellidos asc";
         Query query = sesion.createQuery(hql);
         List<TbPersona> persona= (List<TbPersona>) query.list();
         sesion.close();
         return persona;
+    }
+    
+    @Override
+    public List<TbTipopersona> getTipoCliente() throws Exception {
+        this.sesion = null;
+        this.tx = null;
+        iniciaOperacion();
+        String hql="from TbTipopersona as tp where descripcion like '%cliente%'";
+        Query query = sesion.createQuery(hql);
+        List<TbTipopersona> tipoPersona= (List<TbTipopersona>) query.list();
+        sesion.close();
+        return tipoPersona;
     }
 
     @Override

@@ -15,6 +15,7 @@ import Pojo.TbParroquia;
 import Pojo.TbPersona;
 import Pojo.TbProvincia;
 import Pojo.TbTipoempresa;
+import Pojo.TbTipopersona;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -259,12 +260,16 @@ public class MbVCliente implements Serializable{
 
 //            tbPersona.setTbParroquia(tParroquia);
             //falta consultar el id del tipoPersona like cliente
+            TbTipopersona tipoPersona = new TbTipopersona();
+            tipoPersona = (TbTipopersona) daoCliente.getTipoCliente();
             tbPersona.setTelefono(tbPersona.getTelefono().replaceAll("[()-]", ""));
+            tbPersona.setTbTipopersona(tipoPersona);
             msg = daoCliente.registrarCliente(tbPersona);
             
             if(msg){
                 mensajesOk("Datos procesados correctamente");
                 vaciarCajas();
+                cargarTablaPersona();
             }else{
                 mensajesError("Error al procesar los Datos");
             }
@@ -283,8 +288,20 @@ public class MbVCliente implements Serializable{
         
     }
     public void onRowEdit(RowEditEvent event) {
-
-        
+        try {
+            DaoTCliente daoCliente = new DaoTCliente();
+            tblPersona = ((TbPersona) event.getObject());
+            msg = daoCliente.registrarCliente(tblPersona);
+            if (msg) {
+                mensajesOk("Datos procesados correctamente");
+                // vaciarCajas();
+                cargarTablaPersona();
+            } else {
+                mensajesError("Error al procesar los Datos");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(MbVCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void onRowCancel(RowEditEvent event) {

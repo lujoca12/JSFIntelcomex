@@ -6,6 +6,7 @@
 package Interface;
 
 import Pojo.TbPersona;
+import Pojo.TbTipopersona;
 import java.util.List;
 
 /**
@@ -17,4 +18,5 @@ public interface InterfaceCliente {
     public List<TbPersona> getCliente() throws Exception;
     public List<TbPersona> getCliente(String cedPersona) throws Exception;
     public boolean updateCliente(TbPersona tPersona) throws Exception;
+    public List<TbTipopersona> getTipoCliente() throws Exception;
 }
