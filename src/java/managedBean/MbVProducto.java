@@ -28,6 +28,7 @@ import javax.faces.model.SelectItem;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import org.primefaces.model.UploadedFile;
+import org.apache.commons.io.FilenameUtils;
 
 /**
  *
@@ -41,6 +42,7 @@ public class MbVProducto implements Serializable{
      * Creates a new instance of MbVProducto
      */
     private UploadedFile file;
+    private List<UploadedFile> files = new ArrayList<>();
     private boolean msg;
     
     private TbProducto tbProducto;
@@ -132,7 +134,7 @@ public class MbVProducto implements Serializable{
             DaoTConfiguracion daoConfig = new DaoTConfiguracion();
             List<TbTipotasaiva> iva = daoConfig.getImpuesto();
             for (TbTipotasaiva p : iva) {
-                SelectItem item = new SelectItem(p.getIdTipoTasa(), p.getNombre());
+                SelectItem item = new SelectItem(p.getIdTipoTasa(), p.getNombre()+" "+p.getValor());
                 lstImpuesto.add(item);
             }
         } catch (Exception ex) {
@@ -256,10 +258,6 @@ public class MbVProducto implements Serializable{
         try {
             
             DaoProducto daoProducto = new DaoProducto();
-//            tbProducto.setTbParametrodetalleByTbParametrodetalleAlmacenes(almacen);
-//            tbProducto.setTbParametrodetalleByTbParametrodetalleClasificacion(clasificacion);
-//            tbProducto.setTbParametrodetalleByTbParametrodetalleTasaiva(iva);
-//            tbProducto.setTbParametrodetalleByTbParametrodetalleUnidadmedida(undMedida);
             tbProducto.setTbPersona(tbPersona);
             msg = daoProducto.registrarProducto(tbProducto);
             
@@ -273,6 +271,20 @@ public class MbVProducto implements Serializable{
         } catch (Exception ex) {
             Logger.getLogger(MbVEmpresa.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    public boolean errorArchivos() {
+        int x = 0;
+        boolean error = false;
+//        for (UploadedFile f : files) {
+//            extension = FilenameUtils.getExtension(f.getFileName());
+//            if (!reqPro.get(x).getRequisitos().getTipoArchivo().contains(extension)) {
+////                error = true;
+//                files.clear();
+//                break;
+//            }
+//            x++;
+//        }
+        return error;
     }
     
     private void mensajesOk(String msg) {
