@@ -1,12 +1,90 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        Hello from Facelets
+        <div class="ui-fluid">
+            <h:form id="frmRegistrarTipoPago">
+                <p:growl id="msgs" showDetail="true" />
+                <p:tab id="personal" title="RegistrarPago">
+                    <p:panel header="Registrar Tipos de Pagos" >
+                        <p:focus context="txtId"/>
+                        <p:panelGrid columns="2" columnClasses="ui-grid-col-3,ui-grid-col-6" layout="grid" styleClass="ui-panelgrid-blank">
+
+                            <p:outputLabel for="txtId" styleClass="labelDerecha" value="Código:" />
+                            <p:inputText id="txtId" value="#{mbVConfiguracion.tblTipoPago.id}" required="true" maxlength="5"/>
+
+                            <p:outputLabel for="txtNombre" styleClass="labelDerecha" value="Nombre:" />
+                            <p:inputText id="txtNombre" value="#{mbVConfiguracion.tblTipoPago.nombre}" required="true" maxlength="255"/>
+
+                            <p:outputLabel for="txtDescripcion" styleClass="labelDerecha" value="Descripción:" />
+                            <p:inputText id="txtDescripcion" value="#{mbVConfiguracion.tblTipoPago.descripcion}" required="true" maxlength="255"/>
+
+                            <h:outputText id="display" value="" />
+                            <p:commandButton value="Guardar" update="frmRegistrarTipoPago,tblTipoPago" styleClass="anchoBotones" icon="ui-icon-disk"
+                                             actionListener="#{mbVConfiguracion.registrarTipoPago()}" />
+
+                        </p:panelGrid>
+
+                        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                            <p:graphicImage class="imgAjax" value="#{resource['img/ajax-loader.gif']}"  />
+                        </p:dialog>
+                    </p:panel>
+                </p:tab>
+
+                <br></br>
+
+                <p:panel id="panelTabla" style="height: 30%; width: 100%;">
+                    <p:dataTable class="tblDatos fuenteTamanio" id="tblTipoPago" var="lstTbl" value="#{mbVConfiguracion.lstTipoPago}"
+                                 editable="true" scrollable="true" scrollHeight="150" sortMode="multiple">
+                        
+                        <p:ajax event="rowEdit" listener="#{mbVConfiguracion.onRowEditTipoPago}" update=":frmRegistrarTipoPago:msgs" />
+                        <p:ajax event="rowEditCancel" listener="#{mbVConfiguracion.onRowCancelTipoPago}" update=":frmRegistrarTipoPago:msgs" />
+
+                        <p:column headerText="Código" sortBy="#{lstTbl.id}">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.id}" /></f:facet>
+                                <f:facet name="input">
+                                    <p:inputText id="txtId" value="#{lstTbl.id}" required="true" maxlength="5"/>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+
+                        <p:column headerText="Nombre" sortBy="#{lstTbl.nombre}">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.nombre}" /></f:facet>
+                                <f:facet name="input">
+                                    <p:inputText id="txtNombre" value="#{lstTbl.nombre}" required="true" maxlength="255"/>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Descripción" sortBy="#{lstTbl.descripcion}">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.descripcion}" /></f:facet>
+                                <f:facet name="input">
+                                    <p:inputText id="txtDescripcion" value="#{lstTbl.descripcion}" required="true" maxlength="255"/>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column>
+                            <p:rowEditor />   
+                        </p:column>
+
+                    </p:dataTable>
+
+                </p:panel>
+
+            </h:form>
+        </div>
     </h:body>
 </html>
 
