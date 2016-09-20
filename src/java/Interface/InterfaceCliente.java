@@ -19,4 +19,5 @@ public interface InterfaceCliente {
     public List<TbPersona> getCliente(String cedPersona) throws Exception;
     public boolean updateCliente(TbPersona tPersona) throws Exception;
     public List<TbTipopersona> getTipoCliente() throws Exception;
+    public List<TbPersona> getProveedor() throws Exception;
 }

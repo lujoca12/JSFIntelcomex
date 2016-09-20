@@ -6,6 +6,7 @@
 package Dao;
 
 import Pojo.TbTipoalmacenes;
+import Pojo.TbTipoclasificacion;
 import Pojo.TbTipopago;
 import Pojo.TbTipopedido;
 import Pojo.TbTipotasaiva;
@@ -193,6 +194,20 @@ public class DaoTConfiguracion {
         Query query = sesion.createQuery(hql);
         //query.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         List<TbTipounidadmedida> lst=(List<TbTipounidadmedida>) query.list();
+        sesion.close();
+        return lst; 
+    }
+    
+    public List<TbTipoclasificacion> getClasificacion(){
+        this.sesion = null;
+        this.tx = null;
+        iniciaOperacion();
+       
+        String hql="from TbTipoclasificacion p order by p.nombre asc";
+       
+        Query query = sesion.createQuery(hql);
+        //query.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        List<TbTipoclasificacion> lst=(List<TbTipoclasificacion>) query.list();
         sesion.close();
         return lst; 
     }
