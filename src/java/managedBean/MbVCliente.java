@@ -31,7 +31,7 @@ import org.primefaces.event.RowEditEvent;
  *
  * @author server
  */
-@Named(value = "mbVProveedor")
+@Named(value = "mbVCliente")
 @ViewScoped
 public class MbVCliente implements Serializable{
 
@@ -44,6 +44,8 @@ public class MbVCliente implements Serializable{
     private List<SelectItem> lstProvincia;
     private List<SelectItem> lstParroquia;
     private List<SelectItem> lstTipoEmpresa;
+    private List<TbPersona> lstPersona;
+    private TbPersona tblPersona;
         
     private String idPaisOrigen;
     private String idProvinciaNac = "";
@@ -63,16 +65,17 @@ public class MbVCliente implements Serializable{
 //        tipoEmpresa = new TbParametrodetalle();
 //        tipoPersona = new TbParametrodetalle();
         cargarPaises();
+        cargarTablaPersona();
     }
-//    private void cargarTablaProveedores(){
-//        lstEmpresa = new ArrayList<>();
-//        DaoTEmpresa daoEmpresa = new DaoTEmpresa();
-//        try {
-//            lstEmpresa = daoEmpresa.getEmpresa();
-//        } catch (Exception ex) {
-//            Logger.getLogger(MbVLocalizacion.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
+    private void cargarTablaPersona(){
+        lstPersona = new ArrayList<>();
+        DaoTCliente daoCliente = new DaoTCliente();
+        try {
+            lstPersona = daoCliente.getCliente();
+        } catch (Exception ex) {
+            Logger.getLogger(MbVLocalizacion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     public TbPersona getTbPersona() {
         return tbPersona;
@@ -82,21 +85,22 @@ public class MbVCliente implements Serializable{
         this.tbPersona = tbPersona;
     }
 
-//    public TbParametrodetalle getTipoEmpresa() {
-//        return tipoEmpresa;
-//    }
-//
-//    public void setTipoEmpresa(TbParametrodetalle tipoEmpresa) {
-//        this.tipoEmpresa = tipoEmpresa;
-//    }
-//
-//    public TbParametrodetalle getTipoPersona() {
-//        return tipoPersona;
-//    }
-//
-//    public void setTipoPersona(TbParametrodetalle tipoPersona) {
-//        this.tipoPersona = tipoPersona;
-//    }
+    public List<TbPersona> getLstPersona() {
+        return lstPersona;
+    }
+
+    public void setLstPersona(List<TbPersona> lstPersona) {
+        this.lstPersona = lstPersona;
+    }
+
+    public TbPersona getTblPersona() {
+        return tblPersona;
+    }
+
+    public void setTblPersona(TbPersona tblPersona) {
+        this.tblPersona = tblPersona;
+    }
+
     
     public String getIdPaisOrigen() {
         return idPaisOrigen;
@@ -247,14 +251,16 @@ public class MbVCliente implements Serializable{
     public void registrar() {
         
         try {
-            DaoTCliente daoProveedor = new DaoTCliente();
+            DaoTCliente daoCliente = new DaoTCliente();
             //tbPersona.setTbParametrodetalleByTbParametrodetalleTipoempresa(tipoEmpresa);
             //tbPersona.setTbParametrodetalleByTbParametrodetalleTipopersona(tipoPersona);
-            TbParroquia tParroquia = new TbParroquia();
-            tParroquia.setId(idParroquiaNac);
-            tbPersona.setTbParroquia(tParroquia);
+//            TbParroquia tParroquia = new TbParroquia();
+//            tParroquia.setId(idParroquiaNac);
+
+//            tbPersona.setTbParroquia(tParroquia);
+            //falta consultar el id del tipoPersona like cliente
             tbPersona.setTelefono(tbPersona.getTelefono().replaceAll("[()-]", ""));
-            msg = daoProveedor.registrarProveedor(tbPersona);
+            msg = daoCliente.registrarCliente(tbPersona);
             
             if(msg){
                 mensajesOk("Datos procesados correctamente");

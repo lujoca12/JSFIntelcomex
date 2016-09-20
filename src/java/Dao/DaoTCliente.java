@@ -5,7 +5,6 @@
  */
 package Dao;
 
-import Interface.InterfaceProveedor;
 import Pojo.TbPersona;
 import java.util.List;
 import org.hibernate.HibernateException;
@@ -13,12 +12,13 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
+import Interface.InterfaceCliente;
 
 /**
  *
  * @author server
  */
-public class DaoTCliente implements InterfaceProveedor{
+public class DaoTCliente implements InterfaceCliente{
     
     private Session sesion;
     private Transaction tx;
@@ -41,7 +41,7 @@ public class DaoTCliente implements InterfaceProveedor{
     }
 
     @Override
-    public boolean registrarProveedor(TbPersona tPersona) throws Exception {
+    public boolean registrarCliente(TbPersona tPersona) throws Exception {
         boolean band = false;
         try {
             iniciaOperacion();
@@ -59,7 +59,7 @@ public class DaoTCliente implements InterfaceProveedor{
     }
 
     @Override
-    public List<TbPersona> getProveedor() throws Exception {
+    public List<TbPersona> getCliente() throws Exception {
         this.sesion = null;
         this.tx = null;
         iniciaOperacion();
@@ -71,12 +71,12 @@ public class DaoTCliente implements InterfaceProveedor{
     }
 
     @Override
-    public List<TbPersona> getProveedor(String cedPersona) throws Exception {
+    public List<TbPersona> getCliente(String cedPersona) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean updateProveedor(TbPersona tPersona) throws Exception {
+    public boolean updateCliente(TbPersona tPersona) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
