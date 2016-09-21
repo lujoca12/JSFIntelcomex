@@ -225,8 +225,7 @@ public class MbVProducto implements Serializable{
     }
 
     public void setFile(UploadedFile file) {
-        this.file = file;
-        this.files.add(file);
+        this.file = file;        
     }
 
     public List<UploadedFile> getFiles() {

@@ -9,7 +9,7 @@
     </h:head>
     <h:body>
         <div class="ui-fluid">
-        <h:form id="frmRegistrarProducto">
+            <h:form id="frmRegistrarProducto" enctype="multipart/form-data">
             <p:growl id="msgs" showDetail="true" />
             <p:tab id="personal" title="RegistrarProducto">
                 <p:panel header="Registrar Producto" >
@@ -62,11 +62,11 @@
                 <p:inputText id="txtMarca" value="#{mbVProducto.tbProducto.marca}" required="true" maxlength="100"/>
                 
                 <p:outputLabel for="foto" styleClass="labelDerecha" value="Foto:" />
-                <p:fileUpload id="foto" required="true" value="#{mbVProducto.file}" mode="simple" skinSimple="true"/>
+                <p:fileUpload id="foto" accept="image/*" required="true" value="#{mbVProducto.file}" mode="simple" skinSimple="true"/>
                 
                 <h:outputText id="display" value="" />
-                <p:commandButton value="Guardar" update="frmRegistrarProducto,msgs" styleClass="anchoBotones" icon="ui-icon-disk"
-                                 actionListener="#{mbVProducto.registrarProducto()}" />
+                <p:commandButton ajax="false" value="Guardar" update="frmRegistrarProducto,msgs" styleClass="anchoBotones" icon="ui-icon-disk"
+                                 actionListener="#{mbVProducto.registrarProducto()}"  />
                 
             </p:panelGrid>
             
