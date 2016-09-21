@@ -287,22 +287,19 @@ public class MbVProducto implements Serializable{
             tbProducto.setTbTipotasaiva(tbImpuesto);
             tbProducto.setTbTipounidadmedida(tbUndMedida);
             
-            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date dateobj = new Date();
-            String nombreCarpeta = (tbProducto.getId() + "-" + df.format(dateobj).replaceAll(":", "-")).trim();
-            File directorio = new File("c:/Postgrado/inscripciones/requisitos/" + nombreCarpeta + "/");
+          //  DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+          //  Date dateobj = new Date();
+          //  String nombreCarpeta = (tbProducto.getId() + "-" + df.format(dateobj).replaceAll(":", "-")).trim();
+            File directorio = new File("c:/Productos/");
             if (!directorio.exists()) {
                 directorio.mkdirs();
-            }
-            int cont = 0;
-            
-            for (UploadedFile f : files) {
-                extension = FilenameUtils.getExtension(f.getFileName());
-                Path ruta = Paths.get(directorio + "/" + tbProducto.getNombre() + "." + extension);
-                InputStream input = f.getInputstream();
+            }     
+               extension = FilenameUtils.getExtension(file.getFileName());
+                Path ruta = Paths.get(directorio + "/" + tbProducto.getId()+"-"+ tbProducto.getNombre() + "." + extension);
+                InputStream input = file.getInputstream();
                 Files.copy(input, ruta, StandardCopyOption.REPLACE_EXISTING);
-                cont++;
-            }
+                tbProducto.setImagendir(ruta.toString());
+            
             
             
             
