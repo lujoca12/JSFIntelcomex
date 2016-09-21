@@ -57,6 +57,8 @@ public class MbVCliente implements Serializable{
     
     
     private TbPersona tbPersona;
+    private TbParroquia tbParroquia;
+    private TbTipoempresa tbTipoEmpresa;
 //    private TbParametrodetalle tipoEmpresa;
 //    private TbParametrodetalle tipoPersona;
     
@@ -64,8 +66,8 @@ public class MbVCliente implements Serializable{
     
     public MbVCliente() {
         tbPersona = new TbPersona();
-//        tipoEmpresa = new TbParametrodetalle();
-//        tipoPersona = new TbParametrodetalle();
+        tbParroquia = new TbParroquia();
+        tbTipoEmpresa = new TbTipoempresa();
         cargarPaises();
         cargarTablaPersona();
         cargarTablaProveedor();
@@ -80,6 +82,8 @@ public class MbVCliente implements Serializable{
         }
     }
     
+    
+    
     private void cargarTablaProveedor(){
         lstProveedor = new ArrayList<>();
         DaoTCliente daoCliente = new DaoTCliente();
@@ -90,6 +94,22 @@ public class MbVCliente implements Serializable{
         }
     }
 
+    public TbTipoempresa getTbTipoEmpresa() {
+        return tbTipoEmpresa;
+    }
+
+    public void setTbTipoEmpresa(TbTipoempresa tbTipoEmpresa) {
+        this.tbTipoEmpresa = tbTipoEmpresa;
+    }
+    
+    public TbParroquia getTbParroquia() {
+        return tbParroquia;
+    }
+
+    public void setTbParroquia(TbParroquia tbParroquia) {
+        this.tbParroquia = tbParroquia;
+    }
+    
     public List<TbPersona> getLstProveedor() {
         return lstProveedor;
     }
@@ -273,17 +293,13 @@ public class MbVCliente implements Serializable{
         
         try {
             DaoTCliente daoCliente = new DaoTCliente();
-            //tbPersona.setTbParametrodetalleByTbParametrodetalleTipoempresa(tipoEmpresa);
-            //tbPersona.setTbParametrodetalleByTbParametrodetalleTipopersona(tipoPersona);
-//            TbParroquia tParroquia = new TbParroquia();
-//            tParroquia.setId(idParroquiaNac);
-
-//            tbPersona.setTbParroquia(tParroquia);
-            //falta consultar el id del tipoPersona like cliente
+            
             TbTipopersona tipoPersona = new TbTipopersona();
-            tipoPersona = (TbTipopersona) daoCliente.getTipoCliente();
+            tipoPersona = (TbTipopersona) daoCliente.getTipoCliente(true);
+            tbPersona.setTbParroquia(tbParroquia);
             tbPersona.setTelefono(tbPersona.getTelefono().replaceAll("[()-]", ""));
             tbPersona.setTbTipopersona(tipoPersona);
+            tbPersona.setTbTipoempresa(tbTipoEmpresa);
             msg = daoCliente.registrarCliente(tbPersona);
             
             if(msg){
@@ -300,12 +316,44 @@ public class MbVCliente implements Serializable{
         
 
     }
+    
+    public void registrarProveedor() {
+        
+        try {
+            DaoTCliente daoCliente = new DaoTCliente();
+            
+            TbTipopersona tipoPersona = new TbTipopersona();
+            tipoPersona = daoCliente.getTipoCliente(false);
+            tbPersona.setTbParroquia(tbParroquia);
+            tbPersona.setTelefono(tbPersona.getTelefono().replaceAll("[()-]", ""));
+            tbPersona.setTbTipopersona(tipoPersona);
+            tbPersona.setTbTipoempresa(tbTipoEmpresa);
+            msg = daoCliente.registrarCliente(tbPersona);
+            
+            if(msg){
+                mensajesOk("Datos procesados correctamente");
+                vaciarCajas();
+                cargarTablaProveedor();
+            }else{
+                mensajesError("Error al procesar los Datos");
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(MbVEmpresa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+
+    }
+    
+    
     private void vaciarCajas(){
         idParroquiaNac = "";
         idPaisOrigen = "";
         idProvinciaNac = "";
         idCantonNac = "";
-        
+        tbPersona = new TbPersona();
+        tbParroquia = new TbParroquia();
+        tbTipoEmpresa = new TbTipoempresa();
     }
     public void onRowEdit(RowEditEvent event) {
         try {

@@ -86,15 +86,21 @@ public class DaoTCliente implements InterfaceCliente{
     }
     
     @Override
-    public List<TbTipopersona> getTipoCliente() throws Exception {
+    public TbTipopersona getTipoCliente(boolean band) throws Exception {
         this.sesion = null;
         this.tx = null;
         iniciaOperacion();
-        String hql="from TbTipopersona as tp where descripcion like '%cliente%'";
+        String condicion = "";
+        //Si bandera es true... Cliente
+        if(band)
+            condicion= "cliente";
+        else
+            condicion= "proveedor";
+        String hql="from TbTipopersona as tp where descripcion like '%"+condicion+"%'";
         Query query = sesion.createQuery(hql);
         List<TbTipopersona> tipoPersona= (List<TbTipopersona>) query.list();
         sesion.close();
-        return tipoPersona;
+        return tipoPersona.get(0);
     }
     
     @Override

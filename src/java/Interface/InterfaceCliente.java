@@ -18,7 +18,7 @@ public interface InterfaceCliente {
     public List<TbPersona> getCliente() throws Exception;
     public List<TbPersona> getCliente(String cedPersona) throws Exception;
     public boolean updateCliente(TbPersona tPersona) throws Exception;
-    public List<TbTipopersona> getTipoCliente() throws Exception;
+    public TbTipopersona getTipoCliente(boolean band) throws Exception;
     public List<TbPersona> getProveedor() throws Exception;
     public List<TbPersona> getTblProveedor() throws Exception;
 }

@@ -9,85 +9,61 @@
     </h:head>
     <h:body>
         <div class="ui-fluid">
-        <h:form id="frmRegistrarCliente">
+        <h:form id="frmRegistrarFactura">
             <p:growl id="msgs" showDetail="true" />
-            <p:tab id="personal" title="RegistrarProveedor">
-                <p:panel header="Registrar Cliente" >
-                    <p:focus context="pais"/>
-            <p:panelGrid columns="2" columnClasses="ui-grid-col-3,ui-grid-col-6" layout="grid" styleClass="ui-panelgrid-blank">
-                
-                <h:outputLabel for="pais" styleClass="labelDerecha" value="País: "/>
-                <h:selectOneMenu id="pais" class="form-control" value="#{mbVCliente.idPaisOrigen}">
-                    <p:ajax listener="#{mbVCliente.onPaisChange()}" update="group group2 group3 group4 group5 group6" />
-                    <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
-                    <f:selectItems value="#{mbVCliente.lstPais}"  /> 
+            <p:tab id="personal" title="RegistrarFactura">
+                <p:panel header="Registrar Factura" >
                     
-                </h:selectOneMenu>
+            <p:panelGrid columns="6" columnClasses="ui-grid-col-3,ui-grid-col-6" layout="grid" styleClass="ui-panelgrid-blank">
+                
+                <h:outputLabel for="cboCliente" styleClass="labelDerecha" value="Cliente: "/>
+                <p:selectOneMenu id="cboCliente" value="#{mbVFacturacionCompra.themeUsuarios}" converter="themeConverterEmp"
+                                 effect="fade" var="t" filter="true" filterMatchMode="contains">
+                    <f:selectItems value="#{mbVFacturacionCompra.lstThemeUsuarios}" var="theme" itemLabel="#{theme.displayName}" itemValue="#{theme}" />
+                    <p:column style="width:10%">
+                        <h:outputText styleClass="ui-theme ui-theme-#{t.name}" />
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{t.displayName}" />
+                    </p:column>
+                </p:selectOneMenu>
+                
                 <h:panelGroup id="group">
-                    <h:outputLabel for="provinciaNac" styleClass="labelDerecha"  value="Provincia: "/>
+                    <h:outputLabel for="txtTipoPago" styleClass="labelDerecha"  value="T. Pago: "/>
                 </h:panelGroup>
                 <h:panelGroup id="group2">
-                    <h:selectOneMenu id="provinciaNac" class="form-control" value="#{mbVCliente.idProvinciaNac}">
-                        <p:ajax listener="#{mbVCliente.onProvinciaChange()}" update="group3 group4 group5 group6" />                                        
+                    <h:selectOneMenu id="txtTipoPago" class="form-control" value="#{mbVFacturacionCompra.tbTipopago.id}">
                         <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
-                        <f:selectItems value="#{mbVCliente.lstProvincia}"  />  
+                        <f:selectItems value="#{mbVFacturacionCompra.lstTipoPago}"  />  
                     </h:selectOneMenu>
                 </h:panelGroup>
-                <h:panelGroup id="group3">
-                    <h:outputLabel for="cantonNac" styleClass="labelDerecha" value="Cantón: " />
-                </h:panelGroup>
-                <h:panelGroup id="group4">
-                    <h:selectOneMenu id="cantonNac" class="form-control" value="#{mbVCliente.idCantonNac}">
-                        <p:ajax listener="#{mbVCliente.onCantonChange()}" update="group5 group6" />
-                        <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
-                        <f:selectItems value="#{mbVCliente.lstCanton}"  />  
-                    </h:selectOneMenu>
-                </h:panelGroup>
+                
+                <p:outputLabel for="txtFecha" styleClass="labelDerecha" value="Fecha nacimiento:" />
+                <p:calendar id="txtFecha" value="#{mbVFacturacionCompra.fecha}" effect="fold" required="true" pattern="dd-MM-yyyy" mask="true" />
+                
                 <h:panelGroup id="group5">
-                    <h:outputLabel styleClass="labelDerecha" for="parroquiaNac" value="Parroquia: "/>
+                    <h:outputLabel styleClass="labelDerecha" for="cboProducto" value="Producto: "/>
                 </h:panelGroup>
-                <h:panelGroup id="group6">
-                    <h:selectOneMenu id="parroquiaNac" class="form-control" required="true" value="#{mbVCliente.tbParroquia.id}">
-                        <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
-                        <f:selectItems value="#{mbVCliente.lstParroquia}"  /> 
-                    </h:selectOneMenu>
-                </h:panelGroup>
+                <p:selectOneMenu id="cboProducto" value="#{mbVFacturacionCompra.themeProductos}" converter="themeConverterProd"
+                                 effect="fade" var="t" filter="true" filterMatchMode="contains">
+                    <f:selectItems value="#{mbVFacturacionCompra.lstThemeProductos}" var="theme" itemLabel="#{theme.displayName}" itemValue="#{theme}" />
+                    <p:column style="width:10%">
+                        <h:outputText styleClass="ui-theme ui-theme-#{t.displayName}" />
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{t.displayName}" />
+                    </p:column>
+                </p:selectOneMenu>
                 
-                <p:outputLabel for="txtCedula" styleClass="labelDerecha" value="Cédula:" />
-                <p:inputMask id="txtCedula" class="validarCedula" onblur="validarCedulaUsuarios();" value="#{mbVCliente.tbPersona.cedula}" required="true" mask="9999999999"/>
-                
-                <p:outputLabel for="txtNombres" styleClass="labelDerecha" value="Nombres:" />
-                <p:inputText id="txtNombres" value="#{mbVCliente.tbPersona.nombres}" required="true" maxlength="150"/>
-                
-                <p:outputLabel for="txtApellidos" styleClass="labelDerecha" value="Apellidos:" />
-                <p:inputText id="txtApellidos" value="#{mbVCliente.tbPersona.apellidos}" required="true" maxlength="150"/>
-                
-                <p:outputLabel for="txtDireccion" styleClass="labelDerecha" value="Dirección:" />
-                <p:inputText id="txtDireccion" value="#{mbVCliente.tbPersona.direccion}" required="true" maxlength="30"/>
-                
-                <p:outputLabel for="email" styleClass="labelDerecha" value="Correo:" />
-                <p:inputText id="email" required="true" label="email" size="20"
-                             requiredMessage="Por favor ingrese email."
-                             validatorMessage="Invalid email format"
-                             value="#{mbVCliente.tbPersona.email}">
-                    <f:validateRegex
-                        pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-                </p:inputText>
-                
-                <p:outputLabel for="txtTelefono" styleClass="labelDerecha" value="Teléfono:" />
-                <p:inputMask id="txtTelefono" value="#{mbVCliente.tbPersona.telefono}" mask="(999)-999-999"/>
-                
-                <h:outputLabel for="cboTipoEmpresa" styleClass="labelDerecha" value="Tipo Empresa: "/>
-                <h:selectOneMenu id="cboTipoEmpresa" required="true" class="form-control" value="#{mbVCliente.tbTipoEmpresa.id}">
-                    <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
-                    <f:selectItem itemLabel="Privada" itemValue="1" />
-                    <f:selectItem itemLabel="Pública" itemValue="2" />
-                </h:selectOneMenu>
+                <p:outputLabel for="txtCantidad" styleClass="labelDerecha" value="Cantidad:" />
+                <p:inputMask id="txtCantidad" class="validarCedula" value="#{mbVFacturacionCompra.cantidad}" required="true" mask="9999999999"/>
                 
                 
                 <h:outputText id="display" value="" />
-                <p:commandButton value="Guardar" update="frmRegistrarCliente,msgs" styleClass="anchoBotones" icon="ui-icon-disk"
-                                 actionListener="#{mbVCliente.registrar()}" />
+                <p:commandButton value="Agregar" update="tblFactura" styleClass="anchoBotones" icon="ui-icon-disk"
+                                 actionListener="#{mbVFacturacionCompra.agregarProducto()}" />
                 
             </p:panelGrid>
             
@@ -100,10 +76,10 @@
             
             <br></br>
             <p:panel id="panelTabla" style="height: 30%; width: 100%;">
-                <p:dataTable class="tblDatos fuenteTamanio" id="tblCanton" var="lstTbl" value="#{mbVCliente.lstPersona}"
+                <p:dataTable class="tblDatos fuenteTamanio" id="tblFactura" var="lstTbl" value="#{mbVFacturacionCompra.lstPersona}"
                                  editable="true" scrollable="true" scrollHeight="150"  sortMode="multiple">
-                        <p:ajax event="rowEdit" listener="#{mbVCliente.onRowEdit}" update=":frmRegistrarCliente:msgs" />
-                        <p:ajax event="rowEditCancel" listener="#{mbVCliente.onRowCancel}" update=":frmRegistrarCliente:msgs" />
+                        <p:ajax event="rowEdit" listener="#{mbVFacturacionCompra.onRowEdit}" update=":frmRegistrarFactura:msgs" />
+                        <p:ajax event="rowEditCancel" listener="#{mbVFacturacionCompra.onRowCancel}" update=":frmRegistrarFactura:msgs" />
 
                         <p:column headerText="Cedula" sortBy="#{lstTbl.cedula}">
                             <p:cellEditor>
