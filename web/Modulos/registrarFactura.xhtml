@@ -3,145 +3,139 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
         <div class="ui-fluid">
-        <h:form id="frmRegistrarFactura">
-            <p:growl id="msgs" showDetail="true" />
-            <p:tab id="personal" title="RegistrarFactura">
-                <p:panel header="Registrar Factura" >
-                    
-            <p:panelGrid columns="6" columnClasses="ui-grid-col-3,ui-grid-col-6" layout="grid" styleClass="ui-panelgrid-blank">
-                
-                <h:outputLabel for="cboCliente" styleClass="labelDerecha" value="Cliente: "/>
-                <p:selectOneMenu id="cboCliente" value="#{mbVFacturacionCompra.themeUsuarios}" converter="themeConverterEmp"
-                                 effect="fade" var="t" filter="true" filterMatchMode="contains">
-                    <f:selectItems value="#{mbVFacturacionCompra.lstThemeUsuarios}" var="theme" itemLabel="#{theme.displayName}" itemValue="#{theme}" />
-                    <p:column style="width:10%">
-                        <h:outputText styleClass="ui-theme ui-theme-#{t.name}" />
-                    </p:column>
+            <h:form id="frmRegistrarFactura">
+                <p:growl id="msgs" showDetail="true" />
+                <p:tab id="personal" title="RegistrarFactura">
+                    <p:panel header="Registrar Factura" >
 
-                    <p:column>
-                        <h:outputText value="#{t.displayName}" />
-                    </p:column>
-                </p:selectOneMenu>
-                
-                <h:panelGroup id="group">
-                    <h:outputLabel for="txtTipoPago" styleClass="labelDerecha"  value="T. Pago: "/>
-                </h:panelGroup>
-                <h:panelGroup id="group2">
-                    <h:selectOneMenu id="txtTipoPago" class="form-control" value="#{mbVFacturacionCompra.tbTipopago.id}">
-                        <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
-                        <f:selectItems value="#{mbVFacturacionCompra.lstTipoPago}"  />  
-                    </h:selectOneMenu>
-                </h:panelGroup>
-                
-                <p:outputLabel for="txtFecha" styleClass="labelDerecha" value="Fecha nacimiento:" />
-                <p:calendar id="txtFecha" value="#{mbVFacturacionCompra.fecha}" effect="fold" required="true" pattern="dd-MM-yyyy" mask="true" />
-                
-                <h:panelGroup id="group5">
-                    <h:outputLabel styleClass="labelDerecha" for="cboProducto" value="Producto: "/>
-                </h:panelGroup>
-                <p:selectOneMenu id="cboProducto" value="#{mbVFacturacionCompra.themeProductos}" converter="themeConverterProd"
-                                 effect="fade" var="t" filter="true" filterMatchMode="contains">
-                    <f:selectItems value="#{mbVFacturacionCompra.lstThemeProductos}" var="theme" itemLabel="#{theme.displayName}" itemValue="#{theme}" />
-                    <p:column style="width:10%">
-                        <h:outputText styleClass="ui-theme ui-theme-#{t.displayName}" />
-                    </p:column>
+                        <p:panelGrid columns="4" columnClasses="ui-grid-col-3,ui-grid-col-6" layout="grid" styleClass="ui-panelgrid-blank">
 
-                    <p:column>
-                        <h:outputText value="#{t.displayName}" />
-                    </p:column>
-                </p:selectOneMenu>
-                
-                <p:outputLabel for="txtCantidad" styleClass="labelDerecha" value="Cantidad:" />
-                <p:inputMask id="txtCantidad" class="validarCedula" value="#{mbVFacturacionCompra.cantidad}" required="true" mask="9999999999"/>
-                
-                
-                <h:outputText id="display" value="" />
-                <p:commandButton value="Agregar" update="tblFactura" styleClass="anchoBotones" icon="ui-icon-disk"
-                                 actionListener="#{mbVFacturacionCompra.agregarProducto()}" />
-                
-            </p:panelGrid>
-            
-            <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
-            <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
-                <p:graphicImage class="imgAjax" value="#{resource['img/ajax-loader.gif']}"  />
-            </p:dialog>
-                </p:panel>
-            </p:tab>
-            
-            <br></br>
-            <p:panel id="panelTabla" style="height: 30%; width: 100%;">
-                <p:dataTable class="tblDatos fuenteTamanio" id="tblFactura" var="lstTbl" value="#{mbVFacturacionCompra.lstPersona}"
-                                 editable="true" scrollable="true" scrollHeight="150"  sortMode="multiple">
-                        <p:ajax event="rowEdit" listener="#{mbVFacturacionCompra.onRowEdit}" update=":frmRegistrarFactura:msgs" />
-                        <p:ajax event="rowEditCancel" listener="#{mbVFacturacionCompra.onRowCancel}" update=":frmRegistrarFactura:msgs" />
+                            <h:outputLabel for="cboCliente" styleClass="labelDerecha" value="Cliente: "/>
+                            <p:selectOneMenu id="cboCliente" value="#{mbVFacturacionCompra.themeUsuarios}" converter="themeConverterEmp"
+                                             effect="fade" var="t" filter="true" filterMatchMode="contains">
+                                <f:selectItems value="#{mbVFacturacionCompra.lstThemeUsuarios}" var="theme" itemLabel="#{theme.displayName}" itemValue="#{theme}" />
+                                <p:column style="width:10%">
+                                    <h:outputText styleClass="ui-theme ui-theme-#{t.name}" />
+                                </p:column>
 
-                        <p:column headerText="Cedula" sortBy="#{lstTbl.cedula}">
+                                <p:column>
+                                    <h:outputText value="#{t.displayName}" />
+                                </p:column>
+                            </p:selectOneMenu>
+                            
+                            <p:outputLabel for="txtFecha" styleClass="labelDerecha" value="Fecha:" />
+                            <p:calendar id="txtFecha" value="#{mbVFacturacionCompra.fecha}" effect="fold" required="true" pattern="dd-MM-yyyy" mask="true" />
+                            
+                            <h:outputLabel styleClass="labelDerecha" for="cboProducto" value="Producto: "/>
+                            <p:selectOneMenu id="cboProducto" value="#{mbVFacturacionCompra.themeProductos}" converter="themeConverterProd"
+                                             effect="fade" var="t" filter="true" filterMatchMode="contains">
+                                <f:selectItems value="#{mbVFacturacionCompra.lstThemeProductos}" var="theme" itemLabel="#{theme.displayName}" itemValue="#{theme}" />
+                                <p:column style="width:10%">
+                                    <h:outputText styleClass="ui-theme ui-theme-#{t.displayName}" />
+                                </p:column>
+
+                                <p:column>
+                                    <h:outputText value="#{t.displayName}" />
+                                </p:column>
+                            </p:selectOneMenu>
+                            
+                             <h:outputLabel for="txtTipoPago" styleClass="labelDerecha"  value="T.Pago: "/>
+                            <h:panelGroup id="group2">
+                                <h:selectOneMenu id="txtTipoPago" class="form-control" value="#{mbVFacturacionCompra.tbTipopago.id}">
+                                    <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
+                                    <f:selectItems value="#{mbVFacturacionCompra.lstTipoPago}"  />  
+                                </h:selectOneMenu>
+                            </h:panelGroup>
+
+                            
+                            
+
+                            <p:outputLabel for="txtCantidad" styleClass="labelDerecha" value="Cantidad:" />
+                            <p:inputText id="txtCantidad" value="#{mbVFacturacionCompra.cantidad}" maxlength="4" required="true" onclick="this.select()"
+                                         onkeypress="return validarNum(event, true)" >
+                                <f:validateDoubleRange maximum="10"/>
+                            </p:inputText>
+
+
+                            <h:outputText id="display" value="" />
+                            <p:commandButton value="Agregar" update="tblFactura" styleClass="anchoBotones" icon="ui-icon-disk"
+                                             actionListener="#{mbVFacturacionCompra.agregarProducto()}" />
+
+                        </p:panelGrid>
+
+                        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                            <p:graphicImage class="imgAjax" value="#{resource['img/ajax-loader.gif']}"  />
+                        </p:dialog>
+                    </p:panel>
+                </p:tab>
+
+                <br></br>
+                <p:panel id="panelTabla" style="height: 30%; width: 100%;">
+                    <p:dataTable class="tblDatos fuenteTamanio" id="tblFactura" var="lstTbl" value="#{mbVFacturacionCompra.lstFactura}"
+                                 editable="true" scrollable="true" scrollHeight="150" >
+                        <p:ajax event="rowEdit" listener="#{mbVFacturacionCompra.onRowEditFactura}" update=":frmRegistrarFactura:msgs" />
+                        <p:ajax event="rowEditCancel" listener="#{mbVFacturacionCompra.onRowCancelFactura}" update=":frmRegistrarFactura:msgs" />
+
+                        <p:column headerText="#">
                             <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{lstTbl.cedula}" /></f:facet>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.numero}" /></f:facet>
                                 <f:facet name="input">
-                                    <p:inputText readonly="true" style="width:100%" required="true" value="#{lstTbl.cedula}"  />
+                                    <p:inputText readonly="true" style="width:100%" required="true" value="#{lstTbl.numero}"  />
                                 </f:facet>
                             </p:cellEditor>
                         </p:column>
 
 
-                        <p:column headerText="Apellidos" sortBy="#{lstTbl.cedula}">
+                        <p:column headerText="Codigo">
                             <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{lstTbl.cedula}" /></f:facet>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.idProducto}" /></f:facet>
                                 <f:facet name="input">
-                                    <p:inputText readonly="false" style="width:100%" required="true" value="#{lstTbl.cedula}"  />
+                                    <p:inputText readonly="false" style="width:100%" required="true" value="#{lstTbl.idProducto}"  />
                                 </f:facet>
                             </p:cellEditor>
                         </p:column>
 
-                        <p:column headerText="Nombres" sortBy="#{lstTbl.nombres}">
+                        <p:column headerText="Descripcion">
                             <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{lstTbl.nombres}" /></f:facet>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.nombreProducto}" /></f:facet>
                                 <f:facet name="input">
-                                    <p:inputText readonly="false" style="width:100%" required="true" value="#{lstTbl.nombres}"  />
+                                    <p:inputText readonly="false" style="width:100%" required="true" value="#{lstTbl.nombreProducto}"  />
                                 </f:facet>
                             </p:cellEditor>
                         </p:column>
-                        
-                        <p:column headerText="email" sortBy="#{lstTbl.telefono}">
+
+                        <p:column headerText="Cantidad">
                             <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{lstTbl.telefono}" /></f:facet>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.cantidad}" /></f:facet>
                                 <f:facet name="input">
-                                    <p:inputText readonly="false" style="width:100%" required="true" value="#{lstTbl.telefono}"  />
+                                    <p:inputText readonly="false" style="width:100%" required="true" value="#{lstTbl.cantidad}"  />
                                 </f:facet>
                             </p:cellEditor>
                         </p:column>
-                        
-                        <p:column headerText="email" sortBy="#{lstTbl.email}">
+
+                        <p:column headerText="PVP">
                             <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{lstTbl.email}" /></f:facet>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.pvp}" /></f:facet>
                                 <f:facet name="input">
-                                    <p:inputText readonly="false" style="width:100%" required="true" value="#{lstTbl.email}"  />
+                                    <p:inputText readonly="false" style="width:100%" required="true" value="#{lstTbl.pvp}"  />
                                 </f:facet>
                             </p:cellEditor>
                         </p:column>
-                        
-                        
-                        <p:column headerText="Parroquia" sortBy="#{lstTbl.tbParroquia.nombre}">
+
+
+                        <p:column headerText="Total">
                             <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{lstTbl.tbParroquia.nombre}" /></f:facet>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.totalxProducto}" /></f:facet>
                                 <f:facet name="input">
-                                    <p:inputText readonly="true" style="width:100%" required="true" value="#{lstTbl.tbParroquia.nombre}"  />
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
-                        
-                        <p:column headerText="Direcciôn" sortBy="#{lstTbl.direccion}">
-                            <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{lstTbl.direccion}" /></f:facet>
-                                <f:facet name="input">
-                                    <p:inputText readonly="false" style="width:100%" required="true" value="#{lstTbl.direccion}"  />
+                                    <p:inputText readonly="true" style="width:100%" required="true" value="#{lstTbl.totalxProducto}"  />
                                 </f:facet>
                             </p:cellEditor>
                         </p:column>
@@ -152,13 +146,50 @@
                         </p:column>
 
                     </p:dataTable>
-
+                    <p:panelGrid columns="8" columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-3,ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"  layout="grid" styleClass="ui-panelgrid-blank">
+                        <p:outputLabel for="txtSubtotal" styleClass="labelDerecha" value="Subtotal:" />
+                        <p:inputText id="txtSubtotal" value="#{mbVFacturacionCompra.cantidad}" readonly="true" />
+                        
+                        <p:outputLabel for="txttarifa0" styleClass="labelDerecha" value="0%:" />
+                        <p:inputText id="txttarifa0" value="#{mbVFacturacionCompra.cantidad}" readonly="true"  />
+                        
+                        <p:outputLabel for="txtTarifa14" styleClass="labelDerecha" value="14%:" />
+                        <p:inputText id="txtTarifa14" value="#{mbVFacturacionCompra.cantidad}" readonly="true"  />
+                        
+                        <p:outputLabel for="txtTotal" styleClass="labelDerecha" value="Total:" />
+                        <p:inputText id="txtTotal" value="#{mbVFacturacionCompra.cantidad}" readonly="true"  />
+                    </p:panelGrid>
                 </p:panel>
- </h:form>
-            
-    
-    
-</div>
+                
+                <br></br>
+                <center><h5>Facturas Registradas</h5></center>
+                <p:panel id="panelTabla1" style="height: 30%; width: 100%;">
+                    <p:dataTable class="tblDatos fuenteTamanio" id="tblFacturaRegistradas" var="lstTbl" value="#{mbVFacturacionCompra.lstTblFactura}"
+                                 editable="true" scrollable="true" scrollHeight="150" >
+
+                        <p:column headerText="Codigo">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.id}" /></f:facet>
+                                <f:facet name="input">
+                                    <p:inputText readonly="true" style="width:100%" required="true" value="#{lstTbl.fecha}"  />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+
+                        <p:column headerText="Fecha">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.fecha}" /></f:facet>
+                                <f:facet name="input">
+                                    <p:inputText readonly="false" style="width:100%" required="true" value="#{lstTbl.fecha}"  />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+        </div>
     </h:body>
 </html>
 

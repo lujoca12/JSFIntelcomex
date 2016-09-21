@@ -30,6 +30,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import org.primefaces.event.RowEditEvent;
 
 /**
  *
@@ -326,5 +327,25 @@ public class MbVFacturacionCompra implements Serializable{
         tarifa14= 0.0;
         Total= 0.0;
     }
+    public void onRowEditFactura(RowEditEvent event) {
+        try {
+//            DaoTConfiguracion daoConfig = new DaoTConfiguracion();
+//            tblImpuesto = ((TbTipotasaiva) event.getObject());
+//            msg = daoConfig.registrarImpuersto(tblImpuesto);
+//            if (msg) {
+//                mensajesOk("Datos procesados correctamente");
+//                // vaciarCajas();
+//                cargarTablaImpuesto();
+//            } else {
+//                mensajesError("Error al procesar los Datos");
+//            }
+        } catch (Exception ex) {
+            Logger.getLogger(MbVEmpresa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
     
+    public void onRowCancelFactura(RowEditEvent event) {
+
+    }
 }
