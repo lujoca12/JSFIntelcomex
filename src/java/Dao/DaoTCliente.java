@@ -72,6 +72,19 @@ public class DaoTCliente implements InterfaceCliente{
         return persona;
     }
     
+     @Override
+    public List<TbPersona> getTblProveedor() throws Exception {
+        this.sesion = null;
+        this.tx = null;
+        iniciaOperacion();
+        String hql="from TbPersona as p inner join fetch p.tbTipoempresa tipo inner join fetch p.tbTipopersona tipoPersona inner join fetch p.tbParroquia parroq "
+                + "where tipoPersona.descripcion like '%proveed%' order by p.apellidos asc";
+        Query query = sesion.createQuery(hql);
+        List<TbPersona> persona= (List<TbPersona>) query.list();
+        sesion.close();
+        return persona;
+    }
+    
     @Override
     public List<TbTipopersona> getTipoCliente() throws Exception {
         this.sesion = null;

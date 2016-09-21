@@ -46,6 +46,7 @@ public class MbVCliente implements Serializable{
     private List<SelectItem> lstParroquia;
     private List<SelectItem> lstTipoEmpresa;
     private List<TbPersona> lstPersona;
+    private List<TbPersona> lstProveedor;
     private TbPersona tblPersona;
         
     private String idPaisOrigen;
@@ -67,6 +68,7 @@ public class MbVCliente implements Serializable{
 //        tipoPersona = new TbParametrodetalle();
         cargarPaises();
         cargarTablaPersona();
+        cargarTablaProveedor();
     }
     private void cargarTablaPersona(){
         lstPersona = new ArrayList<>();
@@ -77,7 +79,25 @@ public class MbVCliente implements Serializable{
             Logger.getLogger(MbVLocalizacion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    private void cargarTablaProveedor(){
+        lstProveedor = new ArrayList<>();
+        DaoTCliente daoCliente = new DaoTCliente();
+        try {
+            lstProveedor = daoCliente.getTblProveedor();
+        } catch (Exception ex) {
+            Logger.getLogger(MbVLocalizacion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
+    public List<TbPersona> getLstProveedor() {
+        return lstProveedor;
+    }
+
+    public void setLstProveedor(List<TbPersona> lstProveedor) {
+        this.lstProveedor = lstProveedor;
+    }
+    
     public TbPersona getTbPersona() {
         return tbPersona;
     }
