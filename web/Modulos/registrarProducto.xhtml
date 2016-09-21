@@ -20,31 +20,31 @@
                 <p:inputText id="txtCodigo" value="#{mbVProducto.tbProducto.id}" required="true" maxlength="5"/>
                 
                 <h:outputLabel for="cboProveedor" styleClass="labelDerecha" value="Proveedor: "/>
-                <h:selectOneMenu id="cboProveedor" required="true" class="form-control" value="#{mbVProducto.tbProducto.tbPersona.cedula}">
+                <h:selectOneMenu id="cboProveedor" required="true" class="form-control" value="#{mbVProducto.tbPersona.cedula}">
                     <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
                     <f:selectItems value="#{mbVProducto.lstPersona}"  /> 
                 </h:selectOneMenu>
                 
                 <h:outputLabel for="cboUndMedida" styleClass="labelDerecha" value="Und. Medida: "/>
-                <h:selectOneMenu id="cboUndMedida" required="true" class="form-control" value="#{mbVProducto.tbProducto.tbTipounidadmedida.idTipoUnidadmedida}">
+                <h:selectOneMenu id="cboUndMedida" required="true" class="form-control" value="#{mbVProducto.tbUndMedida.idTipoUnidadmedida}">
                     <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
                     <f:selectItems value="#{mbVProducto.lstUnidadMedida}"  /> 
                 </h:selectOneMenu>
                 
                 <h:outputLabel for="cboAlmacen" styleClass="labelDerecha" value="Almacen: "/>
-                <h:selectOneMenu id="cboAlmacen" required="true" class="form-control" value="#{mbVProducto.tbProducto.tbTipoalmacenes.idTipoAlmacenes}">
+                <h:selectOneMenu id="cboAlmacen" required="true" class="form-control" value="#{mbVProducto.tbAlmacen.idTipoAlmacenes}">
                     <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
                     <f:selectItems value="#{mbVProducto.lstAlmacenes}"  /> 
                 </h:selectOneMenu>
                 
                 <h:outputLabel for="cboClasificacion" styleClass="labelDerecha" value="Clasificación: "/>
-                <h:selectOneMenu id="cboClasificacion" required="true" class="form-control" value="#{mbVProducto.tbProducto.tbTipoclasificacion.idTipoClasificacion}">
+                <h:selectOneMenu id="cboClasificacion" required="true" class="form-control" value="#{mbVProducto.tbClasificacion.idTipoClasificacion}">
                     <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
                     <f:selectItems value="#{mbVProducto.lstClasificacion}"  /> 
                 </h:selectOneMenu>
                 
                 <h:outputLabel for="cboIva" styleClass="labelDerecha" value="IVA: "/>
-                <h:selectOneMenu id="cboIva" required="true" class="form-control" value="#{mbVProducto.tbProducto.tbTipotasaiva.idTipoTasa}">
+                <h:selectOneMenu id="cboIva" required="true" class="form-control" value="#{mbVProducto.tbImpuesto.idTipoTasa}">
                     <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
                     <f:selectItems value="#{mbVProducto.lstImpuesto}"  /> 
                 </h:selectOneMenu>

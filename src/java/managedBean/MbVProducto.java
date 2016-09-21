@@ -17,8 +17,17 @@ import Pojo.TbTipopago;
 import Pojo.TbTipopedido;
 import Pojo.TbTipotasaiva;
 import Pojo.TbTipounidadmedida;
+import java.io.File;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,6 +56,10 @@ public class MbVProducto implements Serializable{
     
     private TbProducto tbProducto;
     private TbPersona tbPersona;
+    private TbTipoalmacenes tbAlmacen;
+    private TbTipotasaiva tbImpuesto;
+    private TbTipounidadmedida tbUndMedida;
+    private TbTipoclasificacion tbClasificacion;
     
     private List<SelectItem> lstImpuesto;
     private List<SelectItem> lstTipoPago;
@@ -56,14 +69,15 @@ public class MbVProducto implements Serializable{
     private List<SelectItem> lstUnidadMedida;
     private List<SelectItem> lstPersona;
     
-    private int idUndMedida;
-    private int idIva;
-    private int idClasificacion;
-    private int idAlmacen;
+   private String extension = "";
     
     public MbVProducto() {
         tbProducto = new TbProducto();
         tbPersona = new TbPersona();
+        tbAlmacen = new TbTipoalmacenes();
+        tbImpuesto = new TbTipotasaiva();
+        tbUndMedida = new TbTipounidadmedida();
+        tbClasificacion = new TbTipoclasificacion();
         cargarCboImpuesto();
         cargarCboProveedor();
         cargarCboUnidadMedida();
@@ -212,8 +226,17 @@ public class MbVProducto implements Serializable{
 
     public void setFile(UploadedFile file) {
         this.file = file;
+        this.files.add(file);
     }
 
+    public List<UploadedFile> getFiles() {
+        return files;
+    }
+
+    public void setFiles(List<UploadedFile> files) {
+        this.files = files;
+    }
+    
     public TbProducto getTbProducto() {
         return tbProducto;
     }
@@ -222,36 +245,36 @@ public class MbVProducto implements Serializable{
         this.tbProducto = tbProducto;
     }
 
-    public int getIdUndMedida() {
-        return idUndMedida;
+    public TbTipoalmacenes getTbAlmacen() {
+        return tbAlmacen;
     }
 
-    public void setIdUndMedida(int idUndMedida) {
-        this.idUndMedida = idUndMedida;
+    public void setTbAlmacen(TbTipoalmacenes tbAlmacen) {
+        this.tbAlmacen = tbAlmacen;
     }
 
-    public int getIdIva() {
-        return idIva;
+    public TbTipotasaiva getTbImpuesto() {
+        return tbImpuesto;
     }
 
-    public void setIdIva(int idIva) {
-        this.idIva = idIva;
+    public void setTbImpuesto(TbTipotasaiva tbImpuesto) {
+        this.tbImpuesto = tbImpuesto;
     }
 
-    public int getIdClasificacion() {
-        return idClasificacion;
+    public TbTipounidadmedida getTbUndMedida() {
+        return tbUndMedida;
     }
 
-    public void setIdClasificacion(int idClasificacion) {
-        this.idClasificacion = idClasificacion;
+    public void setTbUndMedida(TbTipounidadmedida tbUndMedida) {
+        this.tbUndMedida = tbUndMedida;
     }
 
-    public int getIdAlmacen() {
-        return idAlmacen;
+    public TbTipoclasificacion getTbClasificacion() {
+        return tbClasificacion;
     }
 
-    public void setIdAlmacen(int idAlmacen) {
-        this.idAlmacen = idAlmacen;
+    public void setTbClasificacion(TbTipoclasificacion tbClasificacion) {
+        this.tbClasificacion = tbClasificacion;
     }
     
     public void registrarProducto(){
@@ -259,6 +282,30 @@ public class MbVProducto implements Serializable{
             
             DaoProducto daoProducto = new DaoProducto();
             tbProducto.setTbPersona(tbPersona);
+            tbProducto.setTbTipoalmacenes(tbAlmacen);
+            tbProducto.setTbTipoclasificacion(tbClasificacion);
+            tbProducto.setTbTipotasaiva(tbImpuesto);
+            tbProducto.setTbTipounidadmedida(tbUndMedida);
+            
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date dateobj = new Date();
+            String nombreCarpeta = (tbProducto.getId() + "-" + df.format(dateobj).replaceAll(":", "-")).trim();
+            File directorio = new File("c:/Postgrado/inscripciones/requisitos/" + nombreCarpeta + "/");
+            if (!directorio.exists()) {
+                directorio.mkdirs();
+            }
+            int cont = 0;
+            
+            for (UploadedFile f : files) {
+                extension = FilenameUtils.getExtension(f.getFileName());
+                Path ruta = Paths.get(directorio + "/" + tbProducto.getNombre() + "." + extension);
+                InputStream input = f.getInputstream();
+                Files.copy(input, ruta, StandardCopyOption.REPLACE_EXISTING);
+                cont++;
+            }
+            
+            
+            
             msg = daoProducto.registrarProducto(tbProducto);
             
             if(msg){
