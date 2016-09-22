@@ -268,10 +268,12 @@ public class MbVFacturacionCompra implements Serializable{
     private void vaciarEncabezadoFactura(){
         cantidad = "";
         llenarCboProducto();
+        
     }
     private void vaciarEncabezadoCompra(){
         cantidad = "";
         llenarCboProducto();
+        
     }
     private void cargarTablFactxfechaActual(){
         try {
@@ -592,6 +594,9 @@ public class MbVFacturacionCompra implements Serializable{
         tbDetallefactura = new TbDetallefactura();
         tbTipopago = new TbTipopago();
         
+        lstFactura = new ArrayList<>();
+        llenarCboProveedor();
+        llenarCboUsuarios();
         
         Subtotal = 0.0;
         tarifa0= 0.0;
