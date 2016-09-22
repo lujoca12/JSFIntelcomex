@@ -20,11 +20,12 @@ public class ClsFactura implements Serializable {
     private Double costo;
     private Double otroPrecio;
     private Double pvp;
+    private Double iva;
 
     public ClsFactura() {
     }
 
-    public ClsFactura(int numero,String idProducto, String nombreProducto, Double cantidad, Double TotalxProducto, Double costo, Double otroPrecio, Double pvp) {
+    public ClsFactura(int numero,String idProducto, String nombreProducto, Double cantidad, Double TotalxProducto, Double costo, Double otroPrecio, Double pvp, Double iva) {
         this.numero = numero;
         this.idProducto = idProducto;
         this.nombreProducto = nombreProducto;
@@ -33,6 +34,7 @@ public class ClsFactura implements Serializable {
         this.costo = costo;
         this.otroPrecio = otroPrecio;
         this.pvp = pvp;
+        this.iva = iva;
     }
 
     public int getNumero() {
@@ -98,8 +100,12 @@ public class ClsFactura implements Serializable {
     public void setPvp(Double pvp) {
         this.pvp = pvp;
     }
-    
-    
-    
-    
+
+    public Double getIva() {
+        return iva;
+    }
+
+    public void setIva(Double iva) {
+        this.iva = iva;
+    }
 }

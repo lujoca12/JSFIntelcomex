@@ -23,5 +23,11 @@
         <property name="fecharegistro" type="date">
             <column name="fecharegistro" length="10" />
         </property>
+        <property name="proveedorid" type="string">
+            <column name="proveedorid" length="10" />
+        </property>
+        <property name="proveedornombres" type="string">
+            <column name="proveedornombres" length="255" />
+        </property>
     </class>
 </hibernate-mapping>

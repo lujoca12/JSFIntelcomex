@@ -20,5 +20,11 @@
         <property name="tbDetallefacturacol" type="string">
             <column name="tb_detallefacturacol" length="45" />
         </property>
+        <property name="iva" type="big_decimal">
+            <column name="iva" precision="6" />
+        </property>
+        <property name="precioxund" type="big_decimal">
+            <column name="precioxund" precision="6" />
+        </property>
     </class>
 </hibernate-mapping>

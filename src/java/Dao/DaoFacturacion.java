@@ -4,7 +4,12 @@
  * and open the template in the editor.
  */
 package Dao;
+import Clases.ClsFactura;
+import Pojo.TbDetallefactura;
 import Pojo.TbFactura;
+import Pojo.TbInventario;
+import Pojo.TbProducto;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import org.hibernate.HibernateException;
@@ -37,15 +42,68 @@ public class DaoFacturacion {
         throw new HibernateException("Ocurrió un error en la capa de acceso a datos", he);
     }
     
-    public boolean registrarFactura(TbFactura factura ){
+    public boolean registrarFactura(TbFactura factura, List<ClsFactura> lstFactura ){
         boolean band = false;
         try {
             iniciaOperacion();
+            //Primero guardo la factura
             sesion.saveOrUpdate(factura);
-
+            tx.commit();
+            sesion.close();
+            iniciaOperacion();
+            TbDetallefactura detalleFact = new TbDetallefactura();
+            TbProducto producto = new TbProducto();
+            BigDecimal bigdec;
+            for (int i = 0; i < lstFactura.size(); i++) {
+                detalleFact.setTbFactura(factura);
+                detalleFact.setTbDetallefacturacol("usuario "+factura.getTbUsuarios().getApellidos());
+                bigdec = new BigDecimal(lstFactura.get(i).getTotalxProducto());
+                detalleFact.setPrecioDetalle(bigdec);
+                producto.setId(lstFactura.get(i).getIdProducto());
+                detalleFact.setTbProducto(producto);
+                bigdec = new BigDecimal(lstFactura.get(i).getIva());
+                detalleFact.setIva(bigdec);
+                bigdec = new BigDecimal(lstFactura.get(i).getPvp());
+                detalleFact.setPrecioxund(bigdec);
+                sesion.saveOrUpdate(detalleFact);
+            }
             tx.commit();
             sesion.close();
             band = true;
+            
+        } catch (Exception e) {
+            tx.rollback();
+            band = false;
+        }
+        
+        return band;
+    }
+    
+    public boolean registrarCompra(TbInventario inventario, List<ClsFactura> lstFactura ){
+        boolean band = false;
+        try {
+            iniciaOperacion();
+            //Primero guardo la factura
+//            sesion.saveOrUpdate(inventario);
+//            tx.commit();
+//            sesion.close();
+//            iniciaOperacion();
+            
+            TbProducto producto = new TbProducto();
+            BigDecimal bigdec;
+            for (int i = 0; i < lstFactura.size(); i++) {
+                producto.setId(lstFactura.get(i).getIdProducto());
+                inventario.setTbProducto(producto);
+                inventario.setStock(Integer.parseInt(lstFactura.get(i).getCantidad().toString()));
+                inventario.setCantidadMinima(5);
+                bigdec = new BigDecimal(lstFactura.get(i).getCosto());
+                inventario.setPrecioStock(bigdec);
+                sesion.saveOrUpdate(inventario);
+            }
+            tx.commit();
+            sesion.close();
+            band = true;
+            
         } catch (Exception e) {
             tx.rollback();
             band = false;

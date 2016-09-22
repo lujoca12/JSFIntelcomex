@@ -15,6 +15,8 @@ public class TbDetallefactura  implements java.io.Serializable {
      private TbProducto tbProducto;
      private BigDecimal precioDetalle;
      private String tbDetallefacturacol;
+     private BigDecimal iva;
+     private BigDecimal precioxund;
 
     public TbDetallefactura() {
     }
@@ -24,11 +26,13 @@ public class TbDetallefactura  implements java.io.Serializable {
         this.tbFactura = tbFactura;
         this.tbProducto = tbProducto;
     }
-    public TbDetallefactura(TbFactura tbFactura, TbProducto tbProducto, BigDecimal precioDetalle, String tbDetallefacturacol) {
+    public TbDetallefactura(TbFactura tbFactura, TbProducto tbProducto, BigDecimal precioDetalle, String tbDetallefacturacol, BigDecimal iva, BigDecimal precioxund) {
        this.tbFactura = tbFactura;
        this.tbProducto = tbProducto;
        this.precioDetalle = precioDetalle;
        this.tbDetallefacturacol = tbDetallefacturacol;
+       this.iva = iva;
+       this.precioxund = precioxund;
     }
    
     public Integer getId() {
@@ -67,6 +71,22 @@ public class TbDetallefactura  implements java.io.Serializable {
         this.tbDetallefacturacol = tbDetallefacturacol;
     }
 
+    public BigDecimal getIva() {
+        return iva;
+    }
+
+    public void setIva(BigDecimal iva) {
+        this.iva = iva;
+    }
+
+    public BigDecimal getPrecioxund() {
+        return precioxund;
+    }
+
+    public void setPrecioxund(BigDecimal precioxund) {
+        this.precioxund = precioxund;
+    }
+    
 
 
 

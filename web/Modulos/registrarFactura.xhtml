@@ -18,7 +18,7 @@
                         <p:panelGrid columns="4" columnClasses="ui-grid-col-3,ui-grid-col-6" layout="grid" styleClass="ui-panelgrid-blank">
 
                             <h:outputLabel for="cboCliente" styleClass="labelDerecha" value="Cliente: "/>
-                            <p:selectOneMenu id="cboCliente" value="#{mbVFacturacionCompra.themeUsuarios}" converter="themeConverterEmp"
+                            <p:selectOneMenu required="true" id="cboCliente" value="#{mbVFacturacionCompra.themeUsuarios}" converter="themeConverterEmp"
                                              effect="fade" var="t" filter="true" filterMatchMode="contains">
                                 <f:selectItems value="#{mbVFacturacionCompra.lstThemeUsuarios}" var="theme" itemLabel="#{theme.displayName}" itemValue="#{theme}" />
                                 <p:column style="width:10%">
@@ -58,9 +58,9 @@
                             
 
                             <p:outputLabel for="txtCantidad" styleClass="labelDerecha" value="Cantidad:" />
-                            <p:inputText id="txtCantidad" value="#{mbVFacturacionCompra.cantidad}" maxlength="4" required="true" onclick="this.select()"
-                                         onkeypress="return validarNum(event, true)" >
-                                <f:validateDoubleRange maximum="10"/>
+                            <p:inputText id="txtCantidad" value="#{mbVFacturacionCompra.cantidad}" maxlength="4" required="false" onclick="this.select()"
+                                         onkeypress="return soloNumeros(this)" >
+                                
                             </p:inputText>
 
 
@@ -166,6 +166,10 @@
                         <p:inputText id="txtTotal" value="#{mbVFacturacionCompra.total}" readonly="true"  >
                             <f:convertNumber pattern="#0.00" />
                         </p:inputText>
+                    </p:panelGrid>
+                    <p:panelGrid columns="1" columnClasses="ui-grid-col-12"  layout="grid" styleClass="ui-panelgrid-blank">
+                        <p:commandButton ajax="true" value="Guardar Factura" update="frmRegistrarFactura,msgs" icon="ui-icon-disk"
+                                         actionListener="#{mbVFacturacionCompra.registrarFactura()}" />
                     </p:panelGrid>
                 </p:panel>
                 

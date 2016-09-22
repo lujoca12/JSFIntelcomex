@@ -17,6 +17,8 @@ public class TbInventario  implements java.io.Serializable {
      private Integer cantidadMinima;
      private BigDecimal precioStock;
      private Date fecharegistro;
+     private String proveedorid;
+     private String proveedornombres;
 
     public TbInventario() {
     }
@@ -25,12 +27,14 @@ public class TbInventario  implements java.io.Serializable {
     public TbInventario(TbProducto tbProducto) {
         this.tbProducto = tbProducto;
     }
-    public TbInventario(TbProducto tbProducto, Integer stock, Integer cantidadMinima, BigDecimal precioStock, Date fecharegistro) {
+    public TbInventario(TbProducto tbProducto, Integer stock, Integer cantidadMinima, BigDecimal precioStock, Date fecharegistro, String proveedorid,String proveedornombres ) {
        this.tbProducto = tbProducto;
        this.stock = stock;
        this.cantidadMinima = cantidadMinima;
        this.precioStock = precioStock;
        this.fecharegistro = fecharegistro;
+       this.proveedorid = proveedorid;
+       this.proveedornombres = proveedornombres;
     }
    
     public Integer getId() {
@@ -76,6 +80,22 @@ public class TbInventario  implements java.io.Serializable {
         this.fecharegistro = fecharegistro;
     }
 
+    public String getProveedorid() {
+        return proveedorid;
+    }
+
+    public void setProveedorid(String proveedorid) {
+        this.proveedorid = proveedorid;
+    }
+
+    public String getProveedornombres() {
+        return proveedornombres;
+    }
+
+    public void setProveedornombres(String proveedornombres) {
+        this.proveedornombres = proveedornombres;
+    }
+    
 
 
 
