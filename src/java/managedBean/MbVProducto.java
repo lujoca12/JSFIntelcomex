@@ -38,6 +38,7 @@ import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import org.primefaces.model.UploadedFile;
 import org.apache.commons.io.FilenameUtils;
+import org.primefaces.event.RowEditEvent;
 
 /**
  *
@@ -69,6 +70,8 @@ public class MbVProducto implements Serializable{
     private List<SelectItem> lstUnidadMedida;
     private List<SelectItem> lstPersona;
     
+    private List<TbProducto> lstProducto;
+    
    private String extension = "";
     
     public MbVProducto() {
@@ -83,8 +86,17 @@ public class MbVProducto implements Serializable{
         cargarCboUnidadMedida();
         cargarCboAlmacenes();
         cargarCboClasificacion();
+        cargarTblProducto();
     }
-    
+    private void cargarTblProducto(){
+        try {
+            lstProducto = new ArrayList<>();
+            DaoProducto daoProducto = new DaoProducto();
+            lstProducto = daoProducto.getProducto();
+        } catch (Exception ex) {
+            Logger.getLogger(MbVProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     private void cargarCboUnidadMedida(){
         try {
             lstUnidadMedida = new ArrayList<>();
@@ -156,6 +168,14 @@ public class MbVProducto implements Serializable{
         }
     }
 
+    public List<TbProducto> getLstProducto() {
+        return lstProducto;
+    }
+
+    public void setLstProducto(List<TbProducto> lstProducto) {
+        this.lstProducto = lstProducto;
+    }
+    
     public List<SelectItem> getLstClasificacion() {
         return lstClasificacion;
     }
@@ -286,18 +306,16 @@ public class MbVProducto implements Serializable{
             tbProducto.setTbTipotasaiva(tbImpuesto);
             tbProducto.setTbTipounidadmedida(tbUndMedida);
             
-          //  DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-          //  Date dateobj = new Date();
-          //  String nombreCarpeta = (tbProducto.getId() + "-" + df.format(dateobj).replaceAll(":", "-")).trim();
-            File directorio = new File("c:/Productos/");
-            if (!directorio.exists()) {
-                directorio.mkdirs();
-            }     
-               extension = FilenameUtils.getExtension(file.getFileName());
-                Path ruta = Paths.get(directorio + "/" + tbProducto.getId()+"-"+ tbProducto.getNombre() + "." + extension);
-                InputStream input = file.getInputstream();
-                Files.copy(input, ruta, StandardCopyOption.REPLACE_EXISTING);
-                tbProducto.setImagendir(ruta.toString());
+        
+//            File directorio = new File("c:/Productos/");
+//            if (!directorio.exists()) {
+//                directorio.mkdirs();
+//            }
+//            extension = FilenameUtils.getExtension(file.getFileName());
+//            Path ruta = Paths.get(directorio + "/" + tbProducto.getId() + "-" + tbProducto.getNombre() + "." + extension);
+//            InputStream input = file.getInputstream();
+//            Files.copy(input, ruta, StandardCopyOption.REPLACE_EXISTING);
+            //tbProducto.setImagendir(ruta.toString());
             
             
             
@@ -307,6 +325,7 @@ public class MbVProducto implements Serializable{
             if(msg){
                 mensajesOk("Datos procesados correctamente");
                 vaciarCajas();
+                cargarTblProducto();
             }else{
                 mensajesError("Error al procesar los Datos");
             }
@@ -342,5 +361,26 @@ public class MbVProducto implements Serializable{
     
     private void vaciarCajas(){
         tbProducto = new TbProducto();
+    }
+    public void onRowEdit(RowEditEvent event) {
+        try {
+            DaoProducto daoProducto = new DaoProducto();
+            TbProducto tblProducto = new TbProducto();
+            tblProducto = ((TbProducto) event.getObject());
+            msg = daoProducto.registrarProducto(tblProducto);
+            if (msg) {
+                mensajesOk("Datos procesados correctamente");
+                // vaciarCajas();
+                cargarTblProducto();
+            } else {
+                mensajesError("Error al procesar los Datos");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(MbVCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void onRowCancel(RowEditEvent event) {
+
     }
 }

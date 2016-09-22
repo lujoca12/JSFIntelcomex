@@ -144,8 +144,25 @@
                             <p:rowEditor> 
                             </p:rowEditor>
                         </p:column>
+                        
+                        <p:column style="width:20px;">
+                            <p:commandButton id="btnEliminar"
+                                             action="#{mbVFacturacionCompra.onDelete(lstTbl)}"
+                                             update="frmRegistrarFactura,tblFactura"
+                                             icon="ui-icon-trash"
+                                             style="border-style: hidden;background-color: transparent;"
+                                             >
+                                <p:confirm header="Eliminación de Producto" message="Presiona confirmar para realizar acción" icon="ui-icon-alert" />
+                            </p:commandButton>
+                        </p:column>
 
                     </p:dataTable>
+                    
+                     <p:confirmDialog global="true" styleClass="change-position">
+                        <p:commandButton value="Confirmar" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+                        <p:commandButton value="Cancelar" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+                    </p:confirmDialog>
+                    
                     <p:panelGrid columns="8" columnClasses="ui-grid-col-4,ui-grid-col-4,ui-grid-col-4,ui-grid-col-4,ui-grid-col-4,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"  layout="grid" styleClass="ui-panelgrid-blank">
                         <p:outputLabel for="txtSubtotal" styleClass="labelDerecha" value="Subt. 14%:" />
                         <p:inputText id="txtSubtotal" value="#{mbVFacturacionCompra.subtotal}" readonly="true" >

@@ -624,4 +624,7 @@ public class MbVFacturacionCompra implements Serializable{
     public void onRowCancelFactura(RowEditEvent event) {
 
     }
+    public void onDelete(List<ClsFactura> factura) {
+        
+    }
 }

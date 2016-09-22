@@ -46,7 +46,7 @@ public class DaoProducto implements InterfaceProducto {
         boolean band = false;
         try {
             iniciaOperacion();
-            sesion.save(tProducto);
+            sesion.saveOrUpdate(tProducto);
 
             tx.commit();
             sesion.close();
@@ -64,7 +64,8 @@ public class DaoProducto implements InterfaceProducto {
         this.sesion = null;
         this.tx = null;
         iniciaOperacion();
-        String hql="from TbProducto as p inner join fetch p.tbTipotasaiva iva order by p.nombre asc";
+        String hql="from TbProducto as p inner join fetch p.tbTipotasaiva iva inner join fetch p.tbTipounidadmedida undMedida "
+                + "inner join fetch p.tbTipoclasificacion clasif inner join fetch p.tbTipoalmacenes almac inner join fetch p.tbPersona person  order by p.nombre asc";
         Query query = sesion.createQuery(hql);
         List<TbProducto> producto= (List<TbProducto>) query.list();
         sesion.close();

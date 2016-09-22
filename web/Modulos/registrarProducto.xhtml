@@ -9,78 +9,126 @@
     </h:head>
     <h:body>
         <div class="ui-fluid">
-            <h:form id="frmRegistrarProducto" enctype="multipart/form-data">
-            <p:growl id="msgs" showDetail="true" />
-            <p:tab id="personal" title="RegistrarProducto">
-                <p:panel header="Registrar Producto" >
-                    <p:focus context="txtCodigo"/>
-            <p:panelGrid columns="2" columnClasses="ui-grid-col-3,ui-grid-col-6" layout="grid" styleClass="ui-panelgrid-blank">
-                
-                <p:outputLabel for="txtCodigo" styleClass="labelDerecha" value="Código:" />
-                <p:inputText id="txtCodigo" value="#{mbVProducto.tbProducto.id}" required="true" maxlength="5"/>
-                
-                <h:outputLabel for="cboProveedor" styleClass="labelDerecha" value="Proveedor: "/>
-                <h:selectOneMenu id="cboProveedor" required="true" class="form-control" value="#{mbVProducto.tbPersona.cedula}">
-                    <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
-                    <f:selectItems value="#{mbVProducto.lstPersona}"  /> 
-                </h:selectOneMenu>
-                
-                <h:outputLabel for="cboUndMedida" styleClass="labelDerecha" value="Und. Medida: "/>
-                <h:selectOneMenu id="cboUndMedida" required="true" class="form-control" value="#{mbVProducto.tbUndMedida.idTipoUnidadmedida}">
-                    <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
-                    <f:selectItems value="#{mbVProducto.lstUnidadMedida}"  /> 
-                </h:selectOneMenu>
-                
-                <h:outputLabel for="cboAlmacen" styleClass="labelDerecha" value="Almacen: "/>
-                <h:selectOneMenu id="cboAlmacen" required="true" class="form-control" value="#{mbVProducto.tbAlmacen.idTipoAlmacenes}">
-                    <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
-                    <f:selectItems value="#{mbVProducto.lstAlmacenes}"  /> 
-                </h:selectOneMenu>
-                
-                <h:outputLabel for="cboClasificacion" styleClass="labelDerecha" value="Clasificación: "/>
-                <h:selectOneMenu id="cboClasificacion" required="true" class="form-control" value="#{mbVProducto.tbClasificacion.idTipoClasificacion}">
-                    <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
-                    <f:selectItems value="#{mbVProducto.lstClasificacion}"  /> 
-                </h:selectOneMenu>
-                
-                <h:outputLabel for="cboIva" styleClass="labelDerecha" value="IVA: "/>
-                <h:selectOneMenu id="cboIva" required="true" class="form-control" value="#{mbVProducto.tbImpuesto.idTipoTasa}">
-                    <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
-                    <f:selectItems value="#{mbVProducto.lstImpuesto}"  /> 
-                </h:selectOneMenu>
-                
-                <p:outputLabel for="txtDescripcion" styleClass="labelDerecha" value="Descripción:" />
-                <p:inputText id="txtDescripcion" value="#{mbVProducto.tbProducto.nombre}" required="true" maxlength="60"/>
-                
-                <p:outputLabel for="txtPrecio1" styleClass="labelDerecha" value="Costo:" />
-                <p:inputText id="txtPrecio1" value="#{mbVProducto.tbProducto.precio1}" required="true" maxlength="100"/>
-                
-                <p:outputLabel for="txtPrecio2" styleClass="labelDerecha" value="PVP:" />
-                <p:inputText id="txtPrecio2" value="#{mbVProducto.tbProducto.precio2}" required="true" maxlength="100"/>
-                
-                <p:outputLabel for="txtMarca" styleClass="labelDerecha" value="Marca:" />
-                <p:inputText id="txtMarca" value="#{mbVProducto.tbProducto.marca}" required="true" maxlength="100"/>
-                
-                <p:outputLabel for="foto" styleClass="labelDerecha" value="Foto:" />
-                <p:fileUpload id="foto" accept="image/*" required="true" value="#{mbVProducto.file}" mode="simple" skinSimple="true"/>
-                
-                <h:outputText id="display" value="" />
-                <p:commandButton ajax="false" value="Guardar" update="frmRegistrarProducto,msgs" styleClass="anchoBotones" icon="ui-icon-disk"
-                                 actionListener="#{mbVProducto.registrarProducto()}"  />
-                
-            </p:panelGrid>
-            
-            <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
-            <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
-                <p:graphicImage class="imgAjax" value="#{resource['img/ajax-loader.gif']}"  />
-            </p:dialog>
+            <h:form id="frmRegistrarProducto">
+                <p:growl id="msgs" showDetail="true" />
+                <p:tab id="personal" title="RegistrarProducto">
+                    <p:panel header="Registrar Producto" >
+                        <p:focus context="txtCodigo"/>
+                        <p:panelGrid columns="2" columnClasses="ui-grid-col-3,ui-grid-col-6" layout="grid" styleClass="ui-panelgrid-blank">
+
+                            <p:outputLabel for="txtCodigo" styleClass="labelDerecha" value="Código:" />
+                            <p:inputText id="txtCodigo" value="#{mbVProducto.tbProducto.id}" required="true" maxlength="5"/>
+
+                            <h:outputLabel for="cboProveedor" styleClass="labelDerecha" value="Proveedor: "/>
+                            <h:selectOneMenu id="cboProveedor" required="true" class="form-control" value="#{mbVProducto.tbPersona.cedula}">
+                                <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{mbVProducto.lstPersona}"  /> 
+                            </h:selectOneMenu>
+
+                            <h:outputLabel for="cboUndMedida" styleClass="labelDerecha" value="Und. Medida: "/>
+                            <h:selectOneMenu id="cboUndMedida" required="true" class="form-control" value="#{mbVProducto.tbUndMedida.idTipoUnidadmedida}">
+                                <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{mbVProducto.lstUnidadMedida}"  /> 
+                            </h:selectOneMenu>
+
+                            <h:outputLabel for="cboAlmacen" styleClass="labelDerecha" value="Almacen: "/>
+                            <h:selectOneMenu id="cboAlmacen" required="true" class="form-control" value="#{mbVProducto.tbAlmacen.idTipoAlmacenes}">
+                                <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{mbVProducto.lstAlmacenes}"  /> 
+                            </h:selectOneMenu>
+
+                            <h:outputLabel for="cboClasificacion" styleClass="labelDerecha" value="Clasificación: "/>
+                            <h:selectOneMenu id="cboClasificacion" required="true" class="form-control" value="#{mbVProducto.tbClasificacion.idTipoClasificacion}">
+                                <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{mbVProducto.lstClasificacion}"  /> 
+                            </h:selectOneMenu>
+
+                            <h:outputLabel for="cboIva" styleClass="labelDerecha" value="IVA: "/>
+                            <h:selectOneMenu id="cboIva" required="true" class="form-control" value="#{mbVProducto.tbImpuesto.idTipoTasa}">
+                                <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{mbVProducto.lstImpuesto}"  /> 
+                            </h:selectOneMenu>
+
+                            <p:outputLabel for="txtDescripcion" styleClass="labelDerecha" value="Descripción:" />
+                            <p:inputText id="txtDescripcion" value="#{mbVProducto.tbProducto.nombre}" required="true" maxlength="60"/>
+
+                            <p:outputLabel for="txtPrecio1" styleClass="labelDerecha" value="Costo:" />
+                            <p:inputText id="txtPrecio1" value="#{mbVProducto.tbProducto.precio1}" required="true" maxlength="100"/>
+
+                            <p:outputLabel for="txtPrecio2" styleClass="labelDerecha" value="PVP:" />
+                            <p:inputText id="txtPrecio2" value="#{mbVProducto.tbProducto.precio2}" required="true" maxlength="100"/>
+
+                            <p:outputLabel for="txtMarca" styleClass="labelDerecha" value="Marca:" />
+                            <p:inputText id="txtMarca" value="#{mbVProducto.tbProducto.marca}" required="true" maxlength="100"/>
+
+                            <h:outputText id="display" value="" />
+                            <p:commandButton ajax="true" value="Guardar" update="frmRegistrarProducto,msgs,tblProducto" styleClass="anchoBotones" icon="ui-icon-disk"
+                                             actionListener="#{mbVProducto.registrarProducto()}"  />
+
+                        </p:panelGrid>
+
+                        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                            <p:graphicImage class="imgAjax" value="#{resource['img/ajax-loader.gif']}"  />
+                        </p:dialog>
+                    </p:panel>
+                </p:tab>
+                <br></br>
+            <p:panel id="panelTabla" style="height: 30%; width: 100%;">
+                <p:dataTable class="tblDatos fuenteTamanio" id="tblProducto" var="lstTbl" value="#{mbVProducto.lstProducto}"
+                                 editable="true" scrollable="true" scrollHeight="150"  sortMode="multiple">
+                        <p:ajax event="rowEdit" listener="#{mbVProducto.onRowEdit}" update=":frmRegistrarProducto:msgs" />
+                        <p:ajax event="rowEditCancel" listener="#{mbVProducto.onRowCancel}" update=":frmRegistrarProducto:msgs" />
+
+                        <p:column headerText="Codigo" sortBy="#{lstTbl.id}">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.id}" /></f:facet>
+                                <f:facet name="input">
+                                    <p:inputText readonly="true" style="width:100%" required="true" value="#{lstTbl.id}"  />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+
+                        <p:column headerText="Descripción" sortBy="#{lstTbl.nombre}">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.nombre}" /></f:facet>
+                                <f:facet name="input">
+                                    <p:inputText readonly="false" style="width:100%" required="true" value="#{lstTbl.nombre}"  />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Costo" sortBy="#{lstTbl.precio1}">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.precio1}" /></f:facet>
+                                <f:facet name="input">
+                                    <p:inputText readonly="false" style="width:100%" required="true" value="#{lstTbl.precio1}"  />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        
+                        <p:column headerText="PVP" sortBy="#{lstTbl.precio2}">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.precio2}" /></f:facet>
+                                <f:facet name="input">
+                                    <p:inputText readonly="false" style="width:100%" required="true" value="#{lstTbl.precio2}"  />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        
+                        <p:column>
+                            <p:rowEditor> 
+                            </p:rowEditor>
+                        </p:column>
+                        
+
+                    </p:dataTable>
+
                 </p:panel>
-            </p:tab>
- </h:form>
-            
-    
-    
-</div>
+            </h:form>
+        </div>
+        
     </h:body>
 </html>
 
