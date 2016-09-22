@@ -103,7 +103,7 @@ public class MbVFacturacionCompra implements Serializable{
     ///Agregando Productos a la tabla de factura
     public void agregarProducto(){
         //if(lstFactura.size() <= 0){
-        if(this.themeUsuarios == null && this.themeProductos == null){
+        if(this.themeUsuarios == null || this.themeProductos == null || tbTipopago.getId() <= 0 ){
                 mensajesError("Faltan campos por seleccionar");
                 return;
             } else {
@@ -123,17 +123,20 @@ public class MbVFacturacionCompra implements Serializable{
                         this.themeProductos.getPvp()));
 
                 if (this.themeProductos.getIva() == 12.0) {
-                    tarifa14 += this.themeProductos.getPvp() / 1.12;
-                    Total += tarifa14 + (tarifa14 * 0.12);
+                    tarifa14 += (this.themeProductos.getPvp() * Double.parseDouble(cantidad))-((this.themeProductos.getPvp() * Double.parseDouble(cantidad)) / 1.12);
+                    Total += (this.themeProductos.getPvp() * Double.parseDouble(cantidad));
+                    Subtotal = Total / 1.12;
                 } else if (this.themeProductos.getIva() == 14.0) {
-                    tarifa14 += this.themeProductos.getPvp() / 1.14;
-                    Total += tarifa14 + (tarifa14 * 0.14);
+                    tarifa14 += (this.themeProductos.getPvp() * Double.parseDouble(cantidad))- ((this.themeProductos.getPvp() * Double.parseDouble(cantidad)) / 1.14);
+                    Total += (this.themeProductos.getPvp() * Double.parseDouble(cantidad));
+                    Subtotal = Total / 1.14;
                 } else if (this.themeProductos.getIva() == 0) {
                     tarifa0 += this.themeProductos.getPvp();
+                    Total += tarifa0;
                 }
-                Subtotal += tarifa0 + tarifa14;
-                Total += tarifa0;
-            
+                
+                
+            cont++;
         }
             
         //}else{
