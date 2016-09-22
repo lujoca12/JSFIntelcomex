@@ -100,7 +100,7 @@
 
                 <br></br>
                 <p:panel id="panelTabla" style="height: 30%; width: 100%;">
-                    <p:dataTable class="tblDatos fuenteTamanio" id="tblCanton" var="lstTbl" value="#{mbVCliente.lstPersona}"
+                    <p:dataTable class="tblDatos fuenteTamanio" id="tblCanton" var="lstTbl" value="#{mbVCliente.lstProveedor}"
                                  editable="true" scrollable="true" scrollHeight="150"  sortMode="multiple">
                         <p:ajax event="rowEdit" listener="#{mbVCliente.onRowEdit}" update=":frmRegistrarProveedor:msgs" />
                         <p:ajax event="rowEditCancel" listener="#{mbVCliente.onRowCancel}" update=":frmRegistrarProveedor:msgs" />

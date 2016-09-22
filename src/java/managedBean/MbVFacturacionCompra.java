@@ -61,6 +61,7 @@ public class MbVFacturacionCompra implements Serializable{
     private Double tarifa14;
     private Double Total;
     private String cantidad;
+    private String costo;
     
     private boolean msg;
     private Date fecha;
@@ -68,6 +69,9 @@ public class MbVFacturacionCompra implements Serializable{
     
     private ClsEmpleado themeUsuarios;
     private List<ClsEmpleado> lstThemeUsuarios;
+    
+    private ClsEmpleado themeProveedor;
+    private List<ClsEmpleado> lstThemeProveedor;
     
     private ClsProducto themeProductos;
     private List<ClsProducto> lstThemeProductos;
@@ -156,6 +160,8 @@ public class MbVFacturacionCompra implements Serializable{
                             tarifa0 += lstFactura.get(i).getPvp();
                             Total += tarifa0;
                         }
+                        mensajesError("El Stock maximo es "+temp);
+                        return;
                     }
                 }else{
                     if (this.themeProductos.getIva() == 12.0) {
@@ -183,7 +189,87 @@ public class MbVFacturacionCompra implements Serializable{
         //}
         vaciarEncabezadoFactura();
     }
+    ///Agregando Productos a la tabla Compra
+    public void agregarProductoCompra(){
+        //if(lstFactura.size() <= 0){
+        if(this.themeProveedor == null || this.themeProductos == null){
+                mensajesError("Faltan campos por seleccionar");
+                return;
+            } else {
+                boolean band = false;
+                double temp = 0.0;
+                //Condicion para saber si hay mas de un registro en la lista
+                if(lstFactura.size() > 0){
+                    for (int i = 0; i < lstFactura.size(); i++) {
+                        //Condicion para comparar productos repetidos y actualizarlos
+                        if(lstFactura.get(i).getIdProducto().equals(this.themeProductos.getId().toString())){
+                           
+                                temp = lstFactura.get(i).getCantidad() + Double.parseDouble(cantidad);
+                                lstFactura.get(i).setCantidad(temp);
+                                lstFactura.get(i).setTotalxProducto(lstFactura.get(i).getCantidad()*lstFactura.get(i).getCosto());
+                                band = true;
+                        }
+                    }
+                }else if(band == false){
+                    lstFactura.add(new ClsFactura((cont + 1),
+                        this.themeProductos.getId(),
+                        this.themeProductos.getNombre(),
+                        Double.parseDouble(cantidad),
+                        (Double.parseDouble(costo) * Double.parseDouble(cantidad)),
+                        Double.parseDouble(costo),
+                        0.0,
+                        this.themeProductos.getPvp(),
+                        this.themeProductos.getIva()));
+                }
+                
+                if(band){
+                    tarifa14 = 0.0;Total=0.0;Subtotal = 0.0;tarifa0=0.0;
+                    for (int i = 0; i < lstFactura.size(); i++) {
+                        
+                        if (lstFactura.get(i).getIva() == 12.0) {
+                            tarifa14 += (lstFactura.get(i).getCosto() * lstFactura.get(i).getCantidad()) - ((lstFactura.get(i).getCosto() * lstFactura.get(i).getCantidad()) / 1.12);
+                            Total += (lstFactura.get(i).getCosto() * lstFactura.get(i).getCantidad());
+                            Subtotal = Total / 1.12;
+                        } else if (lstFactura.get(i).getIva() == 14.0) {
+                            tarifa14 += (lstFactura.get(i).getCosto() * lstFactura.get(i).getCantidad()) - ((lstFactura.get(i).getCosto() * lstFactura.get(i).getCantidad()) / 1.14);
+                            Total += (lstFactura.get(i).getCosto() * lstFactura.get(i).getCantidad());
+                            Subtotal = Total / 1.14;
+                        } else if (lstFactura.get(i).getIva() == 0) {
+                            tarifa0 += lstFactura.get(i).getCosto();
+                            Total += tarifa0;
+                        }
+                    }
+                }else{
+                    if (this.themeProductos.getIva() == 12.0) {
+                        tarifa14 += (this.themeProductos.getCosto() * Double.parseDouble(cantidad)) - ((this.themeProductos.getCosto() * Double.parseDouble(cantidad)) / 1.12);
+                        Total += (this.themeProductos.getCosto() * Double.parseDouble(cantidad));
+                        Subtotal = Total / 1.12;
+                    } else if (this.themeProductos.getIva() == 14.0) {
+                        tarifa14 += (this.themeProductos.getCosto() * Double.parseDouble(cantidad)) - ((this.themeProductos.getCosto() * Double.parseDouble(cantidad)) / 1.14);
+                        Total += (this.themeProductos.getCosto() * Double.parseDouble(cantidad));
+                        Subtotal = Total / 1.14;
+                    } else if (this.themeProductos.getIva() == 0) {
+                        tarifa0 += this.themeProductos.getCosto();
+                        Total += tarifa0;
+                    }
+                    cont++;
+                }
+                
+                
+                
+            
+        }
+            
+        //}else{
+            
+        //}
+        vaciarEncabezadoCompra();
+    }
     private void vaciarEncabezadoFactura(){
+        cantidad = "";
+        llenarCboProducto();
+    }
+    private void vaciarEncabezadoCompra(){
         cantidad = "";
         llenarCboProducto();
     }
@@ -217,17 +303,17 @@ public class MbVFacturacionCompra implements Serializable{
         }
     }
     public void llenarCboProveedor() {
-        this.lstThemeUsuarios = new ArrayList<ClsEmpleado>();
+        this.lstThemeProveedor = new ArrayList<ClsEmpleado>();
         try {
             DaoTCliente daoCliente = new DaoTCliente();
 
             List<TbPersona> lstCliente = daoCliente.getProveedor();
-            if(this.lstThemeUsuarios.size() > 0)
-                this.lstThemeUsuarios.clear();
+            if(this.lstThemeProveedor.size() > 0)
+                this.lstThemeProveedor.clear();
             
-            this.lstThemeUsuarios.add(new ClsEmpleado("-1", "Ninguno", "Ninguno"));
+            this.lstThemeProveedor.add(new ClsEmpleado("-1", "Ninguno", "Ninguno"));
             for (TbPersona cliente : lstCliente) {
-                this.lstThemeUsuarios.add(new ClsEmpleado(cliente.getCedula(), 
+                this.lstThemeProveedor.add(new ClsEmpleado(cliente.getCedula(), 
                         cliente.getCedula()+" - "+cliente.getApellidos() + " " + cliente.getNombres(), 
                         cliente.getApellidos() + " " + cliente.getNombres()));
             }
@@ -311,6 +397,30 @@ public class MbVFacturacionCompra implements Serializable{
 
     }
 
+    public String getCosto() {
+        return costo;
+    }
+
+    public void setCosto(String costo) {
+        this.costo = costo;
+    }
+    
+    public ClsEmpleado getThemeProveedor() {
+        return themeProveedor;
+    }
+
+    public void setThemeProveedor(ClsEmpleado themeProveedor) {
+        this.themeProveedor = themeProveedor;
+    }
+
+    public List<ClsEmpleado> getLstThemeProveedor() {
+        return lstThemeProveedor;
+    }
+
+    public void setLstThemeProveedor(List<ClsEmpleado> lstThemeProveedor) {
+        this.lstThemeProveedor = lstThemeProveedor;
+    }
+    
     public String getCantidad() {
         return cantidad;
     }
@@ -481,6 +591,7 @@ public class MbVFacturacionCompra implements Serializable{
         tbProducto = new TbProducto();
         tbDetallefactura = new TbDetallefactura();
         tbTipopago = new TbTipopago();
+        
         
         Subtotal = 0.0;
         tarifa0= 0.0;
