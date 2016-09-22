@@ -6,6 +6,7 @@
 package Dao;
 
 import Interface.InterfaceProducto;
+import Pojo.TbInventario;
 import Pojo.TbProducto;
 import java.util.List;
 import org.hibernate.HibernateException;
@@ -63,11 +64,21 @@ public class DaoProducto implements InterfaceProducto {
         this.sesion = null;
         this.tx = null;
         iniciaOperacion();
-        String hql="from TbProducto as p order by p.nombre asc";
+        String hql="from TbProducto as p inner join fetch p.tbTipotasaiva iva order by p.nombre asc";
         Query query = sesion.createQuery(hql);
         List<TbProducto> producto= (List<TbProducto>) query.list();
         sesion.close();
         return producto;
+    }
+    public TbInventario getStockProducto(String idProducto) throws Exception {
+        this.sesion = null;
+        this.tx = null;
+        iniciaOperacion();
+        String hql="from TbInventario as inv inner join fetch inv.tbProducto p where p.id ='"+idProducto+"' ";
+        Query query = sesion.createQuery(hql);
+        List<TbInventario> inv= (List<TbInventario>) query.list();
+        sesion.close();
+        return inv.get(0);
     }
 
     @Override

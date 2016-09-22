@@ -15,6 +15,7 @@ import Dao.DaoTConfiguracion;
 import Dao.DaoTUsuario;
 import Pojo.TbDetallefactura;
 import Pojo.TbFactura;
+import Pojo.TbInventario;
 import Pojo.TbPersona;
 import Pojo.TbProducto;
 import Pojo.TbTipopago;
@@ -63,12 +64,14 @@ public class MbVFacturacionCompra implements Serializable{
     
     private boolean msg;
     private Date fecha;
+    private int cont = 0;
     
     private ClsEmpleado themeUsuarios;
     private List<ClsEmpleado> lstThemeUsuarios;
     
     private ClsProducto themeProductos;
     private List<ClsProducto> lstThemeProductos;
+    private int stock = 0;
     
     public MbVFacturacionCompra() {
         tbPersona = new TbPersona();
@@ -85,6 +88,7 @@ public class MbVFacturacionCompra implements Serializable{
         llenarCboProducto();
         llenarCboUsuarios();
         cargarTipoPago();
+        lstFactura = new ArrayList<>();
     }
     
     private void cargarTipoPago(){
@@ -98,7 +102,48 @@ public class MbVFacturacionCompra implements Serializable{
     }
     ///Agregando Productos a la tabla de factura
     public void agregarProducto(){
-        lstFactura = new ArrayList<>();
+        //if(lstFactura.size() <= 0){
+        if(this.themeUsuarios == null && this.themeProductos == null){
+                mensajesError("Faltan campos por seleccionar");
+                return;
+            } else {
+//            if (Integer.parseInt(cantidad) >= 0 && Integer.parseInt(cantidad) <= this.themeProductos.getCantidad()) {
+//                cantidad = 
+//            }else if(Integer.parseInt(cantidad) > this.themeProductos.getCantidad()){
+//                cantidad = String.valueOf(this.themeProductos.getCantidad());
+//                this.themeProductos.setCantidad(0);
+//            }
+                lstFactura.add(new ClsFactura((cont + 1),
+                        this.themeProductos.getId(),
+                        this.themeProductos.getNombre(),
+                        Double.parseDouble(cantidad),
+                        (this.themeProductos.getPvp() * Double.parseDouble(cantidad)),
+                        this.themeProductos.getCosto(),
+                        0.0,
+                        this.themeProductos.getPvp()));
+
+                if (this.themeProductos.getIva() == 12.0) {
+                    tarifa14 += this.themeProductos.getPvp() / 1.12;
+                    Total += tarifa14 + (tarifa14 * 0.12);
+                } else if (this.themeProductos.getIva() == 14.0) {
+                    tarifa14 += this.themeProductos.getPvp() / 1.14;
+                    Total += tarifa14 + (tarifa14 * 0.14);
+                } else if (this.themeProductos.getIva() == 0) {
+                    tarifa0 += this.themeProductos.getPvp();
+                }
+                Subtotal += tarifa0 + tarifa14;
+                Total += tarifa0;
+            
+        }
+            
+        //}else{
+            
+        //}
+        vaciarEncabezadoFactura();
+    }
+    private void vaciarEncabezadoFactura(){
+        cantidad = "";
+        llenarCboProducto();
     }
     private void cargarTablFactxfechaActual(){
         try {
@@ -133,18 +178,24 @@ public class MbVFacturacionCompra implements Serializable{
         this.lstThemeProductos = new ArrayList<ClsProducto>();
         try {
             DaoProducto daoProducto = new DaoProducto();
-
+            TbInventario tbInv = new TbInventario();
+            Double iva = 0.0;
             List<TbProducto> lstProducto = daoProducto.getProducto();
             if(this.lstThemeProductos.size() > 0)
                 this.lstThemeProductos.clear();
             
-            this.lstThemeProductos.add(new ClsProducto("-1", "Ninguno", 0.0, 0.0,0.0));
+            this.lstThemeProductos.add(new ClsProducto("-1", "Ninguno", 0.0, 0.0,0.0,"",0));
             for (TbProducto prod : lstProducto) {
+                tbInv = daoProducto.getStockProducto(prod.getId());
+                stock = tbInv.getStock();
+                iva = (double)prod.getTbTipotasaiva().getValor();
                 this.lstThemeProductos.add(new ClsProducto(prod.getId(), 
                         prod.getId() +" - "+prod.getNombre(), //Codigo + nombre del producto
                         prod.getPrecio2().doubleValue(),//Pvp
                         prod.getPrecio1().doubleValue(),//Costo
-                        0.0));//otro precio
+                        iva,//iva
+                        prod.getNombre(),//Nombre del producto
+                        stock));//stock
             }
         } catch (Exception ex) {
 

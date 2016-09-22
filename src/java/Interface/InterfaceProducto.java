@@ -6,6 +6,7 @@
 package Interface;
 
 import Pojo.TbProducto;
+import Pojo.TbInventario;
 import java.util.List;
 
 /**
@@ -17,4 +18,5 @@ public interface InterfaceProducto {
     public List<TbProducto> getProducto() throws Exception;
     public List<TbProducto> getProducto(String idProducto) throws Exception;
     public boolean updateProducto(TbProducto tProducto) throws Exception;
+    public TbInventario getStockProducto(String idProducto) throws Exception;
 }

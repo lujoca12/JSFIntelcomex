@@ -14,16 +14,19 @@ public class ClsProducto {
     private String displayName; 
     private Double pvp;
     private Double costo;
-    private Double otroprecio;
-     
+    private Double iva;
+    private String nombre;
+    private int cantidad;
     public ClsProducto() {}
 
-    public ClsProducto(String id, String displayName, Double pvp, Double costo, Double otroprecio) {
+    public ClsProducto(String id, String displayName, Double pvp, Double costo, Double iva, String nombre, int cantidad) {
         this.id = id;
         this.displayName = displayName;
         this.pvp = pvp;
         this.costo = costo;
-        this.otroprecio = otroprecio;
+        this.iva = iva;
+        this.nombre = nombre;
+        this.cantidad = cantidad;
     }
 
     public String getId() {
@@ -58,13 +61,28 @@ public class ClsProducto {
         this.costo = costo;
     }
 
-    public Double getOtroprecio() {
-        return otroprecio;
+    public Double getIva() {
+        return iva;
     }
 
-    public void setOtroprecio(Double otroprecio) {
-        this.otroprecio = otroprecio;
+    public void setIva(Double iva) {
+        this.iva = iva;
     }
- 
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
     
 }

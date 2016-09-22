@@ -8,10 +8,10 @@ package Clases;
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.faces.component.UIComponent;
+import javax.faces.component.UISelectItem;
 import javax.faces.component.UISelectItems;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-import Clases.ClsEmpleado;
 import javax.faces.convert.FacesConverter;
 /**
  *
@@ -21,14 +21,12 @@ import javax.faces.convert.FacesConverter;
 public class SelectConverterEmp implements Converter {
  
     public Object getAsObject(FacesContext fc, UIComponent uic, String value) {
-        int valor = 0;
         if (value == null) {
             return null;
         } else {
             if(value.equals("-1")){
                 
-            }else if(isNumeric(value)){
-                valor = Integer.parseInt(value);
+            }else {
                for (ClsEmpleado item : getSelectItems(uic)) {
                    if(item.getId().equals(value))
                         return item;
@@ -52,11 +50,11 @@ public class SelectConverterEmp implements Converter {
         Collection<ClsEmpleado> collection = new ArrayList<ClsEmpleado>();
 
         for (UIComponent child : component.getChildren()) {
-//            if (child instanceof UISelectItem) {
-//                UISelectItem ui = (UISelectItem) child;
-//                ClsEmpleado item = (ClsEmpleado) ui.getValue();
-//                collection.add(item);
-//            } else 
+            if (child instanceof UISelectItem) {
+                UISelectItem ui = (UISelectItem) child;
+                ClsEmpleado item = (ClsEmpleado) ui.getValue();
+                collection.add(item);
+            } else 
                 if (child instanceof UISelectItems) {
                 UISelectItems ui = (UISelectItems) child;
                 Object value = ui.getValue();

@@ -5,14 +5,18 @@
  */
 package Clases;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
+import javax.faces.component.UISelectItem;
 import javax.faces.component.UISelectItems;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
+import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
-import Clases.ClsProducto;
+import javax.faces.model.SelectItem;
 
 /**
  *
@@ -29,7 +33,6 @@ public class SelectConverterProducto implements Converter {
             if(value.equals("-1")){
                 
             }else{
-               valor = Integer.parseInt(value);
                for (ClsProducto item : getSelectItems(uic)) {
                    if(item.getId().equals(value))
                         return item;
@@ -53,11 +56,11 @@ public class SelectConverterProducto implements Converter {
         Collection<ClsProducto> collection = new ArrayList<ClsProducto>();
 
         for (UIComponent child : component.getChildren()) {
-//            if (child instanceof UISelectItem) {
-//                UISelectItem ui = (UISelectItem) child;
-//                ClsProducto item = (ClsProducto) ui.getValue();
-//                collection.add(item);
-//            } else 
+            if (child instanceof UISelectItem) {
+                UISelectItem ui = (UISelectItem) child;
+                ClsProducto item = (ClsProducto) ui.getValue();
+                collection.add(item);
+            } else 
                 if (child instanceof UISelectItems) {
                 UISelectItems ui = (UISelectItems) child;
                 Object value = ui.getValue();

@@ -31,7 +31,7 @@
                             </p:selectOneMenu>
                             
                             <p:outputLabel for="txtFecha" styleClass="labelDerecha" value="Fecha:" />
-                            <p:calendar id="txtFecha" value="#{mbVFacturacionCompra.fecha}" effect="fold" required="true" pattern="dd-MM-yyyy" mask="true" />
+                            <p:calendar id="txtFecha" value="#{mbVFacturacionCompra.fecha}" effect="fold" readonly="true" required="true" pattern="dd-MM-yyyy" mask="true" />
                             
                             <h:outputLabel styleClass="labelDerecha" for="cboProducto" value="Producto: "/>
                             <p:selectOneMenu id="cboProducto" value="#{mbVFacturacionCompra.themeProductos}" converter="themeConverterProd"
@@ -65,7 +65,7 @@
 
 
                             <h:outputText id="display" value="" />
-                            <p:commandButton value="Agregar" update="tblFactura" styleClass="anchoBotones" icon="ui-icon-disk"
+                            <p:commandButton ajax="true" value="Agregar" update="tblFactura txtSubtotal txttarifa0 txtTarifa14 txtTotal" styleClass="anchoBotones" icon="ui-icon-plusthick"
                                              actionListener="#{mbVFacturacionCompra.agregarProducto()}" />
 
                         </p:panelGrid>
