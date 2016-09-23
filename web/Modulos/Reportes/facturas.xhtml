@@ -1,12 +1,202 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        Hello from Facelets
+        <div class="ui-fluid">
+            <h:form id="frmRegistrarFactura">
+                <p:growl id="msgs" showDetail="true" />
+                <p:tab id="personal" title="RegistrarFactura">
+                    <p:panel header="Reportes de Facturación" >
+
+                        <p:panelGrid columns="4" columnClasses="ui-grid-col-3,ui-grid-col-6" layout="grid" styleClass="ui-panelgrid-blank">
+
+                            <h:outputLabel for="cboCliente" styleClass="labelDerecha" value="Factura Nº: "/>
+                            <p:selectOneMenu required="true" id="cboCliente" value="#{mbVFacturacionCompra.themeUsuarios}" converter="themeConverterEmp"
+                                             effect="fade" var="t" filter="true" filterMatchMode="contains">
+                                <f:selectItems value="#{mbVFacturacionCompra.lstThemeUsuarios}" var="theme" itemLabel="#{theme.displayName}" itemValue="#{theme}" />
+                                <p:column style="width:10%">
+                                    <h:outputText styleClass="ui-theme ui-theme-#{t.name}" />
+                                </p:column>
+
+                                <p:column>
+                                    <h:outputText value="#{t.displayName}" />
+                                </p:column>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel for="txtFecha" styleClass="labelDerecha" value="Fecha:" />
+                            <p:calendar id="txtFecha" value="#{mbVFacturacionCompra.fecha}" effect="fold" readonly="true" required="true" pattern="dd-MM-yyyy" mask="true" />
+
+                            <h:outputLabel styleClass="labelDerecha" for="cboProducto" value="Producto: "/>
+                            
+                            <p:selectOneMenu id="cboProducto" value="#{mbVFacturacionCompra.themeProductos}" converter="themeConverterProd"
+                                             effect="fade" var="t" filter="true" filterMatchMode="contains">
+                                <f:selectItems value="#{mbVFacturacionCompra.lstThemeProductos}" var="theme" itemLabel="#{theme.displayName}" itemValue="#{theme}" />
+                                <p:column style="width:10%">
+                                    <h:outputText styleClass="ui-theme ui-theme-#{t.displayName}" />
+                                </p:column>
+
+                                <p:column>
+                                    <h:outputText value="#{t.displayName}" />
+                                </p:column>
+                                
+                            </p:selectOneMenu>
+
+                            <h:outputLabel for="txtTipoPago" styleClass="labelDerecha"  value="T.Pago: "/>
+                            <h:panelGroup id="group2">
+                                <h:selectOneMenu id="txtTipoPago" required="true" class="form-control" value="#{mbVFacturacionCompra.tbTipopago.id}">
+                                    <f:selectItem itemLabel="Ninguno" itemValue="" noSelectionOption="true" />
+                                    <f:selectItems value="#{mbVFacturacionCompra.lstTipoPago}"  />  
+                                </h:selectOneMenu>
+                            </h:panelGroup>
+                            
+                            
+                            <h:outputLabel styleClass="labelDerecha" for="cboProducto" value="Cliente: "/>
+                            
+                            <p:selectOneMenu style="width:30%" id="cboProducto" value="#{mbVFacturacionCompra.themeProductos}" converter="themeConverterProd"
+                                             effect="fade" var="t" filter="true" filterMatchMode="contains">
+                                <f:selectItems value="ninguno" var="theme" itemLabel="aa" itemValue="bb" />
+                                <p:column style="width:10%">
+                                    <h:outputText styleClass="ui-theme ui-theme-#{t.displayName}" />
+                                </p:column>
+
+                                <p:column>
+                                    <h:outputText value="#{t.displayName}" />
+                                </p:column>
+                                
+                            </p:selectOneMenu>
+                            
+                            <p:panelGrid columns="1" columnClasses="ui-grid-col-12"  layout="grid" styleClass="ui-panelgrid-blank">
+                                <p:commandButton ajax="true" value="Buscar" update="frmRegistrarFactura,msgs" icon="ui-icon-disk" actionListener="#{mbVFacturacionCompra.registrarFactura()}" />
+                            </p:panelGrid>
+
+
+
+
+                        </p:panelGrid>
+
+                        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                            <p:graphicImage class="imgAjax" value="#{resource['img/ajax-loader.gif']}"  />
+                        </p:dialog>
+                    </p:panel>
+                </p:tab>
+
+                <br></br>
+                <p:panel id="panelTabla" style="height: 30%; width: 100%;">
+                    <p:dataTable class="tblDatos fuenteTamanio" id="tblFactura" var="lstTbl" value="#{mbVFacturacionCompra.lstFactura}"
+                                 editable="true" scrollable="true" scrollHeight="150" >
+                        <p:ajax event="rowEdit" listener="#{mbVFacturacionCompra.onRowEditFactura}" update=":frmRegistrarFactura:msgs" />
+                        <p:ajax event="rowEditCancel" listener="#{mbVFacturacionCompra.onRowCancelFactura}" update=":frmRegistrarFactura:msgs" />
+
+                        <p:column headerText="#">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.numero}" /></f:facet>
+                                <f:facet name="input">
+                                    <p:inputText readonly="true" style="width:100%" required="true" value="#{lstTbl.numero}"  />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+
+                        <p:column headerText="Codigo">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.idProducto}" /></f:facet>
+                                <f:facet name="input">
+                                    <p:inputText readonly="true" style="width:100%" required="true" value="#{lstTbl.idProducto}"  />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Descripcion">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.nombreProducto}" /></f:facet>
+                                <f:facet name="input">
+                                    <p:inputText readonly="true" style="width:100%" required="true" value="#{lstTbl.nombreProducto}"  />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Cantidad">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.cantidad}" /></f:facet>
+                                <f:facet name="input">
+                                    <p:inputText readonly="false" style="width:100%" required="true" value="#{lstTbl.cantidad}"  />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="PVP">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.pvp}" /></f:facet>
+                                <f:facet name="input">
+                                    <p:inputText readonly="true" style="width:100%" required="true" value="#{lstTbl.pvp}"  />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+
+                        <p:column headerText="Total">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{lstTbl.totalxProducto}" /></f:facet>
+                                <f:facet name="input">
+                                    <p:inputText readonly="true" style="width:100%" required="true" value="#{lstTbl.totalxProducto}"  />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column>
+                            <p:rowEditor> 
+                            </p:rowEditor>
+                        </p:column>
+
+                        <p:column style="width:20px;">
+                            <p:commandButton id="btnEliminar"
+                                             action="#{mbVFacturacionCompra.onDelete(lstTbl)}"
+                                             update="frmRegistrarFactura,tblFactura"
+                                             icon="ui-icon-trash"
+                                             style="border-style: hidden;background-color: transparent;"
+                                             >
+                                <p:confirm header="Eliminación de Producto" message="Presiona confirmar para realizar acción" icon="ui-icon-alert" />
+                            </p:commandButton>
+                        </p:column>
+
+                    </p:dataTable>
+
+                    <p:confirmDialog global="true" styleClass="change-position">
+                        <p:commandButton value="Confirmar" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+                        <p:commandButton value="Cancelar" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+                    </p:confirmDialog>
+
+                    <p:panelGrid columns="8" columnClasses="ui-grid-col-4,ui-grid-col-4,ui-grid-col-4,ui-grid-col-4,ui-grid-col-4,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"  layout="grid" styleClass="ui-panelgrid-blank">
+                        <p:outputLabel for="txtSubtotal" styleClass="labelDerecha" value="Subt. 14%:" />
+                        <p:inputText id="txtSubtotal" value="" readonly="true" ></p:inputText>
+
+                        <p:outputLabel for="txttarifa0" styleClass="labelDerecha" value="Subt 0%:" />
+                        <p:inputText id="txttarifa0" value="#{mbVFacturacionCompra.tarifa0}" readonly="true"  >
+                            <f:convertNumber pattern="#0.00" />
+                        </p:inputText>
+
+                        <p:outputLabel for="txtTarifa14" styleClass="labelDerecha" value="% IVA:" />
+                        <p:inputText id="txtTarifa14" value="#{mbVFacturacionCompra.tarifa14}" readonly="true"  >
+                            <f:convertNumber pattern="#0.00" />
+                        </p:inputText>
+
+                        <p:outputLabel for="txtTotal" styleClass="labelDerecha" value="Total:" />
+                        <p:inputText id="txtTotal" value="#{mbVFacturacionCompra.total}" readonly="true"  >
+                            <f:convertNumber pattern="#0.00" />
+                        </p:inputText>
+                    </p:panelGrid>
+
+                </p:panel>
+            </h:form>
+        </div>
     </h:body>
 </html>
 
