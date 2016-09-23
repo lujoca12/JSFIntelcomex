@@ -79,7 +79,8 @@ public class DaoProducto implements InterfaceProducto {
         Query query = sesion.createQuery(hql);
         List<TbInventario> inv= (List<TbInventario>) query.list();
         sesion.close();
-        return inv.get(0);
+        
+        return inv.size() > 0 ? inv.get(0):null;
     }
 
     @Override

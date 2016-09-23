@@ -137,8 +137,9 @@ public class DaoFacturacion {
             BigDecimal bigdec;
             for (int i = 0; i < lstFactura.size(); i++) {
                 producto.setId(lstFactura.get(i).getIdProducto());
+                inventario.setId(lstFactura.get(i).getIdInventario());
                 inventario.setTbProducto(producto);
-                inventario.setStock(Integer.parseInt(lstFactura.get(i).getCantidad().toString()));
+                inventario.setStock(lstFactura.get(i).getCantidad().intValue()+lstFactura.get(i).getStock());
                 inventario.setCantidadMinima(5);
                 bigdec = new BigDecimal(lstFactura.get(i).getCosto());
                 inventario.setPrecioStock(bigdec);

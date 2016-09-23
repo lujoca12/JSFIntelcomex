@@ -34,9 +34,9 @@
                             <p:calendar id="txtFecha" value="#{mbVFacturacionCompra.fecha}" effect="fold" readonly="true" required="true" pattern="dd-MM-yyyy" mask="true" />
                             
                             <h:outputLabel styleClass="labelDerecha" for="cboProducto" value="Producto: "/>
-                            <p:selectOneMenu id="cboProducto" value="#{mbVFacturacionCompra.themeProductos}" converter="themeConverterProd"
+                            <p:selectOneMenu id="cboProducto" value="#{mbVFacturacionCompra.themeProductosCompra}" converter="themeConverterProd"
                                              effect="fade" var="t" filter="true" filterMatchMode="contains">
-                                <f:selectItems value="#{mbVFacturacionCompra.lstThemeProductos}" var="theme" itemLabel="#{theme.displayName}" itemValue="#{theme}" />
+                                <f:selectItems value="#{mbVFacturacionCompra.lstThemeProductosCompra}" var="theme" itemLabel="#{theme.displayName}" itemValue="#{theme}" />
                                 <p:column style="width:10%">
                                     <h:outputText styleClass="ui-theme ui-theme-#{t.displayName}" />
                                 </p:column>
@@ -60,7 +60,7 @@
 
 
                             <h:outputText id="display" value="" />
-                            <p:commandButton ajax="true" value="Agregar" update="msgs,tblFactura,txtSubtotal,txttarifa0,txtTarifa14,txtTotal,txtCantidad,cboProducto" styleClass="anchoBotones" icon="ui-icon-plusthick"
+                            <p:commandButton ajax="true" value="Agregar" update="msgs,tblCompra,txtSubtotal,txttarifa0,txtTarifa14,txtTotal,txtCantidad,cboProducto" styleClass="anchoBotones" icon="ui-icon-plusthick"
                                              actionListener="#{mbVFacturacionCompra.agregarProductoCompra()}" />
 
                         </p:panelGrid>
@@ -74,7 +74,7 @@
 
                 <br></br>
                 <p:panel id="panelTabla" style="height: 30%; width: 100%;">
-                    <p:dataTable class="tblDatos fuenteTamanio" id="tblFactura" var="lstTbl" value="#{mbVFacturacionCompra.lstFactura}"
+                    <p:dataTable class="tblDatos fuenteTamanio" id="tblCompra" var="lstTbl" value="#{mbVFacturacionCompra.lstFactura}"
                                  editable="true" scrollable="true" scrollHeight="150" >
                         <p:ajax event="rowEdit" listener="#{mbVFacturacionCompra.onRowEditFactura}" update=":frmRegistrarCompra:msgs" />
                         <p:ajax event="rowEditCancel" listener="#{mbVFacturacionCompra.onRowCancelFactura}" update=":frmRegistrarCompra:msgs" />
@@ -139,8 +139,25 @@
                             <p:rowEditor> 
                             </p:rowEditor>
                         </p:column>
+                        
+                        <p:column style="width:20px;">
+                            <p:commandButton id="btnEliminar"
+                                             action="#{mbVFacturacionCompra.onDeleteTblCompra(lstTbl)}"
+                                             update="frmRegistrarCompra,tblCompra"
+                                             icon="ui-icon-trash"
+                                             style="border-style: hidden;background-color: transparent;"
+                                             >
+                                <p:confirm header="Eliminación de Producto" message="Presiona confirmar para realizar acción" icon="ui-icon-alert" />
+                            </p:commandButton>
+                        </p:column>
 
                     </p:dataTable>
+                    
+                     <p:confirmDialog global="true" styleClass="change-position">
+                        <p:commandButton value="Confirmar" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+                        <p:commandButton value="Cancelar" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+                    </p:confirmDialog>
+                    
                     <p:panelGrid columns="8" columnClasses="ui-grid-col-4,ui-grid-col-4,ui-grid-col-4,ui-grid-col-4,ui-grid-col-4,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"  layout="grid" styleClass="ui-panelgrid-blank">
                         <p:outputLabel for="txtSubtotal" styleClass="labelDerecha" value="Subt. 14%:" />
                         <p:inputText id="txtSubtotal" value="#{mbVFacturacionCompra.subtotal}" readonly="true" >
@@ -164,14 +181,14 @@
                     </p:panelGrid>
                     <p:panelGrid columns="1" columnClasses="ui-grid-col-12"  layout="grid" styleClass="ui-panelgrid-blank">
                         <p:commandButton ajax="true" value="Guardar Compra" update="frmRegistrarCompra,msgs" icon="ui-icon-disk"
-                                         actionListener="#{mbVFacturacionCompra.registrarFactura()}" />
+                                         actionListener="#{mbVFacturacionCompra.registrarCompra()}" />
                     </p:panelGrid>
                 </p:panel>
                 
                 <br></br>
                 <center><h5>Compras Registradas</h5></center>
                 <p:panel id="panelTabla1" style="height: 30%; width: 100%;">
-                    <p:dataTable class="tblDatos fuenteTamanio" id="tblFacturaRegistradas" var="lstTbl" value="#{mbVFacturacionCompra.lstTblFactura}"
+                    <p:dataTable class="tblDatos fuenteTamanio" id="tblFacturaCompra" var="lstTbl" value="#{mbVFacturacionCompra.lstTblFactura}"
                                  editable="true" scrollable="true" scrollHeight="150" >
 
                         <p:column headerText="Codigo">
