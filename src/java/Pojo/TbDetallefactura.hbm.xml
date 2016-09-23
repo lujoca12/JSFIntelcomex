@@ -6,7 +6,7 @@
     <class name="Pojo.TbDetallefactura" table="tb_detallefactura" catalog="intelcomex" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
-            <generator class="identity" />
+            <generator class="increment" />
         </id>
         <many-to-one name="tbFactura" class="Pojo.TbFactura" fetch="select">
             <column name="tb_factura_id" not-null="true" />

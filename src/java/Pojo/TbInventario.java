@@ -19,6 +19,7 @@ public class TbInventario  implements java.io.Serializable {
      private Date fecharegistro;
      private String proveedorid;
      private String proveedornombres;
+     private Integer stockactual;
 
     public TbInventario() {
     }
@@ -27,7 +28,7 @@ public class TbInventario  implements java.io.Serializable {
     public TbInventario(TbProducto tbProducto) {
         this.tbProducto = tbProducto;
     }
-    public TbInventario(TbProducto tbProducto, Integer stock, Integer cantidadMinima, BigDecimal precioStock, Date fecharegistro, String proveedorid,String proveedornombres ) {
+    public TbInventario(TbProducto tbProducto, Integer stock, Integer cantidadMinima, BigDecimal precioStock, Date fecharegistro, String proveedorid,String proveedornombres,Integer stockactual ) {
        this.tbProducto = tbProducto;
        this.stock = stock;
        this.cantidadMinima = cantidadMinima;
@@ -35,6 +36,7 @@ public class TbInventario  implements java.io.Serializable {
        this.fecharegistro = fecharegistro;
        this.proveedorid = proveedorid;
        this.proveedornombres = proveedornombres;
+       this.stockactual = stockactual;
     }
    
     public Integer getId() {
@@ -94,6 +96,14 @@ public class TbInventario  implements java.io.Serializable {
 
     public void setProveedornombres(String proveedornombres) {
         this.proveedornombres = proveedornombres;
+    }
+
+    public Integer getStockactual() {
+        return stockactual;
+    }
+
+    public void setStockactual(Integer stockactual) {
+        this.stockactual = stockactual;
     }
     
 

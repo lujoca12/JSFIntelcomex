@@ -51,11 +51,13 @@ public class DaoFacturacion {
             tx.commit();
             sesion.close();
             iniciaOperacion();
-            TbDetallefactura detalleFact = new TbDetallefactura();
-            TbProducto producto = new TbProducto();
+            TbDetallefactura detalleFact;
+            TbProducto producto;
             BigDecimal bigdec;
             TbInventario inventario;
             for (int i = 0; i < lstFactura.size(); i++) {
+                detalleFact = new TbDetallefactura();
+                producto = new TbProducto();
                 detalleFact.setTbFactura(factura);
                 detalleFact.setTbDetallefacturacol("usuario "+factura.getTbUsuarios().getApellidos());
                 bigdec = new BigDecimal(lstFactura.get(i).getTotalxProducto());
@@ -91,11 +93,14 @@ public class DaoFacturacion {
                 producto = new TbProducto();
                 producto.setId(lstFactura.get(i).getIdProducto());
                 inventario.setId(lstFactura.get(i).getIdInventario());
-                inventario.setStock(lstFactura.get(i).getStock() - lstFactura.get(i).getCantidad().intValue());
+                inventario.setStock(lstFactura.get(i).getCantidadAnterior());
+                inventario.setStockactual(lstFactura.get(i).getStock() - lstFactura.get(i).getCantidad().intValue());
                 inventario.setTbProducto(producto);
                 inventario.setCantidadMinima(lstFactura.get(i).getCantMinima());
                 inventario.setPrecioStock(lstFactura.get(i).getPrecioStock());
                 inventario.setFecharegistro(lstFactura.get(i).getFecharegistro());
+                inventario.setProveedorid(lstFactura.get(i).getIdProveedor());
+                inventario.setProveedornombres(lstFactura.get(i).getProveedor());
                 sesion.saveOrUpdate(inventario);
             }
             tx.commit();
@@ -127,22 +132,26 @@ public class DaoFacturacion {
         boolean band = false;
         try {
             iniciaOperacion();
-            //Primero guardo la factura
-//            sesion.saveOrUpdate(inventario);
-//            tx.commit();
-//            sesion.close();
-//            iniciaOperacion();
+           String nombreProveedor = inventario.getProveedornombres();
+           String idProveedor = inventario.getProveedorid();
+           Date fecha = inventario.getFecharegistro();
             
-            TbProducto producto = new TbProducto();
+            TbProducto producto;
             BigDecimal bigdec;
             for (int i = 0; i < lstFactura.size(); i++) {
+                inventario = new TbInventario();
+                producto = new TbProducto();
                 producto.setId(lstFactura.get(i).getIdProducto());
-                inventario.setId(lstFactura.get(i).getIdInventario());
+                //inventario.setId(lstFactura.get(i).getIdInventario());
                 inventario.setTbProducto(producto);
-                inventario.setStock(lstFactura.get(i).getCantidad().intValue()+lstFactura.get(i).getStock());
+                inventario.setStock(lstFactura.get(i).getCantidad().intValue());
+                inventario.setStockactual(lstFactura.get(i).getCantidad().intValue()+lstFactura.get(i).getStock());
                 inventario.setCantidadMinima(5);
                 bigdec = new BigDecimal(lstFactura.get(i).getCosto());
                 inventario.setPrecioStock(bigdec);
+                inventario.setFecharegistro(fecha);
+                inventario.setProveedorid(idProveedor);
+                inventario.setProveedornombres(nombreProveedor);
                 sesion.saveOrUpdate(inventario);
             }
             tx.commit();

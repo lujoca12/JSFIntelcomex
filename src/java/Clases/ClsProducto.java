@@ -24,9 +24,12 @@ public class ClsProducto {
     private int cantMinima;
     private BigDecimal precioStock;
     private Date fecharegistro;
+    private int cantidadAnterior;
+    private String idProveedor;
+    private String proveedor;
     public ClsProducto() {}
 
-    public ClsProducto(String id, String displayName, Double pvp, Double costo, Double iva, String nombre, int cantidad, int idInventario, int cantMinima,BigDecimal precioStock,Date fecharegistro) {
+    public ClsProducto(String id, String displayName, Double pvp, Double costo, Double iva, String nombre, int cantidad, int idInventario, int cantMinima,BigDecimal precioStock,Date fecharegistro, int cantidadAnterior, String idProveedor, String proveedor) {
         this.id = id;
         this.displayName = displayName;
         this.pvp = pvp;
@@ -38,6 +41,9 @@ public class ClsProducto {
         this.cantMinima = cantMinima;
         this.precioStock = precioStock;
         this.fecharegistro = fecharegistro;
+        this.cantidadAnterior = cantidadAnterior;
+        this.idProveedor = idProveedor;
+        this.proveedor = proveedor;
     }
 
     public String getId() {
@@ -127,5 +133,30 @@ public class ClsProducto {
     public void setFecharegistro(Date fecharegistro) {
         this.fecharegistro = fecharegistro;
     }
+
+    public int getCantidadAnterior() {
+        return cantidadAnterior;
+    }
+
+    public void setCantidadAnterior(int cantidadAnterior) {
+        this.cantidadAnterior = cantidadAnterior;
+    }
+
+    public String getIdProveedor() {
+        return idProveedor;
+    }
+
+    public void setIdProveedor(String idProveedor) {
+        this.idProveedor = idProveedor;
+    }
+
+    public String getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(String proveedor) {
+        this.proveedor = proveedor;
+    }
+    
     
 }

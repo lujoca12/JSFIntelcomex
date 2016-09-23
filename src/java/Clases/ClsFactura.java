@@ -28,11 +28,14 @@ public class ClsFactura implements Serializable {
     private int cantMinima;
     private BigDecimal precioStock;
     private Date fecharegistro;
+    private int cantidadAnterior;
+    private String idProveedor;
+    private String proveedor;
 
     public ClsFactura() {
     }
 
-    public ClsFactura(int numero,String idProducto, String nombreProducto, Double cantidad, Double TotalxProducto, Double costo, Double otroPrecio, Double pvp, Double iva, int stock, int idInventario, int cantMinima,BigDecimal precioStock,Date fecharegistro) {
+    public ClsFactura(int numero,String idProducto, String nombreProducto, Double cantidad, Double TotalxProducto, Double costo, Double otroPrecio, Double pvp, Double iva, int stock, int idInventario, int cantMinima,BigDecimal precioStock,Date fecharegistro,int cantidadAnterior,String idProveedor,String proveedor) {
         this.numero = numero;
         this.idProducto = idProducto;
         this.nombreProducto = nombreProducto;
@@ -47,6 +50,9 @@ public class ClsFactura implements Serializable {
         this.cantMinima = cantMinima;
         this.precioStock = precioStock;
         this.fecharegistro = fecharegistro;
+        this.cantidadAnterior = cantidadAnterior;
+        this.idProveedor = idProveedor;
+        this.proveedor = proveedor;
     }
 
     public int getNumero() {
@@ -159,6 +165,30 @@ public class ClsFactura implements Serializable {
 
     public void setFecharegistro(Date fecharegistro) {
         this.fecharegistro = fecharegistro;
+    }
+
+    public int getCantidadAnterior() {
+        return cantidadAnterior;
+    }
+
+    public void setCantidadAnterior(int cantidadAnterior) {
+        this.cantidadAnterior = cantidadAnterior;
+    }
+
+    public String getIdProveedor() {
+        return idProveedor;
+    }
+
+    public void setIdProveedor(String idProveedor) {
+        this.idProveedor = idProveedor;
+    }
+
+    public String getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(String proveedor) {
+        this.proveedor = proveedor;
     }
     
     

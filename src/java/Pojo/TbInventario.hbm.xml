@@ -6,7 +6,7 @@
     <class name="Pojo.TbInventario" table="tb_inventario" catalog="intelcomex" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
-            <generator class="identity" />
+            <generator class="increment" />
         </id>
         <many-to-one name="tbProducto" class="Pojo.TbProducto" fetch="select">
             <column name="tb_producto_id" length="5" not-null="true" />
@@ -28,6 +28,9 @@
         </property>
         <property name="proveedornombres" type="string">
             <column name="proveedornombres" length="255" />
+        </property>
+        <property name="stockactual" type="java.lang.Integer">
+            <column name="stockactual" />
         </property>
     </class>
 </hibernate-mapping>

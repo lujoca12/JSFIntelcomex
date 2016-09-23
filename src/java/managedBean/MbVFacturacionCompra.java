@@ -165,7 +165,10 @@ public class MbVFacturacionCompra implements Serializable{
                                 this.themeProductos.getIdInventario(),
                                 this.themeProductos.getCantMinima(),
                                 this.themeProductos.getPrecioStock(),
-                                this.themeProductos.getFecharegistro()));
+                                this.themeProductos.getFecharegistro(),
+                                this.themeProductos.getCantidadAnterior(),
+                                this.themeProductos.getIdProveedor(),
+                                this.themeProductos.getProveedor()));
                         cont++;
                     }
                 }
@@ -266,7 +269,10 @@ public class MbVFacturacionCompra implements Serializable{
                         this.themeProductosCompra.getIdInventario(),
                         this.themeProductosCompra.getCantMinima(),
                         this.themeProductosCompra.getPrecioStock(),
-                        this.themeProductosCompra.getFecharegistro()));
+                        this.themeProductosCompra.getFecharegistro(),
+                        0,
+                        "",
+                        ""));
                     }
                     cont++;
                 }
@@ -383,10 +389,10 @@ public class MbVFacturacionCompra implements Serializable{
             if(this.lstThemeProductos.size() > 0)
                 this.lstThemeProductos.clear();
             BigDecimal bigdec = null;
-            this.lstThemeProductos.add(new ClsProducto("-1", "Ninguno", 0.0, 0.0,0.0,"",0,0,0,bigdec,null));
+            this.lstThemeProductos.add(new ClsProducto("-1", "Ninguno", 0.0, 0.0,0.0,"",0,0,0,bigdec,null,0,"",""));
             for (TbProducto prod : lstProducto) {
                 tbInv = daoProducto.getStockProducto(prod.getId());
-                stock = tbInv.getStock();
+                stock = tbInv.getStockactual();
                 iva = (double)prod.getTbTipotasaiva().getValor();
                 this.lstThemeProductos.add(new ClsProducto(prod.getId(), 
                         prod.getId() +" - "+prod.getNombre(), //Codigo + nombre del producto
@@ -398,7 +404,10 @@ public class MbVFacturacionCompra implements Serializable{
                         tbInv.getId(),
                         tbInv.getCantidadMinima() == null ?0:tbInv.getCantidadMinima(),
                         tbInv.getPrecioStock(),
-                        tbInv.getFecharegistro()));
+                        tbInv.getFecharegistro(),
+                        tbInv != null ? tbInv.getStock():0,
+                        tbInv != null ? tbInv.getProveedorid():null,
+                        tbInv != null ? tbInv.getProveedornombres():null));
             }
         } catch (Exception ex) {
 
@@ -416,10 +425,15 @@ public class MbVFacturacionCompra implements Serializable{
             if(this.lstThemeProductosCompra.size() > 0)
                 this.lstThemeProductosCompra.clear();
             BigDecimal bigdec = null;
-            this.lstThemeProductosCompra.add(new ClsProducto("-1", "Ninguno", 0.0, 0.0,0.0,"",0,0,0,bigdec,null));
+            this.lstThemeProductosCompra.add(new ClsProducto("-1", "Ninguno", 0.0, 0.0,0.0,"",0,0,0,bigdec,null,0,"",""));
             for (TbProducto prod : lstProducto) {
                 tbInv = daoProducto.getStockProducto(prod.getId());
-                stock = tbInv != null ? tbInv.getStock():0;
+                if(tbInv != null){
+                    stock = tbInv.getStockactual();
+                }else if(tbInv == null){
+                    stock = 0;
+                }
+                
                 iva = (double)prod.getTbTipotasaiva().getValor();
                 
                 if(tbInv != null){
@@ -440,7 +454,10 @@ public class MbVFacturacionCompra implements Serializable{
                         tbInv != null ? tbInv.getId():0,
                         temp,
                         tbInv != null ? tbInv.getPrecioStock():bigdec,
-                        tbInv != null ? tbInv.getFecharegistro():null));
+                        tbInv != null ? tbInv.getFecharegistro():null,
+                        tbInv != null ? tbInv.getStock():0,
+                        tbInv != null ? tbInv.getProveedorid():null,
+                        tbInv != null ? tbInv.getProveedornombres():null));
             }
         } catch (Exception ex) {
 
@@ -477,9 +494,9 @@ public class MbVFacturacionCompra implements Serializable{
             DaoFacturacion daoFactura = new DaoFacturacion();
             TbInventario inventario = new TbInventario();
             inventario.setFecharegistro(fecha);
-            if (this.themeUsuarios != null) {
-                inventario.setProveedorid(this.themeUsuarios.getId());
-                inventario.setProveedornombres(this.themeUsuarios.getDisplayName());
+            if (this.themeProveedor != null) {
+                inventario.setProveedorid(this.themeProveedor.getId());
+                inventario.setProveedornombres(this.themeProveedor.getDisplayName());
             }
             msg = daoFactura.registrarCompra(inventario, lstFactura);
         } catch (Exception ex) {
@@ -710,12 +727,15 @@ public class MbVFacturacionCompra implements Serializable{
         llenarCboProveedor();
         llenarCboUsuarios();
         llenarCboProducto();
+        llenarCboProductoCompras();
         
         Subtotal = 0.0;
         tarifa0= 0.0;
         tarifa14= 0.0;
         Total= 0.0;
         cont = 0;
+        cantidad = "";
+        costo = "";
     }
     public void onRowEditFactura(RowEditEvent event) {
         try {
@@ -751,6 +771,7 @@ public class MbVFacturacionCompra implements Serializable{
                     return;
                 } else {
                     lstFactura.get(i).setNumero((i + 1));
+                    cont = (i + 1);
                 }
                 if (lstFactura.get(i).getIva() == 12.0) {
                     tarifa14 += (lstFactura.get(i).getCosto() * lstFactura.get(i).getCantidad()) - ((lstFactura.get(i).getCosto() * lstFactura.get(i).getCantidad()) / 1.12);
@@ -781,6 +802,7 @@ public class MbVFacturacionCompra implements Serializable{
                     return;
                 } else {
                     lstFactura.get(i).setNumero((i + 1));
+                    cont = (i + 1);
                 }
                 if (lstFactura.get(i).getIva() == 12.0) {
                     tarifa14 += (lstFactura.get(i).getCosto() * lstFactura.get(i).getCantidad()) - ((lstFactura.get(i).getCosto() * lstFactura.get(i).getCantidad()) / 1.12);
