@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
@@ -42,7 +43,7 @@ import org.primefaces.model.StreamedContent;
  * @author server
  */
 @Named(value = "mbVFacturacionCompra")
-@ViewScoped
+@SessionScoped
 public class MbVFacturacionCompra implements Serializable{
 
     /**

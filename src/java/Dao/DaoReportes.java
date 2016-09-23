@@ -9,6 +9,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -71,13 +72,45 @@ public class DaoReportes {
         String realPath = ctx.getRealPath("/");
         realPath += "Modulos\\Reportes\\";
         
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fechaInicio);
+        
+        String fechaI = "", fechaF="";
+        int año = calendar.get(Calendar.YEAR);
+        int mes = calendar.get(Calendar.MONDAY);
+        int dia = calendar.get(Calendar.DAY_OF_MONTH);
+        String mesint = "";
+        String diaint = "";
+        
+        calendar.setTime(fechaFin);
+        
+        if(dia < 10)
+            diaint = "0"+dia;
+        if(mes < 10)
+            mesint = "0"+mes;
+        
+        fechaI = año+"-"+mesint+"-"+diaint;
+        
+        año = calendar.get(Calendar.YEAR);
+        mes = calendar.get(Calendar.MONDAY);
+        dia = calendar.get(Calendar.DAY_OF_MONTH);
+        mesint = "";
+        diaint = "";
+        
+        if(dia < 10)
+            diaint = "0"+dia;
+        if(mes < 10)
+            mesint = "0"+mes;
+        
+        fechaF = año+"-"+mesint+"-"+diaint;
+                
         iniciaOperacion();
         
         param.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION, sesion);
         param.put("logoIntel",realPath+"logo1.jpg");
 //        param.put("logoPostgrado",realPath+"logoPostgrado.jpg");
-        param.put("fechaInicio",fechaInicio);
-        param.put("fechaFin",fechaFin);
+        param.put("fechaInicio",fechaI);
+        param.put("fechaFin",fechaF);
         //param.put("logoFondo",realPath+"logoUTEQoriginalGrandeTransp1.jpg");
         
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
