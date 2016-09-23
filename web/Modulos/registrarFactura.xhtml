@@ -34,7 +34,7 @@
                             <p:calendar id="txtFecha" value="#{mbVFacturacionCompra.fecha}" effect="fold" readonly="true" required="true" pattern="dd-MM-yyyy" mask="true" />
                             
                             <h:outputLabel styleClass="labelDerecha" for="cboProducto" value="Producto: "/>
-                            <p:selectOneMenu id="cboProducto" value="#{mbVFacturacionCompra.themeProductos}" converter="themeConverterProd"
+                            <p:selectOneMenu id="cboProducto" value="#{mbVFacturacionCompra.themeProductos}" converter="converterProd"
                                              effect="fade" var="t" filter="true" filterMatchMode="contains">
                                 <f:selectItems value="#{mbVFacturacionCompra.lstThemeProductos}" var="theme" itemLabel="#{theme.displayName}" itemValue="#{theme}" />
                                 <p:column style="width:10%">

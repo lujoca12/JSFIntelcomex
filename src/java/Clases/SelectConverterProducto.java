@@ -22,7 +22,7 @@ import javax.faces.model.SelectItem;
  *
  * @author server
  */
-@FacesConverter("themeConverterProd")
+@FacesConverter("converterProd")
 public class SelectConverterProducto implements Converter {
  
     public Object getAsObject(FacesContext fc, UIComponent uic, String value) {

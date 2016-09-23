@@ -11,6 +11,7 @@
     <h:body>
         <div class="ui-fluid">
             <h:form id="frmRegistrarFactura">
+                <p:remoteCommand name="frmRegistrarFactura" autoRun="true" action="#{mbVFacturacionCompra.load()}" />
                 <p:growl id="msgs" showDetail="true" />
                 <p:tab id="personal" title="RegistrarFactura">
                     <p:panel header="Reportes de Compras" >
@@ -35,7 +36,7 @@
 
                             <h:outputLabel styleClass="labelDerecha" for="cboProducto" value="Producto: "/>
                             
-                            <p:selectOneMenu id="cboProducto" value="#{mbVFacturacionCompra.themeProductos}" converter="themeConverterProd"
+                            <p:selectOneMenu id="cboProducto" value="#{mbVFacturacionCompra.themeProductos}" converter="converterProd"
                                              effect="fade" var="t" filter="true" filterMatchMode="contains">
                                 <f:selectItems value="#{mbVFacturacionCompra.lstThemeProductos}" var="theme" itemLabel="#{theme.displayName}" itemValue="#{theme}" />
                                 <p:column style="width:10%">
@@ -50,7 +51,7 @@
 
                             <h:outputLabel styleClass="labelDerecha" for="cboProducto" value="Proveedor: "/>
                             
-                            <p:selectOneMenu style="width:30%" id="cboProducto" value="#{mbVFacturacionCompra.themeProductos}" converter="themeConverterProd"
+                            <p:selectOneMenu style="width:30%" id="cboProducto" value="#{mbVFacturacionCompra.themeProductos}" converter="converterProd"
                                              effect="fade" var="t" filter="true" filterMatchMode="contains">
                                 <f:selectItems value="ninguno" var="theme" itemLabel="aa" itemValue="bb" />
                                 <p:column style="width:10%">

@@ -27,12 +27,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import org.primefaces.event.RowEditEvent;
+import org.primefaces.model.StreamedContent;
 
 /**
  *
@@ -45,6 +47,7 @@ public class MbVFacturacionCompra implements Serializable{
     /**
      * Creates a new instance of MbVFacturacionCompra
      */
+    private StreamedContent media;
     private TbPersona tbPersona;
     private TbFactura tbFactura;
     private TbProducto tbProducto;
@@ -82,6 +85,11 @@ public class MbVFacturacionCompra implements Serializable{
     
     private int stock = 0;
     
+//     @PostConstruct
+//    public void load() {
+//        media = null;
+//        
+//    }
     public MbVFacturacionCompra() {
         tbPersona = new TbPersona();
         tbFactura = new TbFactura();
