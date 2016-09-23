@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b09e379c-20a4-4fba-8ad7-93c534b52b83">
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     tb_usuarios.`nombres` AS tb_usuarios_nombres,
+     tb_usuarios.`apellidos` AS tb_usuarios_apellidos,
+     tb_usuarios.`direccion` AS tb_usuarios_direccion,
+     tb_usuarios.`email` AS tb_usuarios_email,
+     tb_usuarios.`tb_parroquia_id` AS tb_usuarios_tb_parroquia_id,
+     tb_tipopago.`id` AS tb_tipopago_id,
+     tb_tipopago.`nombre` AS tb_tipopago_nombre,
+     tb_tipopago.`descripcion` AS tb_tipopago_descripcion,
+     tb_factura.`id` AS tb_factura_id,
+     tb_factura.`fecha` AS tb_factura_fecha,
+     tb_usuarios.`cedula` AS tb_usuarios_cedula,
+     tb_usuarios.`fechanacimiento` AS tb_usuarios_fechanacimiento,
+     tb_usuarios.`telefono` AS tb_usuarios_telefono,
+     tb_detallefactura.`precio_detalle` AS tb_detallefactura_precio_detalle
+FROM
+     `tb_factura` tb_factura INNER JOIN `tb_detallefactura` tb_detallefactura ON tb_factura.`id` = tb_detallefactura.`tb_factura_id`
+     INNER JOIN `tb_usuarios` tb_usuarios ON tb_factura.`tb_usuarios_cedula` = tb_usuarios.`cedula`
+     INNER JOIN `tb_tipopago` tb_tipopago ON tb_factura.`tb_tipopago_id` = tb_tipopago.`id`]]>
+	</queryString>
+	<field name="tb_usuarios_nombres" class="java.lang.String"/>
+	<field name="tb_usuarios_apellidos" class="java.lang.String"/>
+	<field name="tb_usuarios_direccion" class="java.lang.String"/>
+	<field name="tb_usuarios_email" class="java.lang.String"/>
+	<field name="tb_usuarios_tb_parroquia_id" class="java.lang.String"/>
+	<field name="tb_tipopago_id" class="java.lang.Integer"/>
+	<field name="tb_tipopago_nombre" class="java.lang.String"/>
+	<field name="tb_tipopago_descripcion" class="java.lang.String"/>
+	<field name="tb_factura_id" class="java.lang.Integer"/>
+	<field name="tb_factura_fecha" class="java.sql.Date"/>
+	<field name="tb_usuarios_cedula" class="java.lang.String"/>
+	<field name="tb_usuarios_fechanacimiento" class="java.sql.Date"/>
+	<field name="tb_usuarios_telefono" class="java.lang.String"/>
+	<field name="tb_detallefactura_precio_detalle" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

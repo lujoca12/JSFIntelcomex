@@ -10,6 +10,7 @@ import Clases.ClsFactura;
 import Clases.ClsProducto;
 import Dao.DaoFacturacion;
 import Dao.DaoProducto;
+import Dao.DaoReportes;
 import Dao.DaoTCliente;
 import Dao.DaoTConfiguracion;
 import Dao.DaoTUsuario;
@@ -69,6 +70,7 @@ public class MbVFacturacionCompra implements Serializable{
     
     private boolean msg;
     private Date fecha;
+    private Date fecha1;
     private int cont = 0;
     
     private ClsEmpleado themeUsuarios;
@@ -85,12 +87,9 @@ public class MbVFacturacionCompra implements Serializable{
     
     private int stock = 0;
     
-//     @PostConstruct
-//    public void load() {
-//        media = null;
-//        
-//    }
-    public MbVFacturacionCompra() {
+     @PostConstruct
+    public void load() {
+        media = null;
         tbPersona = new TbPersona();
         tbFactura = new TbFactura();
         tbProducto = new TbProducto();
@@ -109,6 +108,9 @@ public class MbVFacturacionCompra implements Serializable{
         cargarTipoPago();
         lstFactura = new ArrayList<>();
     }
+//    public MbVFacturacionCompra() {
+//        
+//    }
     
     private void cargarTipoPago(){
         lstTipoPago = new ArrayList<>();
@@ -520,6 +522,22 @@ public class MbVFacturacionCompra implements Serializable{
 
     }
 
+    public Date getFecha1() {
+        return fecha1;
+    }
+
+    public void setFecha1(Date fecha1) {
+        this.fecha1 = fecha1;
+    }
+    
+    public StreamedContent getMedia() {
+        return media;
+    }
+
+    public void setMedia(StreamedContent media) {
+        this.media = media;
+    }
+    
     public ClsProducto getThemeProductosCompra() {
         return themeProductosCompra;
     }
@@ -826,5 +844,11 @@ public class MbVFacturacionCompra implements Serializable{
                 }
             }
         }
+    }
+    public void cargarReporte(){
+        media = null;
+        DaoReportes daoReport = new DaoReportes();
+       
+           media = daoReport.reporte(fecha, fecha1);
     }
 }

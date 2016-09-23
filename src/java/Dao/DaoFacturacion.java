@@ -173,7 +173,7 @@ public class DaoFacturacion {
         this.tx = null;
         iniciaOperacion();
        
-        String hql="from TbFactura f inner join fetch f.tbDetallefacturas df inner join fetch f.tbPersona persona "
+        String hql="from TbFactura f inner join fetch f.tbDetallefacturas df inner join fetch f.tbPersona persona inner join fetch"
                 + "f.tbTipopago tipoPago inner join fetch f.tbUsuarios user where f.fecha = '"+fecha+"' order by f.fecha asc";
        
         Query query = sesion.createQuery(hql);
