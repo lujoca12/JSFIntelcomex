@@ -54,6 +54,7 @@ public class DaoFacturacion {
             TbDetallefactura detalleFact = new TbDetallefactura();
             TbProducto producto = new TbProducto();
             BigDecimal bigdec;
+            TbInventario inventario;
             for (int i = 0; i < lstFactura.size(); i++) {
                 detalleFact.setTbFactura(factura);
                 detalleFact.setTbDetallefacturacol("usuario "+factura.getTbUsuarios().getApellidos());
@@ -66,10 +67,11 @@ public class DaoFacturacion {
                 bigdec = new BigDecimal(lstFactura.get(i).getPvp());
                 detalleFact.setPrecioxund(bigdec);
                 sesion.saveOrUpdate(detalleFact);
+                
             }
             tx.commit();
             sesion.close();
-            band = true;
+            band = actualizarStockProducto(lstFactura);
             
         } catch (Exception e) {
             tx.rollback();
@@ -78,7 +80,49 @@ public class DaoFacturacion {
         
         return band;
     }
-    
+    public boolean actualizarStockProducto(List<ClsFactura> lstFactura){
+        boolean band = false;
+        try {
+            iniciaOperacion();
+            TbProducto producto;
+            TbInventario inventario;
+            for (int i = 0; i < lstFactura.size(); i++) {
+                inventario = new TbInventario();
+                producto = new TbProducto();
+                producto.setId(lstFactura.get(i).getIdProducto());
+                inventario.setId(lstFactura.get(i).getIdInventario());
+                inventario.setStock(lstFactura.get(i).getStock() - lstFactura.get(i).getCantidad().intValue());
+                inventario.setTbProducto(producto);
+                inventario.setCantidadMinima(lstFactura.get(i).getCantMinima());
+                inventario.setPrecioStock(lstFactura.get(i).getPrecioStock());
+                inventario.setFecharegistro(lstFactura.get(i).getFecharegistro());
+                sesion.saveOrUpdate(inventario);
+            }
+            tx.commit();
+            sesion.close();
+
+            band = true;
+            
+
+        } catch (Exception e) {
+            tx.rollback();
+            band = false;
+        }
+
+        return band;
+    }
+    public List<TbInventario> getPrductoInventario(int id){
+        this.sesion = null;
+        this.tx = null;
+        iniciaOperacion();
+       
+        String hql="from TbInventario inv inner join fetch inv.tbProducto p";
+       
+        Query query = sesion.createQuery(hql);
+        List<TbInventario> lst=(List<TbInventario>) query.list();
+        sesion.close();
+        return lst; 
+    }
     public boolean registrarCompra(TbInventario inventario, List<ClsFactura> lstFactura ){
         boolean band = false;
         try {
@@ -111,6 +155,7 @@ public class DaoFacturacion {
         
         return band;
     }
+    
     
     
     public List<TbFactura> getFacturasxFecha(Date fecha){

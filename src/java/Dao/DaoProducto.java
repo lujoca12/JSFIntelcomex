@@ -75,7 +75,7 @@ public class DaoProducto implements InterfaceProducto {
         this.sesion = null;
         this.tx = null;
         iniciaOperacion();
-        String hql="from TbInventario as inv inner join fetch inv.tbProducto p where p.id ='"+idProducto+"' ";
+        String hql="from TbInventario as inv inner join fetch inv.tbProducto p where p.id ='"+idProducto+"' and inv.stock > 0 ";
         Query query = sesion.createQuery(hql);
         List<TbInventario> inv= (List<TbInventario>) query.list();
         sesion.close();

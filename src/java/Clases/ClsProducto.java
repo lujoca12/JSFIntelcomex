@@ -5,6 +5,9 @@
  */
 package Clases;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
 /**
  *
  * @author server
@@ -17,9 +20,13 @@ public class ClsProducto {
     private Double iva;
     private String nombre;
     private int cantidad;
+    private int idInventario;
+    private int cantMinima;
+    private BigDecimal precioStock;
+    private Date fecharegistro;
     public ClsProducto() {}
 
-    public ClsProducto(String id, String displayName, Double pvp, Double costo, Double iva, String nombre, int cantidad) {
+    public ClsProducto(String id, String displayName, Double pvp, Double costo, Double iva, String nombre, int cantidad, int idInventario, int cantMinima,BigDecimal precioStock,Date fecharegistro) {
         this.id = id;
         this.displayName = displayName;
         this.pvp = pvp;
@@ -27,6 +34,10 @@ public class ClsProducto {
         this.iva = iva;
         this.nombre = nombre;
         this.cantidad = cantidad;
+        this.idInventario = idInventario;
+        this.cantMinima = cantMinima;
+        this.precioStock = precioStock;
+        this.fecharegistro = fecharegistro;
     }
 
     public String getId() {
@@ -83,6 +94,38 @@ public class ClsProducto {
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public int getIdInventario() {
+        return idInventario;
+    }
+
+    public void setIdInventario(int idInventario) {
+        this.idInventario = idInventario;
+    }
+
+    public int getCantMinima() {
+        return cantMinima;
+    }
+
+    public void setCantMinima(int cantMinima) {
+        this.cantMinima = cantMinima;
+    }
+
+    public BigDecimal getPrecioStock() {
+        return precioStock;
+    }
+
+    public void setPrecioStock(BigDecimal precioStock) {
+        this.precioStock = precioStock;
+    }
+
+    public Date getFecharegistro() {
+        return fecharegistro;
+    }
+
+    public void setFecharegistro(Date fecharegistro) {
+        this.fecharegistro = fecharegistro;
     }
     
 }
