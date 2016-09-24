@@ -97,6 +97,7 @@ public class MbVFacturacionCompra implements Serializable{
         tbDetallefactura = new TbDetallefactura();
         tbTipopago = new TbTipopago();
         fecha = new Date();
+        fecha1 = new Date();
         Subtotal = 0.0;
         tarifa0= 0.0;
         tarifa14= 0.0;

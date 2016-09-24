@@ -82,14 +82,22 @@ public class DaoReportes {
         String mesint = "";
         String diaint = "";
         
-        calendar.setTime(fechaFin);
+        
         
         if(dia < 10)
             diaint = "0"+dia;
+        else
+            diaint = String.valueOf(dia);
         if(mes < 10)
             mesint = "0"+mes;
+        else
+            mesint = String.valueOf(mes);
         
         fechaI = año+"-"+mesint+"-"+diaint;
+        
+        
+       // calendar = Calendar.getInstance();
+        calendar.setTime(fechaFin);
         
         año = calendar.get(Calendar.YEAR);
         mes = calendar.get(Calendar.MONDAY);
@@ -97,12 +105,18 @@ public class DaoReportes {
         mesint = "";
         diaint = "";
         
+        
+        
         if(dia < 10)
             diaint = "0"+dia;
+        else
+            diaint = String.valueOf(dia);
         if(mes < 10)
             mesint = "0"+mes;
+        else
+            mesint = String.valueOf(mes);
         
-        fechaF = año+"-"+mesint+"-"+diaint;
+        fechaI = año+"-"+mesint+"-"+diaint;
                 
         iniciaOperacion();
         
